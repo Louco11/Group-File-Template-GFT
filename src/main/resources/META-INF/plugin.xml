@@ -15,10 +15,9 @@
 
     <actions>
         <!-- Add your actions here -->
-        <action class="Dialog" text="Add template" description="SDK action example">
-
-            <add-to-group group-id="ProjectViewPopupMenu" anchor="first"/>
-            <override-text place="MainMenu" text="Pop Dialog Action"/>
+        <action id="Dialog" class="Dialog" text="CreateTemplate" description="CreateTemplate">
+            <add-to-group group-id="ProjectViewPopupMenu" anchor="after" relative-to-action="WeighingNewGroup"/>
+            <keyboard-shortcut keymap="$default" first-keystroke="shift D"/>
         </action>
 
     </actions>
