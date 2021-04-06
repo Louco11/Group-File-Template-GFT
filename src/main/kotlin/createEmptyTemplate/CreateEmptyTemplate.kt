@@ -6,12 +6,13 @@ import com.intellij.openapi.actionSystem.CommonDataKeys
 import com.intellij.openapi.project.impl.ProjectExImpl
 import constant.Constants
 import java.io.File
-import java.io.StringWriter
-import java.util.logging.XMLFormatter
-import java.awt.print.Book
 
 import javax.xml.bind.JAXBContext
 import javax.xml.bind.Marshaller
+import java.io.StringWriter
+
+
+
 
 
 class CreateEmptyTemplate : AnAction() {
@@ -32,12 +33,14 @@ class CreateEmptyTemplate : AnAction() {
 
     private fun createMainFileTemplate(path: String) {
         File(path, Constants.MAIN_FILE_TEMPLATE).createNewFile()
-        val template = EmptyMainClassXml("EmptyTemplate", "Empty Template Description")
+        val template = EmptyMainClassXml()
+        template.setName("EmptyTemplate")
+        template.setDescription("Empty Template Description")
+
         val context = JAXBContext.newInstance(EmptyMainClassXml::class.java)
         val mar = context.createMarshaller()
         mar.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true)
         mar.marshal(template, File(path, Constants.MAIN_FILE_TEMPLATE))
-
 
     }
 
