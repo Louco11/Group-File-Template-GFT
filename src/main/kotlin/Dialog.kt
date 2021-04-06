@@ -3,7 +3,7 @@ import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.CommonDataKeys
 import com.intellij.openapi.ui.Messages
 
-class Dialog: AnAction() {
+class Dialog(title: String, description: String): AnAction(title, description, null) {
 
     override fun actionPerformed(event: AnActionEvent) {
         // Using the event, create and show a dialog
@@ -15,6 +15,7 @@ class Dialog: AnAction() {
         if (nav != null) {
             dlgMsg.append(String.format("\nSelected Element: %s", nav.toString()))
         }
+
         Messages.showMessageDialog(currentProject, dlgMsg.toString(), dlgTitle, Messages.getInformationIcon())
     }
 

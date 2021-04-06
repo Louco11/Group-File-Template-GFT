@@ -14,11 +14,15 @@
     </extensions>
 
     <actions>
-        <!-- Add your actions here -->
-        <action id="Dialog" class="Dialog" text="CreateTemplate" description="CreateTemplate">
-            <add-to-group group-id="ProjectViewPopupMenu" anchor="after" relative-to-action="WeighingNewGroup"/>
-            <keyboard-shortcut keymap="$default" first-keystroke="shift D"/>
+
+        <action id="createEmptyTemplate.CreateEmptyTemplate" class="createEmptyTemplate.CreateEmptyTemplate" text="Create Empty Template"
+                description="Create empty template">
+            <add-to-group group-id="ToolsMenu" anchor="before" relative-to-action="CreateDesktopEntry"/>
         </action>
+
+        <group id="ListTemplate" class="ListTemplate" text="Templates" popup="true">
+            <add-to-group group-id="ProjectViewPopupMenu" anchor="after" relative-to-action="WeighingNewGroup"/>
+        </group>
 
     </actions>
 </idea-plugin>
