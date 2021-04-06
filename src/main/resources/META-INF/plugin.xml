@@ -15,5 +15,11 @@
 
     <actions>
         <!-- Add your actions here -->
+        <action class="Dialog" text="Add template" description="SDK action example">
+
+            <add-to-group group-id="ProjectViewPopupMenu" anchor="first"/>
+            <override-text place="MainMenu" text="Pop Dialog Action"/>
+        </action>
+
     </actions>
 </idea-plugin>
