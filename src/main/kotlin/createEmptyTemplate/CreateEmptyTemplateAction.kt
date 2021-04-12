@@ -1,15 +1,16 @@
 package createEmptyTemplate
 
-import com.fasterxml.jackson.dataformat.xml.XmlMapper
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.CommonDataKeys
 import com.intellij.openapi.project.impl.ProjectExImpl
 import com.intellij.openapi.ui.Messages
 import constant.Constants
+import mapper.JsonModelMapper
+import model.MainClassJson
 import java.io.File
 
-class CreateEmptyTemplate : AnAction() {
+class CreateEmptyTemplateAction : AnAction() {
 
     override fun actionPerformed(event: AnActionEvent) {
         val basePath = (event.getData(CommonDataKeys.PROJECT) as ProjectExImpl).basePath
@@ -34,14 +35,12 @@ class CreateEmptyTemplate : AnAction() {
     private fun createMainFileTemplate(path: String) {
         val mainFile = File(path, Constants.MAIN_FILE_TEMPLATE)
         mainFile.createNewFile()
-        val template = EmptyMainClassXml(name = path.split("/").last(), path = path)
-        mainFile.writeText(createXmlFile(template))
+        val template = MainClassJson(name = path.split("/").last(), path = path)
+        mainFile.writeText(JsonModelMapper.mapToString(template))
     }
 
-    private fun createXmlFile(template: EmptyMainClassXml) = XmlMapper().writeValueAsString(template)
-        .replace("xmlns=\"\">", "xmlns=\"\">\n    ")
-        .replace("</${Constants.TagXml.FIELD_NAME}>", "</${Constants.TagXml.FIELD_NAME}>\n    ")
-        .replace("</${Constants.TagXml.FIELD_DESCRIPTION}>", "</${Constants.TagXml.FIELD_DESCRIPTION}>\n    ")
-        .replace("</${Constants.TagXml.FIELD_PATH}>", "</${Constants.TagXml.FIELD_PATH}>\n")
+    override fun update(e: AnActionEvent) {
+        super.update(e)
+    }
 
 }

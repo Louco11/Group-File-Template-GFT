@@ -17,8 +17,8 @@
 
     <actions>
 
-        <action id="createEmptyTemplate.CreateEmptyTemplate"
-                class="createEmptyTemplate.CreateEmptyTemplate"
+        <action id="createEmptyTemplate.CreateEmptyTemplateAction"
+                class="createEmptyTemplate.CreateEmptyTemplateAction"
                 text="Create Empty Template"
                 description="Create empty template" icon="SdkIcons.Sdk_create_icon">
             <add-to-group group-id="ToolsMenu" anchor="before" relative-to-action="CreateDesktopEntry"/>

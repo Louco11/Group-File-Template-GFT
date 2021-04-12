@@ -1,5 +1,6 @@
 plugins {
     id("org.jetbrains.intellij") version "0.7.2"
+    id ("org.jetbrains.kotlin.plugin.serialization") version "1.4.32"
     java
     kotlin("jvm") version "1.4.10"
 }
@@ -13,7 +14,8 @@ repositories {
 
 dependencies {
     implementation(kotlin("stdlib"))
-    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.12.2")
+    implementation ("org.jetbrains.kotlinx:kotlinx-serialization-json:1.1.0")
+
     testCompile("junit", "junit", "4.12")
 }
 

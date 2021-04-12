@@ -1,12 +1,12 @@
-import com.fasterxml.jackson.dataformat.xml.XmlMapper
 import com.intellij.openapi.actionSystem.ActionGroup
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.CommonDataKeys
 import com.intellij.openapi.project.impl.ProjectExImpl
 import constant.Constants
-import createEmptyTemplate.EmptyMainClassXml
+import mapper.JsonModelMapper
 import java.io.File
+import java.nio.charset.Charset
 
 class ListTemplate : ActionGroup() {
 
@@ -22,9 +22,9 @@ class ListTemplate : ActionGroup() {
                     val mainFile = File(pathMainFile, Constants.MAIN_FILE_TEMPLATE)
                     if (mainFile.isFile) {
                         try {
-                            val classType = XmlMapper().readValue(mainFile, EmptyMainClassXml::class.java)
+                            val classType = JsonModelMapper.mapToMainClassXml(mainFile.readText(Charset.defaultCharset()))
                             listTemplate.add(
-                                Dialog(classType.name, classType.description)
+                                Dialog(classType)
                             )
                         } catch (e: Exception) {
 
