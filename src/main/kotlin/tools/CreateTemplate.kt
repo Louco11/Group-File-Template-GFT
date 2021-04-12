@@ -13,12 +13,20 @@ object CreateTemplate  {
         fileTemplateModel: FileTemplate
     ) {
         val nameFile = fileTemplateModel.name.replaceTemplate(map)
-        val pathCreate = "$pathChoose${fileTemplateModel.path}"
         val fileTemplate = File("$pathTemplate", fileTemplateModel.fileTemplatePath)
-        val filePath = File(pathCreate)
-        if (!filePath.isDirectory) filePath.mkdir()
+        val filePath = create(pathChoose, fileTemplateModel.path)
         val fileTemplateInPath =  File(filePath.path, nameFile)
         fileTemplateInPath.createNewFile()
         fileTemplateInPath.writeText(fileTemplate.readText(Charset.defaultCharset()).replaceTemplate(map))
+    }
+
+    private fun create(pathProject: String, pathFile: String): File {
+        var pathStep = pathProject
+        pathFile.split("/").forEach {
+            val file = File(pathStep, it)
+            if (!file.isDirectory) file.mkdir()
+            pathStep = "$pathStep/$it"
+        }
+        return File(pathStep)
     }
 }
