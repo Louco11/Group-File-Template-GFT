@@ -16,7 +16,7 @@ class Dialog(title: String, description: String): AnAction(title, description, n
             dlgMsg.append(String.format("\nSelected Element: %s", nav.toString()))
         }
 
-        Messages.showMessageDialog(currentProject, dlgMsg.toString(), dlgTitle, Messages.getInformationIcon())
+        Messages.showMessageDialog(currentProject, dlgMsg.toString(), dlgTitle, null)
     }
 
     override fun update(e: AnActionEvent) {

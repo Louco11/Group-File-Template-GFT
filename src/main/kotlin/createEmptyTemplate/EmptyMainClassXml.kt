@@ -1,22 +1,16 @@
 package createEmptyTemplate
 
-import javax.xml.bind.annotation.XmlAttribute
-import javax.xml.bind.annotation.XmlRootElement
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement
+import constant.Constants
 
-@XmlRootElement(name = "template")
-class EmptyMainClassXml {
-    private var name: String = ""
-    private var description: String = ""
-
-    @JvmName("setName1")
-    @XmlAttribute
-    fun setName(name: String) {
-        this.name = name
-    }
-
-    @JvmName("setDescription1")
-    @XmlAttribute
-    fun setDescription(name: String) {
-        this.description = name
-    }
-}
+@JacksonXmlRootElement(localName = Constants.TagXml.HEAD_TAG)
+class EmptyMainClassXml (
+    @field:JacksonXmlElementWrapper(localName = Constants.TagXml.FIELD_NAME)
+    var name: String = "No Name",
+    @field:JacksonXmlProperty(localName = Constants.TagXml.FIELD_DESCRIPTION)
+    var description: String = "Empty Template Description",
+    @field:JacksonXmlProperty(localName = Constants.TagXml.FIELD_PATH)
+    var path: String = ""
+)

@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "com.louco"
-version = "1.0-SNAPSHOT"
+version = "alfe_test_1.2"
 
 repositories {
     mavenCentral()
@@ -13,6 +13,7 @@ repositories {
 
 dependencies {
     implementation(kotlin("stdlib"))
+    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.12.2")
     testCompile("junit", "junit", "4.12")
 }
 

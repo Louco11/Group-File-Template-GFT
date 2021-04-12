@@ -1,6 +1,8 @@
 <idea-plugin>
-    <id>com.louco.ArchitecturalTemplates</id>
+    <id>com.louco.archTemp</id>
+
     <name>ArchitecturalTemplates</name>
+
     <vendor email="dor2014spb@gmail.com" url="https://www.linkedin.com/in/mikhail-dorontsov-396266100">Doronec</vendor>
 
     <description>"google" = piece of shit, removed the feature create group template file</description>
@@ -10,17 +12,22 @@
     <depends>com.intellij.modules.platform</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <!-- Add your extensions here -->
+        <treeStructureProvider implementation="TreeStructure"/>
     </extensions>
 
     <actions>
 
-        <action id="createEmptyTemplate.CreateEmptyTemplate" class="createEmptyTemplate.CreateEmptyTemplate" text="Create Empty Template"
-                description="Create empty template">
+        <action id="createEmptyTemplate.CreateEmptyTemplate"
+                class="createEmptyTemplate.CreateEmptyTemplate"
+                text="Create Empty Template"
+                description="Create empty template" icon="SdkIcons.Sdk_create_icon">
             <add-to-group group-id="ToolsMenu" anchor="before" relative-to-action="CreateDesktopEntry"/>
         </action>
 
-        <group id="ListTemplate" class="ListTemplate" text="Templates" popup="true">
+        <group id="ListTemplate"
+               class="ListTemplate"
+               text="Templates" popup="true"
+               icon="SdkIcons.Sdk_create_icon">
             <add-to-group group-id="ProjectViewPopupMenu" anchor="after" relative-to-action="WeighingNewGroup"/>
         </group>
 
