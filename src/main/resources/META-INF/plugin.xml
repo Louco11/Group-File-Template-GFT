@@ -12,24 +12,28 @@
     <depends>com.intellij.modules.platform</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <treeStructureProvider implementation="TreeStructure"/>
+        <treeStructureProvider implementation="extensions.TreeStructure"/>
     </extensions>
 
     <actions>
 
-        <action id="createEmptyTemplate.CreateEmptyTemplateAction"
-                class="createEmptyTemplate.CreateEmptyTemplateAction"
-                text="Create Empty Template"
-                description="Create empty template" icon="SdkIcons.Sdk_create_icon">
+        <action id="actions.CreateEmptyTemplateAction"
+                class="actions.CreateEmptyTemplateAction"
+                text="Create New Template"
+                description="Create new template" icon="SdkIcons.Sdk_create_icon">
             <add-to-group group-id="ToolsMenu" anchor="before" relative-to-action="CreateDesktopEntry"/>
         </action>
 
-        <group id="ListTemplate"
-               class="ListTemplate"
+        <group id="actions.ListTemplateGroup"
+               class="actions.ListTemplateGroup"
                text="Templates" popup="true"
                icon="SdkIcons.Sdk_create_icon">
             <add-to-group group-id="ProjectViewPopupMenu" anchor="after" relative-to-action="WeighingNewGroup"/>
         </group>
+
+        <action id="actions.AddFileInTemplate" class="actions.AddFileInTemplate" text="Add File In Template">
+            <add-to-group group-id="ProjectViewPopupMenu" anchor="after" relative-to-action="WeighingNewGroup"/>
+        </action>
 
     </actions>
 </idea-plugin>

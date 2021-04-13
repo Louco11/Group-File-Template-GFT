@@ -11,3 +11,4 @@ fun String.replaceTemplate(map: Map<String, String>): String {
 }
 
 fun String.replaceToPackage() = this.split("usr/")
+fun String.toDrFile() = "$this.dr"

@@ -1,12 +1,11 @@
 plugins {
-    id("org.jetbrains.intellij") version "0.7.2"
-    id ("org.jetbrains.kotlin.plugin.serialization") version "1.4.32"
+    id ("org.jetbrains.intellij") version "0.7.2"
     java
     kotlin("jvm") version "1.4.10"
 }
 
 group = "com.louco"
-version = "alfe_test_1.2"
+version = "alfa-1.2"
 
 repositories {
     mavenCentral()
@@ -14,7 +13,6 @@ repositories {
 
 dependencies {
     implementation(kotlin("stdlib"))
-    implementation ("org.jetbrains.kotlinx:kotlinx-serialization-json:1.1.0")
 
     testCompile("junit", "junit", "4.12")
 }
@@ -23,6 +21,7 @@ dependencies {
 intellij {
     version = "2020.3.3"
 }
+
 tasks.getByName<org.jetbrains.intellij.tasks.PatchPluginXmlTask>("patchPluginXml") {
     changeNotes("""
       Add change notes here.<br>

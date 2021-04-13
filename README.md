@@ -1,1 +1,2 @@
-# ArchitecturalTemplates
+# Architectural Templates plugin
+

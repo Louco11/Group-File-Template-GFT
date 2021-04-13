@@ -1,5 +1,6 @@
 package tools
 
+import com.intellij.openapi.vfs.VirtualFileManager
 import model.FileTemplate
 import java.io.File
 import java.nio.charset.Charset

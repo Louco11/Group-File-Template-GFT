@@ -1,10 +1,11 @@
-package createEmptyTemplate
+package actions
 
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.CommonDataKeys
 import com.intellij.openapi.project.impl.ProjectExImpl
 import com.intellij.openapi.ui.Messages
+import com.intellij.openapi.vfs.VirtualFileManager
 import constant.Constants
 import mapper.JsonModelMapper
 import model.MainClassJson
@@ -25,6 +26,9 @@ class CreateEmptyTemplateAction : AnAction() {
             if (File(pathNewTemplate).isDirectory) "$pathNewTemplate${pathTemplate.list().size}"
             else pathNewTemplate
         )
+        VirtualFileManager.getInstance().asyncRefresh {
+            VirtualFileManager.getInstance().syncRefresh()
+        }
     }
 
     private fun createPath(path: String) {
@@ -37,10 +41,6 @@ class CreateEmptyTemplateAction : AnAction() {
         mainFile.createNewFile()
         val template = MainClassJson(name = path.split("/").last(), path = path)
         mainFile.writeText(JsonModelMapper.mapToString(template))
-    }
-
-    override fun update(e: AnActionEvent) {
-        super.update(e)
     }
 
 }
