@@ -1,4 +1,4 @@
-package tools
+package com.louco.archTemp.tools
 
 fun String.replaceTemplate(key: String, value: String) = this.replace("\${$key}", value)
 

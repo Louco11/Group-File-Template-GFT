@@ -1,13 +1,11 @@
-package tools
+package com.louco.archTemp.tools
 
-import actions.DialogCreateArchitectureAction
-import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.CommonDataKeys
 import com.intellij.openapi.project.impl.ProjectExImpl
-import constant.Constants
-import mapper.JsonModelMapper
-import model.MainClassJson
+import com.louco.archTemp.constant.Constants
+import com.louco.archTemp.mapper.JsonModelMapper
+import com.louco.archTemp.model.MainClassJson
 import java.io.File
 import java.nio.charset.Charset
 

@@ -1,7 +1,7 @@
-package model
+package com.louco.archTemp.model
 
 import com.google.gson.annotations.SerializedName
-import constant.Constants
+import com.louco.archTemp.constant.Constants
 
 data class MainClassJson (
     @SerializedName(Constants.TagXml.FIELD_NAME)

@@ -1,12 +1,12 @@
-package actions
+package com.louco.archTemp.actions
 
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.CommonDataKeys
 import com.intellij.openapi.ui.Messages
 import com.intellij.openapi.vfs.VirtualFileManager
-import model.MainClassJson
-import tools.CreateTemplate
+import com.louco.archTemp.model.MainClassJson
+import com.louco.archTemp.tools.CreateTemplate
 
 class DialogCreateArchitectureAction(val mainClass: MainClassJson) : AnAction(mainClass.name, mainClass.description, null) {
 

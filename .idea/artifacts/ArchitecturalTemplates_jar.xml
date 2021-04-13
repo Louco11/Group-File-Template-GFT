@@ -1,0 +1,6 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="ArchitecturalTemplates:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/ArchitecturalTemplates_jar</output-path>
+    <root id="archive" name="ArchitecturalTemplates.jar" />
+  </artifact>
+</component>

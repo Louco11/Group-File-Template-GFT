@@ -1,15 +1,10 @@
-package actions
+package com.louco.archTemp.actions
 
 import com.intellij.openapi.actionSystem.ActionGroup
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.CommonDataKeys
-import com.intellij.openapi.project.impl.ProjectExImpl
-import constant.Constants
-import mapper.JsonModelMapper
-import tools.getListTemplate
-import java.io.File
-import java.nio.charset.Charset
+import com.louco.archTemp.tools.getListTemplate
 
 class ListTemplateGroup : ActionGroup() {
 

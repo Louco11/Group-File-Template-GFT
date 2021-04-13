@@ -12,26 +12,26 @@
     <depends>com.intellij.modules.platform</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <treeStructureProvider implementation="extensions.TreeStructure"/>
+        <treeStructureProvider implementation="com.louco.archTemp.extensions.TreeStructure"/>
     </extensions>
 
     <actions>
 
-        <action id="actions.CreateEmptyTemplateAction"
-                class="actions.CreateEmptyTemplateAction"
+        <action id="com.louco.archTemp.actions.CreateEmptyTemplateAction"
+                class="com.louco.archTemp.actions.CreateEmptyTemplateAction"
                 text="Create New Template"
                 description="Create new template" icon="SdkIcons.Sdk_create_icon">
             <add-to-group group-id="ToolsMenu" anchor="before" relative-to-action="CreateDesktopEntry"/>
         </action>
 
-        <group id="actions.ListTemplateGroup"
-               class="actions.ListTemplateGroup"
+        <group id="com.louco.archTemp.actions.ListTemplateGroup"
+               class="com.louco.archTemp.actions.ListTemplateGroup"
                text="Templates" popup="true"
                icon="SdkIcons.Sdk_create_icon">
             <add-to-group group-id="ProjectViewPopupMenu" anchor="after" relative-to-action="WeighingNewGroup"/>
         </group>
 
-        <action id="actions.AddFileInTemplate" class="actions.AddFileInTemplate" text="Add File In Template">
+        <action id="com.louco.archTemp.actions.AddFileInTemplate" class="com.louco.archTemp.actions.AddFileInTemplate" text="Add File In Template">
             <add-to-group group-id="ProjectViewPopupMenu" anchor="after" relative-to-action="WeighingNewGroup"/>
         </action>
 
