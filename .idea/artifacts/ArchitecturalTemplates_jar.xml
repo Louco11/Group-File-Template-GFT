@@ -1,6 +1,14 @@
 <component name="ArtifactManager">
-  <artifact type="jar" name="ArchitecturalTemplates:jar">
+  <artifact name="ArchitecturalTemplates:jar">
     <output-path>$PROJECT_DIR$/out/artifacts/ArchitecturalTemplates_jar</output-path>
-    <root id="archive" name="ArchitecturalTemplates.jar" />
+    <root id="root">
+      <element id="archive" name="ArchitecturalTemplates.jar">
+        <element id="module-output" name="ArchitecturalTemplates.main" />
+        <element id="directory" name="META-INF">
+          <element id="file-copy" path="$PROJECT_DIR$/src/main/META-INF/MANIFEST.MF" />
+          <element id="file-copy" path="$PROJECT_DIR$/src/main/resources/META-INF/plugin.xml" />
+        </element>
+      </element>
+    </root>
   </artifact>
 </component>

@@ -27,7 +27,7 @@
         <group id="com.louco.archTemp.actions.ListTemplateGroup"
                class="com.louco.archTemp.actions.ListTemplateGroup"
                text="Templates" popup="true"
-               icon="SdkIcons.Sdk_create_icon">
+               icon="SdkIcons.Sdk_template_icon">
             <add-to-group group-id="ProjectViewPopupMenu" anchor="after" relative-to-action="WeighingNewGroup"/>
         </group>
 

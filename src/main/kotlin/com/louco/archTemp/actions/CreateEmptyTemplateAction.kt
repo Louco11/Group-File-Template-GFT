@@ -3,7 +3,6 @@ package com.louco.archTemp.actions
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.CommonDataKeys
-import com.intellij.openapi.project.impl.ProjectExImpl
 import com.intellij.openapi.ui.Messages
 import com.intellij.openapi.vfs.VirtualFileManager
 import com.louco.archTemp.constant.Constants
@@ -14,7 +13,7 @@ import java.io.File
 class CreateEmptyTemplateAction : AnAction() {
 
     override fun actionPerformed(event: AnActionEvent) {
-        val basePath = (event.getData(CommonDataKeys.PROJECT) as ProjectExImpl).basePath
+        val basePath = event.getData(CommonDataKeys.PROJECT)?.basePath.orEmpty()
         val pathTemplate = File("$basePath${Constants.PATH_TEMPLATE}")
         var nameTemplate = Messages.showInputDialog("", "New Template", null) ?: return
         if (nameTemplate.isEmpty()) {

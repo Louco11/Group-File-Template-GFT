@@ -11,8 +11,8 @@ data class MainClassJson (
     @SerializedName(Constants.TagXml.FIELD_PATH)
     var path: String = "",
     @SerializedName(Constants.TagXml.FIELD_PARAMETERS)
-    var param: List<String> = listOf("name"),
+    var param: List<String> = listOf(),
     @SerializedName(Constants.TagXml.FIELD_ADD_FILE)
-    var fileTemplate: List<FileTemplate> = listOf(FileTemplate())
+    var fileTemplate: List<FileTemplate> = listOf()
 
 )

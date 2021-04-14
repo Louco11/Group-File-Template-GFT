@@ -2,7 +2,6 @@ package com.louco.archTemp.tools
 
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.CommonDataKeys
-import com.intellij.openapi.project.impl.ProjectExImpl
 import com.louco.archTemp.constant.Constants
 import com.louco.archTemp.mapper.JsonModelMapper
 import com.louco.archTemp.model.MainClassJson
@@ -13,7 +12,7 @@ fun AnActionEvent.getListTemplate(): List<MainClassJson> {
     val listTemplate = mutableListOf<MainClassJson>()
 
     this.getData(CommonDataKeys.PROJECT)?.let {
-        val basePath = "${(it as ProjectExImpl).basePath}${Constants.PATH_TEMPLATE}"
+        val basePath = "${it.basePath}${Constants.PATH_TEMPLATE}"
         val dirTemplate = File(basePath)
         if (dirTemplate.isDirectory) {
             dirTemplate.list().forEach { templatePath ->
