@@ -31,8 +31,12 @@
             <add-to-group group-id="ProjectViewPopupMenu" anchor="after" relative-to-action="WeighingNewGroup"/>
         </group>
 
-        <action id="com.louco.archTemp.actions.AddFileInTemplate" class="com.louco.archTemp.actions.AddFileInTemplate" text="Add File In Template">
-            <add-to-group group-id="ProjectViewPopupMenu" anchor="after" relative-to-action="WeighingNewGroup"/>
+        <action
+                id="com.louco.archTemp.actions.AddFileInTemplate"
+                class="com.louco.archTemp.actions.AddFileInTemplate"
+                text="Add File In Template"
+                icon="SdkIcons.Sdk_create_icon">
+            <add-to-group group-id="ProjectViewPopupMenu" anchor="after" relative-to-action="AddToFavorites"/>
         </action>
 
     </actions>

@@ -13,6 +13,12 @@ object Constants {
         const val FIELD_PATH = "path"
         const val FIELD_PARAMETERS= "param"
         const val FIELD_ADD_FILE= "addFile"
+        const val DEFAULT_TAG_PACKAGE= "package"
+    }
+
+    object CreatePackage {
+        const val MAIN_JAVA = "main/java"
+        const val MAIN_KOTLIN = "main/kotlin"
     }
 
 }

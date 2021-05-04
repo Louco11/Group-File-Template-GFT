@@ -34,3 +34,17 @@ fun AnActionEvent.getListTemplate(): List<MainClassJson> {
 
     return listTemplate
 }
+
+fun AnActionEvent.getPackage(): String {
+    val mainJava = Constants.CreatePackage.MAIN_JAVA
+    val mainKotlin = Constants.CreatePackage.MAIN_KOTLIN
+    val path = getData(CommonDataKeys.VIRTUAL_FILE)?.path.orEmpty()
+    var packge = ""
+    if (path.indexOf(mainJava) > 0) {
+        packge = path.removeRange(0, path.indexOf(mainJava) + mainJava.length + 1)
+    }
+    if (path.indexOf(mainKotlin) > 0) {
+        packge = path.removeRange(0, path.indexOf(mainKotlin) + mainKotlin.length + 1)
+    }
+    return packge.replace("/", ".")
+}

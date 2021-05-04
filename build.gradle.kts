@@ -19,7 +19,7 @@ dependencies {
 
 // See https://github.com/JetBrains/gradle-intellij-plugin/
 intellij {
-    //version = "201.8743.12"
+    version = "201.8743.12"
     alternativeIdePath = "/Applications/Android Studio.app"
     // version = "2020.3.3"
 }
