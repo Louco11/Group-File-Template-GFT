@@ -51,7 +51,7 @@ class AddFileInTemplate : AnAction() {
     }
 
     private fun addFile(
-        result: @NotNull List<Module>,
+        result: List<Module>,
         fileToTemplate: @Nullable VirtualFile?
     ) {
         if (result.isNotEmpty()) {

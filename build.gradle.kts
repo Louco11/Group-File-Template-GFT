@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "com.louco"
-version = "alfa-1.2"
+version = "alfa-2.2"
 
 repositories {
     mavenCentral()
