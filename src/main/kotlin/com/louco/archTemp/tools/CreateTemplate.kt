@@ -14,7 +14,7 @@ object CreateTemplate  {
     ) {
         val nameFile = fileTemplateModel.name.replaceTemplate(map)
         val fileTemplate = File("$pathTemplate", fileTemplateModel.fileTemplatePath)
-        val filePath = create(pathChoose, fileTemplateModel.path)
+        val filePath = create(pathChoose, fileTemplateModel.path.replaceTemplate(map))
         val fileTemplateInPath =  File(filePath.path, nameFile)
         fileTemplateInPath.createNewFile()
         fileTemplateInPath.writeText(fileTemplate.readText(Charset.defaultCharset()).replaceTemplate(map))

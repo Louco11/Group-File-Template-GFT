@@ -21,10 +21,10 @@ fun AnActionEvent.getListTemplate(): List<MainClassJson> {
                 if (mainFile.isFile) {
                     try {
                         listTemplate.add(
-                            JsonModelMapper.mapToMainClassXml(mainFile.readText(Charset.defaultCharset()))
+                            JsonModelMapper.mapToMainClass(mainFile.readText(Charset.defaultCharset()))
                         )
                     } catch (e: Exception) {
-
+                        val error = e
                     }
                 }
 

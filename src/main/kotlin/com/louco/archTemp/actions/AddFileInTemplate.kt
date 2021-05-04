@@ -27,20 +27,23 @@ class AddFileInTemplate : AnAction() {
     override fun actionPerformed(event: AnActionEvent) {
         val fileToTemplate = event.getData(CommonDataKeys.VIRTUAL_FILE)
         val templateList = event.getListTemplate()
-
-        val dialog = ChooseModulesDialog(
-            Button(),
-            templateList.map {
-                ModuleImpl(
-                    it.name,
-                    event.project!!,
-                    it.path
-                )
-            },
-            ADD_FILE_IN_TEMPLATE
-        )
-        dialog.setSingleSelectionMode()
-        val result = dialog.showAndGetResult()
+        val modules = templateList.map {
+            ModuleImpl(
+                it.name,
+                event.project!!,
+                it.path
+            )
+        }
+        var result = modules.toList()
+        if (modules.size > 1) {
+            val dialog = ChooseModulesDialog(
+                Button(),
+                modules,
+                ADD_FILE_IN_TEMPLATE
+            )
+            dialog.setSingleSelectionMode()
+            result = dialog.showAndGetResult() as List<ModuleImpl>
+        }
         addFile(result, fileToTemplate)
         VirtualFileManager.getInstance().asyncRefresh {
             VirtualFileManager.getInstance().syncRefresh()
@@ -52,7 +55,7 @@ class AddFileInTemplate : AnAction() {
         fileToTemplate: @Nullable VirtualFile?
     ) {
         if (result.isNotEmpty()) {
-            val filePathTemplate = File(result[0].moduleFile?.path.orEmpty())
+            val filePathTemplate = File(result.first().moduleFile?.path.orEmpty())
             if (filePathTemplate.isDirectory) {
                 val fileToTemp = File(fileToTemplate?.path.orEmpty())
                 if (fileToTemp.isFile) {
@@ -80,7 +83,7 @@ class AddFileInTemplate : AnAction() {
     ) {
         val mainFileTemplate = File(result.moduleFile?.path.orEmpty(), Constants.MAIN_FILE_TEMPLATE)
         if (mainFileTemplate.isFile) {
-            val mainJson = JsonModelMapper.mapToMainClassXml(mainFileTemplate.readText(Charset.defaultCharset()))
+            val mainJson = JsonModelMapper.mapToMainClass(mainFileTemplate.readText(Charset.defaultCharset()))
             val listFile = mainJson.fileTemplate.toMutableList()
             listFile.add(
                 FileTemplate(

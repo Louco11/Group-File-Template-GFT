@@ -17,8 +17,8 @@ object Constants {
     }
 
     object CreatePackage {
-        const val MAIN_JAVA = "main/java"
-        const val MAIN_KOTLIN = "main/kotlin"
+        const val MAIN_JAVA = "java"
+        const val MAIN_KOTLIN = "kotlin"
     }
 
 }
