@@ -14,13 +14,16 @@ import com.louco.archTemp.view.CreateTemplateDialog
 class DialogCreateArchitectureAction(val mainClass: MainClassJson) : AnAction(mainClass.name, mainClass.description, null) {
 
     override fun actionPerformed(event: AnActionEvent) {
-
-        CreateTemplateDialog(mainClass.param, event.project) { inputMap ->
-            onOkClickListener(inputMap, event)
-        }.showAndGet()
+        if (mainClass.param.isEmpty()) {
+            createTemplate(mapOf(), event)
+        } else {
+            CreateTemplateDialog(mainClass.param, event.project) { inputMap ->
+                createTemplate(inputMap, event)
+            }.showAndGet()
+        }
     }
 
-    private fun onOkClickListener(
+    private fun createTemplate(
         inputMap: Map<String, String>,
         event: AnActionEvent
     ) {
