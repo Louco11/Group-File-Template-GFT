@@ -1,7 +1,7 @@
 plugins {
     id ("org.jetbrains.intellij") version "0.7.2"
     java
-    kotlin("jvm") version "1.4.10"
+    kotlin("jvm") version "1.5.0"
 }
 
 group = "com.louco"
@@ -19,9 +19,9 @@ dependencies {
 
 // See https://github.com/JetBrains/gradle-intellij-plugin/
 intellij {
-    version = "201.8743.12"
-    alternativeIdePath = "/Applications/Android Studio.app"
-    // version = "2020.3.3"
+//    version = "201.8743.12"
+//    alternativeIdePath = "/Applications/Android Studio.app"
+     version = "2020.3.3"
 }
 
 tasks.getByName<org.jetbrains.intellij.tasks.PatchPluginXmlTask>("patchPluginXml") {
