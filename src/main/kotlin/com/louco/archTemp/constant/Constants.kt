@@ -19,6 +19,7 @@ object Constants {
     object CreatePackage {
         const val MAIN_JAVA = "java"
         const val MAIN_KOTLIN = "kotlin"
+        const val ANDROID_RES = "res"
     }
 
 }

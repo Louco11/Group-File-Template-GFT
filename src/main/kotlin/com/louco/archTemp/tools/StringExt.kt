@@ -1,7 +1,5 @@
 package com.louco.archTemp.tools
 
-fun String.replaceTemplate(key: String, value: String) = this.replace("\${$key}", value)
-
 fun String.replaceTemplate(map: Map<String, String>): String {
     var stringTemp = this
     map.keys.forEach { key ->

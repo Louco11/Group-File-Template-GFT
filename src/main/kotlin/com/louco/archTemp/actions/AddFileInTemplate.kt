@@ -52,7 +52,7 @@ class AddFileInTemplate : AnAction() {
 
     private fun addFile(
         result: List<Module>,
-        fileToTemplate: @Nullable VirtualFile?
+        fileToTemplate: VirtualFile?
     ) {
         if (result.isNotEmpty()) {
             val filePathTemplate = File(result.first().moduleFile?.path.orEmpty())
