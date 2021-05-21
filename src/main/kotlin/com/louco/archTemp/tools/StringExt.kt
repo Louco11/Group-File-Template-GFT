@@ -8,5 +8,4 @@ fun String.replaceTemplate(map: Map<String, String>): String {
     return stringTemp
 }
 
-fun String.replaceToPackage() = this.split("usr/")
 fun String.toDrFile() = "$this.dr"

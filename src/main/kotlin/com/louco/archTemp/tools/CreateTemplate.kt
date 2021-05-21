@@ -17,11 +17,11 @@ object CreateTemplate  {
     ) {
         val nameFile = fileTemplateModel.name.replaceTemplate(map)
         val fileTemplate = File("$pathTemplate", fileTemplateModel.fileTemplatePath)
-
-        val filePath = if (fileTemplateModel.path.split(SPLASH).first() == Constants.CreatePackage.ANDROID_RES) {
-            createPathRes(pathChoose, fileTemplateModel.path.replaceTemplate(map))
+        val fileTemplatePath =  fileTemplateModel.getPath()
+        val filePath = if (fileTemplatePath.split(SPLASH).first() == Constants.CreatePackage.ANDROID_RES) {
+            createPathRes(pathChoose, fileTemplatePath.replaceTemplate(map))
         } else {
-            create(pathChoose, fileTemplateModel.path.replaceTemplate(map))
+            create(pathChoose, fileTemplatePath.replaceTemplate(map))
         }
         val fileTemplateInPath =  File(filePath.path, nameFile)
         fileTemplateInPath.createNewFile()
