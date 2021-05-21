@@ -1,4 +1,4 @@
-package com.louco.archTemp.extensions
+package com.arch.temp.extensions
 
 import com.intellij.ide.projectView.TreeStructureProvider
 import com.intellij.ide.projectView.ViewSettings

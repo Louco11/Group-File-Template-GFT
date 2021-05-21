@@ -1,4 +1,4 @@
-package com.louco.archTemp.actions
+package com.arch.temp.actions
 
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
@@ -9,13 +9,11 @@ import com.intellij.openapi.roots.ui.configuration.ChooseModulesDialog
 import com.intellij.openapi.ui.Messages
 import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.openapi.vfs.VirtualFileManager
-import com.louco.archTemp.constant.Constants
-import com.louco.archTemp.mapper.JsonModelMapper
-import com.louco.archTemp.model.FileTemplate
-import org.jetbrains.annotations.NotNull
-import org.jetbrains.annotations.Nullable
-import com.louco.archTemp.tools.getListTemplate
-import com.louco.archTemp.tools.toDrFile
+import com.arch.temp.constant.Constants
+import com.arch.temp.mapper.JsonModelMapper
+import com.arch.temp.model.FileTemplate
+import com.arch.temp.tools.getListTemplate
+import com.arch.temp.tools.toDrFile
 import java.awt.Button
 import java.io.File
 import java.nio.charset.Charset

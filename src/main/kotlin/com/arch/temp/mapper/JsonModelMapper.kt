@@ -1,8 +1,8 @@
-package com.louco.archTemp.mapper
+package com.arch.temp.mapper
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import com.louco.archTemp.model.MainClassJson
+import com.arch.temp.model.MainClassJson
 
 object JsonModelMapper {
 

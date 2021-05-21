@@ -1,5 +1,5 @@
 <idea-plugin>
-    <id>com.louco.archTemp</id>
+    <id>com.arch.temp</id>
 
     <name>ArchitecturalTemplates</name>
 
@@ -12,27 +12,27 @@
     <depends>com.intellij.modules.platform</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <treeStructureProvider implementation="com.louco.archTemp.extensions.TreeStructure"/>
+        <treeStructureProvider implementation="com.arch.temp.extensions.TreeStructure"/>
     </extensions>
 
     <actions>
 
-        <action id="com.louco.archTemp.actions.CreateEmptyTemplateAction"
-                class="com.louco.archTemp.actions.CreateEmptyTemplateAction"
+        <action id="com.arch.temp.actions.CreateEmptyTemplateAction"
+                class="com.arch.temp.actions.CreateEmptyTemplateAction"
                 text="Create New Template"
                 description="Create new template">
             <add-to-group group-id="ToolsMenu" anchor="before" relative-to-action="CreateDesktopEntry"/>
         </action>
 
-        <group id="com.louco.archTemp.actions.ListTemplateGroup"
-               class="com.louco.archTemp.actions.ListTemplateGroup"
+        <group id="com.arch.temp.actions.ListTemplateGroup"
+               class="com.arch.temp.actions.ListTemplateGroup"
                text="Templates" popup="true">
             <add-to-group group-id="ProjectViewPopupMenu" anchor="after" relative-to-action="WeighingNewGroup"/>
         </group>
 
         <action
-                id="com.louco.archTemp.actions.AddFileInTemplate"
-                class="com.louco.archTemp.actions.AddFileInTemplate"
+                id="com.arch.temp.actions.AddFileInTemplate"
+                class="com.arch.temp.actions.AddFileInTemplate"
                 text="Add File In Template">
             <add-to-group group-id="ProjectViewPopupMenu" anchor="after" relative-to-action="AddToFavorites"/>
         </action>

@@ -1,4 +1,4 @@
-package com.louco.archTemp.model
+package com.arch.temp.model
 
 class FileTemplate(
     val name: String = "",

@@ -1,10 +1,10 @@
-package com.louco.archTemp.actions
+package com.arch.temp.actions
 
 import com.intellij.openapi.actionSystem.ActionGroup
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.CommonDataKeys
-import com.louco.archTemp.tools.getListTemplate
+import com.arch.temp.tools.getListTemplate
 
 class ListTemplateGroup : ActionGroup() {
 

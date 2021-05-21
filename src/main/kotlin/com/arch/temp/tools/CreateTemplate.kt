@@ -1,7 +1,7 @@
-package com.louco.archTemp.tools
+package com.arch.temp.tools
 
-import com.louco.archTemp.constant.Constants
-import com.louco.archTemp.model.FileTemplate
+import com.arch.temp.constant.Constants
+import com.arch.temp.model.FileTemplate
 import java.io.File
 import java.nio.charset.Charset
 

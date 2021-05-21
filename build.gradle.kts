@@ -4,7 +4,7 @@ plugins {
     kotlin("jvm") version "1.5.0"
 }
 
-group = "com.louco"
+group = "com.arch"
 version = "alfa-2.2"
 
 repositories {
@@ -17,11 +17,10 @@ dependencies {
     testCompile("junit", "junit", "4.12")
 }
 
-// See https://github.com/JetBrains/gradle-intellij-plugin/
 intellij {
 //    version = "201.8743.12"
 //    alternativeIdePath = "/Applications/Android Studio.app"
-     version = "2020.3.3"
+     version = "2020.3.2"
 }
 
 tasks.getByName<org.jetbrains.intellij.tasks.PatchPluginXmlTask>("patchPluginXml") {

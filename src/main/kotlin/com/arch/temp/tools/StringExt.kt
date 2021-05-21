@@ -1,4 +1,4 @@
-package com.louco.archTemp.tools
+package com.arch.temp.tools
 
 fun String.replaceTemplate(map: Map<String, String>): String {
     var stringTemp = this

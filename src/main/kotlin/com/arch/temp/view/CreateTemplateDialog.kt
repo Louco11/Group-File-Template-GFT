@@ -1,11 +1,10 @@
-package com.louco.archTemp.view
+package com.arch.temp.view
 
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.ui.DialogWrapper
 import com.intellij.ui.layout.GrowPolicy
 import com.intellij.ui.layout.panel
 import javax.swing.*
-
 
 class CreateTemplateDialog(
     private val param: List<String>,

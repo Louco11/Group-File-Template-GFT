@@ -1,4 +1,4 @@
-package com.louco.archTemp.constant
+package com.arch.temp.constant
 
 object Constants {
 

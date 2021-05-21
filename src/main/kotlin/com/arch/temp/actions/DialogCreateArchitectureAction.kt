@@ -1,15 +1,15 @@
-package com.louco.archTemp.actions
+package com.arch.temp.actions
 
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.CommonDataKeys
 import com.intellij.openapi.vfs.VirtualFileManager
 import com.intellij.psi.impl.PsiParserFacadeImpl
-import com.louco.archTemp.constant.Constants.TagXml.DEFAULT_TAG_PACKAGE
-import com.louco.archTemp.model.MainClassJson
-import com.louco.archTemp.tools.CreateTemplate
-import com.louco.archTemp.tools.getPackage
-import com.louco.archTemp.view.CreateTemplateDialog
+import com.arch.temp.constant.Constants.TagXml.DEFAULT_TAG_PACKAGE
+import com.arch.temp.model.MainClassJson
+import com.arch.temp.tools.CreateTemplate
+import com.arch.temp.tools.getPackage
+import com.arch.temp.view.CreateTemplateDialog
 
 class DialogCreateArchitectureAction(val mainClass: MainClassJson) : AnAction(mainClass.name, mainClass.description, null) {
 

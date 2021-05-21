@@ -1,13 +1,13 @@
-package com.louco.archTemp.actions
+package com.arch.temp.actions
 
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.CommonDataKeys
 import com.intellij.openapi.ui.Messages
 import com.intellij.openapi.vfs.VirtualFileManager
-import com.louco.archTemp.constant.Constants
-import com.louco.archTemp.mapper.JsonModelMapper
-import com.louco.archTemp.model.MainClassJson
+import com.arch.temp.constant.Constants
+import com.arch.temp.mapper.JsonModelMapper
+import com.arch.temp.model.MainClassJson
 import java.io.File
 
 class CreateEmptyTemplateAction : AnAction() {
