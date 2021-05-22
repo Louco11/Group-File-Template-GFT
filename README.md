@@ -1,7 +1,6 @@
 # Architectural Templates plugin
 
-[Download release alfa 2.5](release/ArchitecturalTemplates_alfa-2.5.jar)
-
+[Download release alfa 2.6](release/ArchitecturalTemplates_alfa-2.6.jar)
 
 ![](screencut/Create%20new%20template.png)
 ![](screencut/dialog%20create%20new%20template.png)
@@ -13,7 +12,7 @@
 ![](screencut/main%20file%20template%20with%20file.png)
 ![](screencut/main%20file%20template%20with%20file%20path.png)
 
-##Параметры
+## Параметры
 `Default param - {package}`
 
 ![](screencut/param%20in%20main.png)

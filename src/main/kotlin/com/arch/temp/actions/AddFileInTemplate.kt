@@ -13,7 +13,7 @@ import com.arch.temp.constant.Constants
 import com.arch.temp.mapper.JsonModelMapper
 import com.arch.temp.model.FileTemplate
 import com.arch.temp.tools.getListTemplate
-import com.arch.temp.tools.toDrFile
+import com.arch.temp.tools.toTmFile
 import java.awt.Button
 import java.io.File
 import java.nio.charset.Charset
@@ -61,11 +61,11 @@ class AddFileInTemplate : AnAction() {
                     val fileName = fileToTemplate?.name.orEmpty().split(".").first()
                     val renameFileName =
                         Messages.showInputDialog("Name File Template", ADD_FILE_IN_TEMPLATE, null, fileName, null).orEmpty()
-                    val file = File(filePathTemplate.path, renameFileName.toDrFile())
+                    val file = File(filePathTemplate.path, renameFileName.toTmFile())
                     file.createNewFile()
                     file.writeText(string)
                     addFileMainFile(
-                        renameFileName.toDrFile(),
+                        renameFileName.toTmFile(),
                         result[0],
                         fileToTemplate!!
                     )

@@ -8,4 +8,4 @@ fun String.replaceTemplate(map: Map<String, String>): String {
     return stringTemp
 }
 
-fun String.toDrFile() = "$this.dr"
+fun String.toTmFile() = "$this.tm"
