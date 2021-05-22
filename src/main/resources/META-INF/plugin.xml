@@ -1,9 +1,12 @@
-<idea-plugin>
+<idea-plugin url="https://www.jetbrains.com/idea">
     <id>com.arch.temp</id>
 
-    <name>ArchitecturalTemplates</name>
+    <name>Architectural Templates</name>
 
     <vendor email="dor2014spb@gmail.com" url="https://www.linkedin.com/in/mikhail-dorontsov-396266100">Doronec</vendor>
+
+    <version>2.7</version>
+    <idea-version since-build="193" until-build="193.*"/>
 
     <description>Helps to create a group template. Support all ide jetbrains (probably)</description>
 
