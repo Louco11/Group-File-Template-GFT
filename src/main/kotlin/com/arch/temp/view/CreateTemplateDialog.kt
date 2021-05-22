@@ -6,6 +6,8 @@ import com.intellij.ui.layout.GrowPolicy
 import com.intellij.ui.layout.panel
 import javax.swing.*
 
+const val TITLE_DIALOG = "Fill param"
+
 class CreateTemplateDialog(
     private val param: List<String>,
     project: Project?,
@@ -16,7 +18,7 @@ class CreateTemplateDialog(
 
     init {
         init()
-        title = "Fill param"
+        title = TITLE_DIALOG
     }
 
     override fun createCenterPanel(): JComponent {
@@ -25,7 +27,7 @@ class CreateTemplateDialog(
                 row(param) {
                     val input = JTextField()
                     mapInput[param] = input
-                    input().growPolicy(GrowPolicy.SHORT_TEXT).onApply {  }
+                    input().growPolicy(GrowPolicy.SHORT_TEXT)
                 }
             }
         }

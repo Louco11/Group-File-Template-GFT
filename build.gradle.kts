@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "com.arch"
-version = "alpha-2.7"
+version = "alpha-3.0"
 
 repositories {
     mavenCentral()
@@ -20,7 +20,7 @@ dependencies {
 intellij {
 //    version = "201.8743.12"
 //    alternativeIdePath = "/Applications/Android Studio.app"
-    version = "2020.3.2"
+    version = "2020.3.3"
 }
 
 tasks.getByName<org.jetbrains.intellij.tasks.PatchPluginXmlTask>("patchPluginXml") {
