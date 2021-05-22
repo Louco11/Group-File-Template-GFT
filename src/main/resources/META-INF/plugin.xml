@@ -6,12 +6,11 @@
     <vendor email="dor2014spb@gmail.com" url="https://www.linkedin.com/in/mikhail-dorontsov-396266100">Doronec</vendor>
 
     <version>2.7</version>
-    <idea-version since-build="193" until-build="193.*"/>
+
+    <idea-version since-build="201" until-build="201.*"/>
 
     <description>Helps to create a group template. Support all ide jetbrains (probably)</description>
 
-    <!-- please see https://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
-         on how to target different products -->
     <depends>com.intellij.modules.platform</depends>
 
     <extensions defaultExtensionNs="com.intellij">
@@ -41,4 +40,5 @@
         </action>
 
     </actions>
+
 </idea-plugin>
