@@ -9,12 +9,16 @@
 
     <idea-version since-build="201" until-build="201.*"/>
 
-    <description>Helps to create a group template.
-        - To create a new template, call Tools -> Create New Template
-        - To create files from templates, right -Ю click on the directory in which you want to create files,
-        select the Templates menu item and select the one that suits you
+    <description>
+        <![CDATA[
+        Helps to create a group template.
+        <br/>
+        - To create a new template, call Tools -> Create New Template    <br/>
+        - To create files from templates, right -> click on the directory in which you want to create files,
+        select the Templates menu item and select the one that suits you <br/>
         - To add a file to a template, right-click on the file you need and select add a file to a template,
         in the dialog box select which template to add to and create a file name as it will look in it.
+         ]]>
     </description>
 
     <depends>com.intellij.modules.platform</depends>
