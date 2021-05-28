@@ -3,9 +3,6 @@ package com.arch.temp.actions
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.CommonDataKeys
-import com.intellij.openapi.module.Module
-import com.intellij.openapi.module.impl.ModuleImpl
-import com.intellij.openapi.roots.ui.configuration.ChooseModulesDialog
 import com.intellij.openapi.ui.Messages
 import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.openapi.vfs.VirtualFileManager
@@ -15,7 +12,7 @@ import com.arch.temp.model.FileTemplate
 import com.arch.temp.model.MainClassJson
 import com.arch.temp.tools.getListTemplate
 import com.arch.temp.tools.toTmFile
-import com.arch.temp.view.DialogCheckTemplate
+import com.arch.temp.view.CheckTemplateDialog
 import java.io.File
 import java.nio.charset.Charset
 
@@ -28,7 +25,7 @@ class AddFileInTemplate : AnAction() {
         val fileToTemplate = event.getData(CommonDataKeys.VIRTUAL_FILE)
         val templateList = event.getListTemplate()
         if (templateList.size > 1) {
-            DialogCheckTemplate(templateList, event.project!!) {
+            CheckTemplateDialog(templateList, event.project!!) {
                 addFile(it, fileToTemplate)
             }.showAndGet()
         } else {

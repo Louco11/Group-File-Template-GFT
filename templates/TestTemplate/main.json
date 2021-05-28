@@ -8,7 +8,7 @@
   ],
   "addFile": [
     {
-      "name": "Dialog{name}Template.kt",
+      "name": "{name}Dialog.kt",
       "path": "dialog/{namePath}",
       "fileTemplatePath": "DialogTemplate.tm"
     }

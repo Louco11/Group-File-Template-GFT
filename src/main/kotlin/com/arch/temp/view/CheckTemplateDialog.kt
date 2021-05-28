@@ -10,7 +10,7 @@ import com.intellij.ui.layout.panel
 import javax.swing.JComponent
 import javax.swing.JRadioButton
 
-class DialogCheckTemplate(
+class CheckTemplateDialog(
     private val param: List<MainClassJson>,
     project: Project?,
     private val callOk: (MainClassJson) -> Unit
