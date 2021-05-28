@@ -9,4 +9,6 @@ IN TODO
  - Adding pieces of code to an existing file
  - Window with a list of templates
 
-[Documentation](https://github.com/Louco11/ArchitecturalTemplates/wiki/Home/_edit)
+[Documentation](https://github.com/Louco11/ArchitecturalTemplates/wiki)
+
+[Plugin In Marketplace](https://plugins.jetbrains.com/plugin/16836-architectural-templates)
