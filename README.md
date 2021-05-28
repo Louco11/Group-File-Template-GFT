@@ -1,5 +1,7 @@
 # Architectural Templates plugin
 
+Version 3.2
+
 IN TODO
  - Add to git dialog
  - Auto save when you exit the template
