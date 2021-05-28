@@ -1,6 +1,6 @@
 # Architectural Templates plugin
 
-![](screencut/Create%20new%20template.png)
+![](screencut/Create%20New%20Empty%20Template.png)
 
 ## Параметры
 `Default param - {package}`
