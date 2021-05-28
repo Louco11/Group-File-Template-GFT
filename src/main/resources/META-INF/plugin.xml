@@ -5,9 +5,9 @@
 
     <vendor email="dor2014spb@gmail.com" url="https://www.linkedin.com/in/mikhail-dorontsov-396266100">Doronec</vendor>
 
-    <version>3.1</version>
+    <version>3.2</version>
 
-    <idea-version since-build="201" until-build="201.*"/>
+    <idea-version since-build="201" until-build="211.*"/>
 
     <description>
         <![CDATA[
