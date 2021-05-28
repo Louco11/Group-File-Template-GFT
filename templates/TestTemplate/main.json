@@ -2,6 +2,15 @@
   "name": "TestTemplate",
   "description": "Empty Template Description",
   "path": "/Users/admin/IdeaProjects/ArchitecturalTemplates/templates/TestTemplate",
-  "param": [],
-  "addFile": []
+  "param": [
+    "name",
+    "namePath"
+  ],
+  "addFile": [
+    {
+      "name": "Dialog{name}Template.kt",
+      "path": "dialog/{namePath}",
+      "fileTemplatePath": "DialogTemplate.tm"
+    }
+  ]
 }
