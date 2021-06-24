@@ -1,6 +1,6 @@
 # Architectural Templates plugin
 
-Version 3.2
+Version 3.3
 
 IN TODO
  - Add to git dialog
@@ -11,6 +11,6 @@ IN TODO
  - Adding pieces of code to an existing file
  - Window with a list of templates
 
-[Documentation](https://github.com/Louco11/ArchitecturalTemplates/wiki)
+[Documentation](https://github.com/Louco11/ArchitecturalTemplates/wiki/Architectural-Templates)
 
 [Plugin In Marketplace](https://plugins.jetbrains.com/plugin/16836-architectural-templates)

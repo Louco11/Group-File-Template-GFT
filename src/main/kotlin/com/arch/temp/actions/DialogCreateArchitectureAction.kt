@@ -30,10 +30,12 @@ class DialogCreateArchitectureAction(val mainClass: MainClassJson) : AnAction(ma
         val mapParam = inputMap.toMutableMap()
         PsiParserFacadeImpl(event.project!!)
         mapParam[DEFAULT_TAG_PACKAGE] = event.getPackage()
+        val basePath = event.getData(CommonDataKeys.PROJECT)?.basePath.orEmpty()
+        val pathCreate = "$basePath${mainClass.path}"
         mainClass.fileTemplate.forEach { file ->
             CreateTemplate.createFileTemplate(
                 event.getData(CommonDataKeys.VIRTUAL_FILE)?.path.orEmpty(),
-                mainClass.path,
+                pathCreate,
                 mapParam,
                 file
             )
