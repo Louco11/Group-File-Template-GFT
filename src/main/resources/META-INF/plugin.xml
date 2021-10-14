@@ -5,11 +5,21 @@
 
     <vendor email="dor2014spb@gmail.com" url="https://www.linkedin.com/in/mikhail-dorontsov-396266100">Doronec</vendor>
 
-    <version>2.7</version>
+    <version>3.3</version>
 
-    <idea-version since-build="201" until-build="201.*"/>
+    <idea-version since-build="201" until-build="211.*"/>
 
-    <description>Helps to create a group template. Support all ide jetbrains (probably)</description>
+    <description>
+        <![CDATA[
+        Helps to create a group template.
+        <br/>
+        - To create a new template, call Tools -> Create New Template    <br/>
+        - To create files from templates, right-click on the directory in which you want to create files,
+        select the Templates menu item and select the one that suits you <br/>
+        - To add a file to a template, right-click on the file you need and select add a file to a template,
+        in the dialog box select which template to add to and create a file name as it will look in it.
+         ]]>
+    </description>
 
     <depends>com.intellij.modules.platform</depends>
 

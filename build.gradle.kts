@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "com.arch"
-version = "alpha-2.7"
+version = "alpha-3.3"
 
 repositories {
     mavenCentral()

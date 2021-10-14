@@ -3,9 +3,6 @@ package com.arch.temp.actions
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.CommonDataKeys
-import com.intellij.openapi.module.Module
-import com.intellij.openapi.module.impl.ModuleImpl
-import com.intellij.openapi.roots.ui.configuration.ChooseModulesDialog
 import com.intellij.openapi.ui.Messages
 import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.openapi.vfs.VirtualFileManager
@@ -15,11 +12,12 @@ import com.arch.temp.model.FileTemplate
 import com.arch.temp.model.MainClassJson
 import com.arch.temp.tools.getListTemplate
 import com.arch.temp.tools.toTmFile
-import com.arch.temp.view.DialogCheckTemplate
+import com.arch.temp.view.CheckTemplateDialog
 import java.io.File
 import java.nio.charset.Charset
 
 const val ADD_FILE_IN_TEMPLATE = "Add file in Template"
+const val NAME_FILE_IN_TEMPLATE = "Name File Template"
 
 class AddFileInTemplate : AnAction() {
 
@@ -27,7 +25,7 @@ class AddFileInTemplate : AnAction() {
         val fileToTemplate = event.getData(CommonDataKeys.VIRTUAL_FILE)
         val templateList = event.getListTemplate()
         if (templateList.size > 1) {
-            DialogCheckTemplate(templateList, event.project!!) {
+            CheckTemplateDialog(templateList, event.project!!) {
                 addFile(it, fileToTemplate)
             }.showAndGet()
         } else {
@@ -36,29 +34,6 @@ class AddFileInTemplate : AnAction() {
         VirtualFileManager.getInstance().asyncRefresh {
             VirtualFileManager.getInstance().syncRefresh()
         }
-//
-//        val modules = templateList.map {
-//            ModuleImpl(
-//                it.name,
-//                event.project!!,
-//                it.path
-//            )
-//        }
-//
-//        if (modules.size > 1) {
-//            val dialog = ChooseModulesDialog(
-//                Button(),
-//                modules,
-//                ADD_FILE_IN_TEMPLATE
-//            )
-//            dialog.setSingleSelectionMode()
-//            result = dialog.showAndGetResult() as List<ModuleImpl>
-//        }
-//
-//        addFile(result, fileToTemplate)
-//        VirtualFileManager.getInstance().asyncRefresh {
-//            VirtualFileManager.getInstance().syncRefresh()
-//        }
     }
 
     private fun addFile(
@@ -72,7 +47,7 @@ class AddFileInTemplate : AnAction() {
                 val string = fileToTemp.readText(Charset.defaultCharset())
                 val fileName = fileToTemplate?.name.orEmpty().split(".").first()
                 val renameFileName =
-                    Messages.showInputDialog("Name File Template", ADD_FILE_IN_TEMPLATE, null, fileName, null).orEmpty()
+                    Messages.showInputDialog(NAME_FILE_IN_TEMPLATE, ADD_FILE_IN_TEMPLATE, null, fileName, null).orEmpty()
                 val file = File(filePathTemplate.path, renameFileName.toTmFile())
                 file.createNewFile()
                 file.writeText(string)

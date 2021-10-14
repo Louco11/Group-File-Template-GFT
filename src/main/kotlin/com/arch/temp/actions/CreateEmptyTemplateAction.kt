@@ -23,22 +23,23 @@ class CreateEmptyTemplateAction : AnAction() {
         val pathNewTemplate = "${pathTemplate.path}/$nameTemplate"
         createPath(
             if (File(pathNewTemplate).isDirectory) "$pathNewTemplate${pathTemplate.list().size}"
-            else pathNewTemplate
+            else pathNewTemplate,
+            "${Constants.PATH_TEMPLATE}/$nameTemplate"
         )
         VirtualFileManager.getInstance().asyncRefresh {
             VirtualFileManager.getInstance().syncRefresh()
         }
     }
 
-    private fun createPath(path: String) {
+    private fun createPath(path: String, pathInFile: String) {
         File(path).mkdir()
-        createMainFileTemplate(path)
+        createMainFileTemplate(path, pathInFile)
     }
 
-    private fun createMainFileTemplate(path: String) {
+    private fun createMainFileTemplate(path: String, pathInFile: String) {
         val mainFile = File(path, Constants.MAIN_FILE_TEMPLATE)
         mainFile.createNewFile()
-        val template = MainClassJson(name = path.split("/").last(), path = path)
+        val template = MainClassJson(name = path.split("/").last(), path = pathInFile)
         mainFile.writeText(JsonModelMapper.mapToString(template))
     }
 
