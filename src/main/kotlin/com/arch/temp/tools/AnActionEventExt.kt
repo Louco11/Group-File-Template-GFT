@@ -24,7 +24,6 @@ fun AnActionEvent.getListTemplate(): List<MainClassJson> {
                             JsonModelMapper.mapToMainClass(mainFile.readText(Charset.defaultCharset()))
                         )
                     } catch (e: Exception) {
-                        val error = e
                     }
                 }
 
