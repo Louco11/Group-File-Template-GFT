@@ -1,5 +1,5 @@
 plugins {
-    id ("org.jetbrains.intellij") version "1.5.3"
+    id ("org.jetbrains.intellij") version "1.6.0"
     java
     kotlin("jvm") version "1.6.21"
 }
@@ -19,9 +19,9 @@ dependencies {
 
 intellij {
     version.value("221.5080.210")
-
-//    alternativeIdePath "/Applications/Android Studio.app"
-//    version = "2020.3.2"
+//    version.set("212.5712.43")
+//    type.set("IC")
+//    plugins.set(listOf("android"))
 }
 
 tasks.getByName<org.jetbrains.intellij.tasks.PatchPluginXmlTask>("patchPluginXml") {}

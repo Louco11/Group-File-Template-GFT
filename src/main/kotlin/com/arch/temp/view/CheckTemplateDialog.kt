@@ -3,9 +3,8 @@ package com.arch.temp.view
 import com.arch.temp.model.MainClassJson
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.ui.DialogWrapper
-import com.intellij.ui.dsl.builder.ButtonsGroup
-import com.intellij.ui.dsl.builder.MutableProperty
-import com.intellij.ui.dsl.builder.panel
+import com.intellij.ui.components.JBRadioButton
+import com.intellij.ui.layout.panel
 import javax.swing.JComponent
 
 class CheckTemplateDialog(
@@ -14,29 +13,31 @@ class CheckTemplateDialog(
     private val callOk: (MainClassJson) -> Unit
 ) : DialogWrapper(project) {
 
-    private var valueCheck: MainClassJson = param.first()
+    private val radioButtonList = mutableListOf<JBRadioButton>()
 
-    init { super.init() }
+    init {
+        init()
+    }
 
     override fun createCenterPanel(): JComponent {
         return panel {
-            buttonsGroup{
-                param.forEach { value ->
-                    row { radioButton(value.name, value) }
+            buttonGroup{
+                param.forEach {
+                    val buttonJb = JBRadioButton(it.name)
+                    radioButtonList.add(buttonJb)
+                    row { buttonJb()}
                 }
-            }.binding({ valueCheck }, { valueCheck = it })
+            }
         }
-    }
-
-    private inline fun <reified T : Any> ButtonsGroup.binding(
-        noinline getter: () -> T,
-        noinline setter: (T) -> Unit
-    ): ButtonsGroup {
-        return bind(MutableProperty(getter, setter), T::class.java)
     }
 
     override fun doOKAction() {
         super.doOKAction()
-        callOk(valueCheck)
+        radioButtonList.forEachIndexed{index, button ->
+            if (button.isSelected) {
+                callOk(param[index])
+            }
+        }
     }
+
 }

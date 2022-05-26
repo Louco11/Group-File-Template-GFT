@@ -2,9 +2,8 @@ package com.arch.temp.view
 
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.ui.DialogWrapper
-import com.intellij.ui.components.JBTextField
-import com.intellij.ui.dsl.builder.Cell
-import com.intellij.ui.dsl.builder.panel
+import com.intellij.ui.layout.GrowPolicy
+import com.intellij.ui.layout.panel
 import javax.swing.*
 
 const val TITLE_DIALOG = "Fill param"
@@ -15,7 +14,7 @@ class CreateTemplateDialog(
     private val callOk: (Map<String, String>) -> Unit
 ) : DialogWrapper(project) {
 
-    private val mapInput: MutableMap<String, Cell<JBTextField>> = mutableMapOf()
+    private val mapInput: MutableMap<String, JTextField> = mutableMapOf()
 
     init {
         init()
@@ -26,9 +25,9 @@ class CreateTemplateDialog(
         return panel {
             param.forEach { param  ->
                 row(param) {
-                    val input = textField()
+                    val input = JTextField()
                     mapInput[param] = input
-                    input.component
+                    input().growPolicy(GrowPolicy.SHORT_TEXT)
                 }
             }
         }
@@ -38,7 +37,7 @@ class CreateTemplateDialog(
         super.doOKAction()
         val mutableMap = mutableMapOf<String, String>()
         param.forEach {
-            mutableMap[it] = mapInput[it]?.component?.text.orEmpty()
+            mutableMap[it] = mapInput[it]?.text.orEmpty()
         }
         callOk(mutableMap)
     }

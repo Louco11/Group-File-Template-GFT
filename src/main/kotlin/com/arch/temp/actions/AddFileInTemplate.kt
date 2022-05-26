@@ -15,7 +15,6 @@ import com.arch.temp.tools.toTmFile
 import com.arch.temp.view.CheckTemplateDialog
 import java.io.File
 import java.nio.charset.Charset
-import java.nio.file.Files
 
 const val ADD_FILE_IN_TEMPLATE = "Add file in Template"
 const val NAME_FILE_IN_TEMPLATE = "Name File Template"
@@ -41,12 +40,8 @@ class AddFileInTemplate : AnAction() {
         result: MainClassJson,
         fileToTemplate: VirtualFile?
     ) {
-        val pathTemplate = File(result.path)
-        println("Louco fileToTemplate = ${fileToTemplate?.path}")
         val fileToTemp = File(fileToTemplate?.path.orEmpty())
-        println("Louco fileToTemp = ${fileToTemp.isFile}")
         if (fileToTemp.isFile) {
-            println("Louco IS FILE")
             val contentFile = fileToTemp.readText(Charset.defaultCharset())
 
             val fileName = fileToTemplate?.name.orEmpty().split(".").first()
@@ -75,7 +70,6 @@ class AddFileInTemplate : AnAction() {
         result: MainClassJson,
         fileToTemplate: VirtualFile
     ) {
-        println("Louco addFileMainFile")
         val mainFileTemplate = File(result.globalBasePath, Constants.MAIN_FILE_TEMPLATE)
         if (mainFileTemplate.isFile) {
             val mainJson = JsonModelMapper.mapToMainClass(mainFileTemplate.readText(Charset.defaultCharset()))
