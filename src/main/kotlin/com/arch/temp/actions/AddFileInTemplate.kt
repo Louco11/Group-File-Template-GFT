@@ -15,6 +15,7 @@ import com.arch.temp.tools.toTmFile
 import com.arch.temp.view.CheckTemplateDialog
 import java.io.File
 import java.nio.charset.Charset
+import java.nio.file.Files
 
 const val ADD_FILE_IN_TEMPLATE = "Add file in Template"
 const val NAME_FILE_IN_TEMPLATE = "Name File Template"
@@ -40,23 +41,32 @@ class AddFileInTemplate : AnAction() {
         result: MainClassJson,
         fileToTemplate: VirtualFile?
     ) {
-        val filePathTemplate = File(result.path)
-        if (filePathTemplate.isDirectory) {
-            val fileToTemp = File(fileToTemplate?.path.orEmpty())
-            if (fileToTemp.isFile) {
-                val string = fileToTemp.readText(Charset.defaultCharset())
-                val fileName = fileToTemplate?.name.orEmpty().split(".").first()
-                val renameFileName =
-                    Messages.showInputDialog(NAME_FILE_IN_TEMPLATE, ADD_FILE_IN_TEMPLATE, null, fileName, null).orEmpty()
-                val file = File(filePathTemplate.path, renameFileName.toTmFile())
-                file.createNewFile()
-                file.writeText(string)
-                addFileMainFile(
-                    renameFileName.toTmFile(),
-                    result,
-                    fileToTemplate!!
-                )
-            }
+        val pathTemplate = File(result.path)
+        println("Louco fileToTemplate = ${fileToTemplate?.path}")
+        val fileToTemp = File(fileToTemplate?.path.orEmpty())
+        println("Louco fileToTemp = ${fileToTemp.isFile}")
+        if (fileToTemp.isFile) {
+            println("Louco IS FILE")
+            val contentFile = fileToTemp.readText(Charset.defaultCharset())
+
+            val fileName = fileToTemplate?.name.orEmpty().split(".").first()
+            val renameFileName =
+                Messages.showInputDialog(
+                    NAME_FILE_IN_TEMPLATE,
+                    ADD_FILE_IN_TEMPLATE,
+                    null,
+                    fileName,
+                    null
+                ).orEmpty()
+            val file = File(result.globalBasePath, renameFileName.toTmFile())
+            file.createNewFile()
+            file.writeText(contentFile)
+
+            addFileMainFile(
+                renameFileName.toTmFile(),
+                result,
+                fileToTemplate!!
+            )
         }
     }
 
@@ -65,7 +75,8 @@ class AddFileInTemplate : AnAction() {
         result: MainClassJson,
         fileToTemplate: VirtualFile
     ) {
-        val mainFileTemplate = File(result.path, Constants.MAIN_FILE_TEMPLATE)
+        println("Louco addFileMainFile")
+        val mainFileTemplate = File(result.globalBasePath, Constants.MAIN_FILE_TEMPLATE)
         if (mainFileTemplate.isFile) {
             val mainJson = JsonModelMapper.mapToMainClass(mainFileTemplate.readText(Charset.defaultCharset()))
             val listFile = mainJson.fileTemplate.toMutableList()
@@ -79,6 +90,7 @@ class AddFileInTemplate : AnAction() {
             mainFileTemplate.writeText(jsonParce)
         }
     }
+
     override fun update(e: AnActionEvent) {
         val project = e.project
         val file = e.getData(CommonDataKeys.PSI_FILE)

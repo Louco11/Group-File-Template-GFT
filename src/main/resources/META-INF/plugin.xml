@@ -5,7 +5,7 @@
 
     <vendor email="dor2014spb@gmail.com" url="https://www.linkedin.com/in/mikhail-dorontsov-396266100">Doronec</vendor>
 
-    <version>3.3</version>
+    <version>3.4</version>
 
     <idea-version since-build="201" until-build="211.*"/>
 
@@ -46,7 +46,7 @@
                 id="com.arch.temp.actions.AddFileInTemplate"
                 class="com.arch.temp.actions.AddFileInTemplate"
                 text="Add File In Template">
-            <add-to-group group-id="ProjectViewPopupMenu" anchor="after" relative-to-action="AddToFavorites"/>
+            <add-to-group group-id="ProjectViewPopupMenu" anchor="after" relative-to-action="WeighingNewGroup"/>
         </action>
 
     </actions>

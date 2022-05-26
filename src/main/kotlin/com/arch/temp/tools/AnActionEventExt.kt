@@ -21,7 +21,9 @@ fun AnActionEvent.getListTemplate(): List<MainClassJson> {
                 if (mainFile.isFile) {
                     try {
                         listTemplate.add(
-                            JsonModelMapper.mapToMainClass(mainFile.readText(Charset.defaultCharset()))
+                            JsonModelMapper.mapToMainClass(mainFile.readText(Charset.defaultCharset())).apply {
+                                globalBasePath = pathMainFile
+                            }
                         )
                     } catch (e: Exception) {
                     }

@@ -1,11 +1,11 @@
 plugins {
-    id ("org.jetbrains.intellij") version "1.2.0"
+    id ("org.jetbrains.intellij") version "1.5.3"
     java
-    kotlin("jvm") version "1.5.0"
+    kotlin("jvm") version "1.6.21"
 }
 
 group = "com.arch"
-version = "alpha-3.3"
+version = "alpha-3.4"
 
 repositories {
     mavenCentral()
@@ -18,13 +18,10 @@ dependencies {
 }
 
 intellij {
-    version = "201.8743.12"
-    alternativeIdePath = "/Applications/Android Studio.app"
+    version.value("221.5080.210")
+
+//    alternativeIdePath "/Applications/Android Studio.app"
 //    version = "2020.3.2"
 }
 
-tasks.getByName<org.jetbrains.intellij.tasks.PatchPluginXmlTask>("patchPluginXml") {
-    changeNotes("""
-      Add change notes here.<br>
-      <em>most HTML tags may be used</em>""")
-}
+tasks.getByName<org.jetbrains.intellij.tasks.PatchPluginXmlTask>("patchPluginXml") {}

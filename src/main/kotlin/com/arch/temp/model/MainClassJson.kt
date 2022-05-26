@@ -14,5 +14,6 @@ data class MainClassJson (
     var param: List<String> = listOf(),
     @SerializedName(Constants.TagXml.FIELD_ADD_FILE)
     var fileTemplate: List<FileTemplate> = listOf()
-
-)
+) {
+    var globalBasePath = ""
+}
