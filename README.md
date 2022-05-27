@@ -1,6 +1,7 @@
 # Architectural Templates plugin
 
-Version 3.3
+Version 3.4
+ -bug fix add files in temlate
 
 IN TODO
  - Add to git dialog
