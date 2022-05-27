@@ -2,18 +2,19 @@ package com.arch.temp.model
 
 import com.google.gson.annotations.SerializedName
 import com.arch.temp.constant.Constants
+import com.google.gson.annotations.Expose
 
 data class MainClassJson (
     @SerializedName(Constants.TagXml.FIELD_NAME)
-    var name: String = "No Name",
+    val name: String = "No Name",
     @SerializedName(Constants.TagXml.FIELD_DESCRIPTION)
-    var description: String = "Empty Template Description",
+    val description: String = "Empty Template Description",
     @SerializedName(Constants.TagXml.FIELD_PATH)
-    var path: String = "",
+    val path: String = "",
     @SerializedName(Constants.TagXml.FIELD_PARAMETERS)
-    var param: List<String> = listOf(),
+    val param: List<String> = listOf(),
     @SerializedName(Constants.TagXml.FIELD_ADD_FILE)
-    var fileTemplate: List<FileTemplate> = listOf()
+    val fileTemplate: List<FileTemplate> = listOf()
 ) {
-    var globalBasePath = ""
+    var globalBasePath: String = ""
 }

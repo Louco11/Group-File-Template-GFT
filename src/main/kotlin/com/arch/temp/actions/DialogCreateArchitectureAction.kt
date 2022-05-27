@@ -5,9 +5,11 @@ import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.CommonDataKeys
 import com.intellij.openapi.vfs.VirtualFileManager
 import com.intellij.psi.impl.PsiParserFacadeImpl
-import com.arch.temp.constant.Constants.TagXml.DEFAULT_TAG_PACKAGE
+import com.arch.temp.constant.Constants.TagXml.DEFAULT_TAG_FULL_PACKAGE
+import com.arch.temp.constant.Constants.TagXml.DEFAULT_TAG_MAIN_PACKAGE
 import com.arch.temp.model.MainClassJson
 import com.arch.temp.tools.CreateTemplate
+import com.arch.temp.tools.getMainPackage
 import com.arch.temp.tools.getPackage
 import com.arch.temp.view.CreateTemplateDialog
 
@@ -29,7 +31,9 @@ class DialogCreateArchitectureAction(val mainClass: MainClassJson) : AnAction(ma
     ) {
         val mapParam = inputMap.toMutableMap()
         PsiParserFacadeImpl(event.project!!)
-        mapParam[DEFAULT_TAG_PACKAGE] = event.getPackage()
+        val valuePackage = event.getPackage()
+        mapParam[DEFAULT_TAG_FULL_PACKAGE] = valuePackage
+        mapParam[DEFAULT_TAG_MAIN_PACKAGE] = valuePackage.getMainPackage()
         val basePath = event.getData(CommonDataKeys.PROJECT)?.basePath.orEmpty()
         val pathCreate = "$basePath${mainClass.path}"
         mainClass.fileTemplate.forEach { file ->

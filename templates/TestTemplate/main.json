@@ -1,16 +1,20 @@
 {
   "name": "TestTemplate",
-  "description": "Empty Template Description",
-  "path": "/Users/admin/IdeaProjects/ArchitecturalTemplates/templates/TestTemplate",
+  "description": "Example for documentation",
+  "path": "/templates/TestTemplate",
   "param": [
-    "name",
-    "namePath"
+    "name"
   ],
   "addFile": [
     {
-      "name": "{name}Dialog.kt",
-      "path": "dialog/{namePath}",
-      "fileTemplatePath": "DialogTemplate.tm"
+      "name": "{name}Fragment.kt",
+      "path": "test",
+      "fileTemplatePath": "example.tm"
+    },
+    {
+      "name": "[name]_main.xml",
+      "path": "res/layout",
+      "fileTemplatePath": "layout.tm"
     }
   ]
 }

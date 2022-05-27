@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "com.arch"
-version = "alpha-3.4"
+version = "alpha-3.5"
 
 repositories {
     mavenCentral()
@@ -18,7 +18,7 @@ dependencies {
 }
 
 intellij {
-    version.value("221.5080.210")
+    version.value("212.5712.43")
 //    version.set("212.5712.43")
 //    type.set("IC")
 //    plugins.set(listOf("android"))
