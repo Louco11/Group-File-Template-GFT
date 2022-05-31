@@ -11,6 +11,7 @@ object Constants {
         const val FIELD_DESCRIPTION = "description"
         const val FIELD_PATH = "path"
         const val FIELD_PARAMETERS = "param"
+        const val FIELD_SELECT_PARAMETERS = "selectParam"
         const val FIELD_ADD_FILE = "addFile"
         const val DEFAULT_TAG_FULL_PACKAGE = "package"
         const val DEFAULT_TAG_MAIN_PACKAGE = "pack"

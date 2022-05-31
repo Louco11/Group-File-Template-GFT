@@ -13,13 +13,13 @@ import com.arch.temp.tools.getMainPackage
 import com.arch.temp.tools.getPackage
 import com.arch.temp.view.CreateTemplateDialog
 
-class DialogCreateArchitectureAction(val mainClass: MainClassJson) : AnAction(mainClass.name, mainClass.description, null) {
+class DialogCreateArchitectureAction(private val mainClass: MainClassJson) : AnAction(mainClass.name, mainClass.description, null) {
 
     override fun actionPerformed(event: AnActionEvent) {
-        if (mainClass.param.isEmpty()) {
+        if (mainClass.param.isEmpty() && mainClass.selectParam.isEmpty()) {
             createTemplate(mapOf(), event)
         } else {
-            CreateTemplateDialog(mainClass.param, event.project) { inputMap ->
+            CreateTemplateDialog(mainClass, event.project) { inputMap ->
                 createTemplate(inputMap, event)
             }.showAndGet()
         }

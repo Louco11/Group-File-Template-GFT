@@ -2,7 +2,6 @@ package com.arch.temp.model
 
 import com.google.gson.annotations.SerializedName
 import com.arch.temp.constant.Constants
-import com.google.gson.annotations.Expose
 
 data class MainClassJson (
     @SerializedName(Constants.TagXml.FIELD_NAME)
@@ -13,6 +12,8 @@ data class MainClassJson (
     val path: String = "",
     @SerializedName(Constants.TagXml.FIELD_PARAMETERS)
     val param: List<String> = listOf(),
+    @SerializedName(Constants.TagXml.FIELD_SELECT_PARAMETERS)
+    val selectParam: List<SelectParam> = listOf(),
     @SerializedName(Constants.TagXml.FIELD_ADD_FILE)
     val fileTemplate: List<FileTemplate> = listOf()
 ) {
