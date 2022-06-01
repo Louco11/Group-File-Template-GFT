@@ -26,8 +26,13 @@
   ],
   "addFile": [
     {
-      "name": "{name}[-C]Fragment.kt",
-      "path": "",
+      "name": "{name}[-C]ViewModel.kt",
+      "path": "viewModels/{name}[-c]",
+      "fileTemplatePath": "example.tm"
+    },
+    {
+      "name": "{name}[-C]ViewModelTest.kt",
+      "path": "test/viewModels/{name}[-c]",
       "fileTemplatePath": "example.tm"
     },
     {

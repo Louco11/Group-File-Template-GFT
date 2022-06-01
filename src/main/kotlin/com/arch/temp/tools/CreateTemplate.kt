@@ -18,10 +18,11 @@ object CreateTemplate  {
         val nameFile = fileTemplateModel.name.replaceTemplate(map)
         val fileTemplate = File("$pathTemplate", fileTemplateModel.fileTemplatePath)
         val fileTemplatePath =  fileTemplateModel.getPath()
-        val filePath = if (fileTemplatePath.split(SPLASH).first() == Constants.CreatePackage.ANDROID_RES) {
-            createPathRes(pathChoose, fileTemplatePath.replaceTemplate(map))
-        } else {
-            create(pathChoose, fileTemplatePath.replaceTemplate(map))
+
+        val filePath = when (fileTemplatePath.split(SPLASH).first()) {
+            Constants.CreatePackage.ANDROID_RES -> createPathRes(pathChoose, fileTemplatePath.replaceTemplate(map))
+            Constants.CreatePackage.PATH_TEST -> createPathTest(pathChoose, fileTemplatePath.replaceTemplate(map))
+            else -> create(pathChoose, fileTemplatePath.replaceTemplate(map))
         }
         val fileTemplateInPath =  File(filePath.path, nameFile)
         fileTemplateInPath.createNewFile()
@@ -41,7 +42,22 @@ object CreateTemplate  {
         return create(packge, pathFileTemplate)
     }
 
+    fun createPathTest(pathProject: String, pathFileTemplate: String): File {
+        println(pathProject)
+        println(pathFileTemplate)
+        val pathTest = "${Constants.CreatePackage.PATH_TEST}/"
+        val path = pathProject.replace(Constants.CreatePackage.MAIN_PATH, Constants.CreatePackage.PATH_TEST)
+            .split(pathTest)
+
+        val pathTemplate = "$pathTest${path.last()}$SPLASH" +
+                pathFileTemplate.replace(Constants.CreatePackage.PATH_TEST, "")
+
+        return create(path.first(), pathTemplate)
+    }
+
     private fun create(pathProject: String, pathFileTemplate: String): File {
+        println(pathProject)
+        println(pathFileTemplate)
         var pathStep = pathProject
         pathFileTemplate.split(SPLASH).forEach {
             val file = File(pathStep, it)
@@ -50,4 +66,9 @@ object CreateTemplate  {
         }
         return File(pathStep)
     }
+}
+fun main() {
+    val pathProject = "/Users/louco/IntelliJIDEAProjects/MyApplication/app/src/main/java/com/example/myapplication"
+    val pathFileTemplate = "test/viewModel"
+    println(CreateTemplate.createPathTest(pathProject, pathFileTemplate).path)
 }

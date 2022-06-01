@@ -5,7 +5,7 @@
 
     <vendor email="dor2014spb@gmail.com" url="https://www.linkedin.com/in/mikhail-dorontsov-396266100">Doronec</vendor>
 
-    <version>3.6</version>
+    <version>3.7</version>
 
     <idea-version since-build="210" until-build="213.*"/>
 
@@ -23,6 +23,10 @@
 
     <change-notes>
         <![CDATA[
+        `v3.7`
+        <br/>
+        - new options after param [-p] point.between.words<br/>
+        - create file with tests if path start "test"<br/>
         v3.6
         <br/>
         - options after param [-s] - snake_case, [-C] - CamelCase [-c] -camelCase<br/>
