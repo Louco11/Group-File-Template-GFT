@@ -25,7 +25,7 @@
         <![CDATA[
         `v3.7`
         <br/>
-        - new options after param [-p] point.between.words<br/>
+        - new options after param [-p] point.between.words and [-sl] slash/between/word <br/>
         - create file with tests if path start "test"<br/>
         v3.6
         <br/>

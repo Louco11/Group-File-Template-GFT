@@ -9,6 +9,7 @@ fun String.replaceTemplate(map: Map<String, String>): String {
         stringTemp = stringTemp.replace("{$key}[-c]", map[key]!!.snakeToLowerCamelCase())
         stringTemp = stringTemp.replace("{$key}[-s]", map[key]!!.camelToSnakeCase())
         stringTemp = stringTemp.replace("{$key}[-p]", map[key]!!.pointBetweenWords())
+        stringTemp = stringTemp.replace("{$key}[-sl]", map[key]!!.slashBetweenWords())
         stringTemp = stringTemp.replace("{$key}", map[key]!!)
     }
     return stringTemp
@@ -25,6 +26,11 @@ fun String.camelToSnakeCase(): String {
 fun String.pointBetweenWords(): String {
     return this.camelToSnakeCase().replace("_",".")
 }
+
+fun String.slashBetweenWords(): String {
+    return this.camelToSnakeCase().replace("_","/")
+}
+
 /* snake_case to snakeCase */
 fun String.snakeToLowerCamelCase(): String {
     val snakeRegex = "_[a-zA-Z]".toRegex()
