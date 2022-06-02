@@ -46,7 +46,7 @@ fun String.snakeToUpperCamelCase(): String {
 
 fun String.getMainPackage(): String {
     val listPath = this.split(".")
-    return if (listPath.size == COUNT_PATH) {
+    return if (listPath.size <= COUNT_PATH) {
         this
     } else {
         "${listPath[0]}.${listPath[1]}.${listPath[2]}"
