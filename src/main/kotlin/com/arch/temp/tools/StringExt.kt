@@ -1,16 +1,14 @@
 package com.arch.temp.tools
 
-const val COUNT_PATH = 3
-
 fun String.replaceTemplate(map: Map<String, String>): String {
     var stringTemp = this
     map.keys.forEach { key ->
         stringTemp = stringTemp.replace("{$key}[-C]", map[key]!!.snakeToUpperCamelCase())
-        stringTemp = stringTemp.replace("{$key}[-c]", map[key]!!.snakeToLowerCamelCase())
-        stringTemp = stringTemp.replace("{$key}[-s]", map[key]!!.camelToSnakeCase())
-        stringTemp = stringTemp.replace("{$key}[-p]", map[key]!!.pointBetweenWords())
-        stringTemp = stringTemp.replace("{$key}[-sl]", map[key]!!.slashBetweenWords())
-        stringTemp = stringTemp.replace("{$key}", map[key]!!)
+            .replace("{$key}[-c]", map[key]!!.snakeToLowerCamelCase())
+            .replace("{$key}[-s]", map[key]!!.camelToSnakeCase())
+            .replace("{$key}[-p]", map[key]!!.pointBetweenWords())
+            .replace("{$key}[-sl]", map[key]!!.slashBetweenWords())
+            .replace("{$key}", map[key]!!)
     }
     return stringTemp
 }
@@ -42,13 +40,4 @@ fun String.snakeToLowerCamelCase(): String {
 /* snake_case to SnakeCase */
 fun String.snakeToUpperCamelCase(): String {
     return this.snakeToLowerCamelCase().replaceFirstChar { it.uppercase() }
-}
-
-fun String.getMainPackage(): String {
-    val listPath = this.split(".")
-    return if (listPath.size <= COUNT_PATH) {
-        this
-    } else {
-        "${listPath[0]}.${listPath[1]}.${listPath[2]}"
-    }
 }

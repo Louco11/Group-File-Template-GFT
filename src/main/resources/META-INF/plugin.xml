@@ -5,7 +5,7 @@
 
     <vendor email="dor2014spb@gmail.com" url="https://www.linkedin.com/in/mikhail-dorontsov-396266100">Doronec</vendor>
 
-    <version>3.7</version>
+    <version>3.8</version>
 
     <idea-version since-build="210" until-build="213.*"/>
 
@@ -23,6 +23,11 @@
 
     <change-notes>
         <![CDATA[
+        `v3.8`
+        <br/>
+        - fix bug tag {pack} <br/>
+        - new default tag {time} {day} {month} {year} <br/>
+        - dialog not found file template <br/>
         `v3.7`
         <br/>
         - new options after param [-p] point.between.words and [-sl] slash/between/word <br/>
@@ -35,7 +40,6 @@
     </change-notes>
 
     <depends>com.intellij.modules.platform</depends>
-    <depends>com.intellij.modules.xdebugger</depends>
 
     <extensions defaultExtensionNs="com.intellij">
         <treeStructureProvider implementation="com.arch.temp.extensions.TreeStructure"/>

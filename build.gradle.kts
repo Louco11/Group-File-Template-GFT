@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "com.arch"
-version = "alpha-3.7"
+version = "beta-3.8"
 
 repositories {
     mavenCentral()
@@ -14,10 +14,12 @@ repositories {
 dependencies {
     implementation(kotlin("stdlib"))
 
+    @Suppress("DEPRECATION")
     testCompile("junit", "junit", "4.12")
 }
 
 intellij {
+    @Suppress("UnstableApiUsage")
     version.value("212.5712.43")
 //    version.set("212.5712.43")
 //    type.set("IC")

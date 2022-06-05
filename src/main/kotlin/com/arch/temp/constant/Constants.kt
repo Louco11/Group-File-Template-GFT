@@ -5,6 +5,7 @@ object Constants {
     const val PATH_TEMPLATE = "/templates"
     const val EMPTY_TEMPLATE_PATH_NAME = "EmptyTemplate"
     const val MAIN_FILE_TEMPLATE = "main.json"
+    const val ANDROID_MANIFEST_FILE = "AndroidManifest.xml"
 
     object TagXml {
         const val FIELD_NAME = "name"
@@ -15,6 +16,10 @@ object Constants {
         const val FIELD_ADD_FILE = "addFile"
         const val DEFAULT_TAG_FULL_PACKAGE = "package"
         const val DEFAULT_TAG_MAIN_PACKAGE = "pack"
+        const val DEFAULT_TAG_YEAR = "year"
+        const val DEFAULT_TAG_MONTH = "month"
+        const val DEFAULT_TAG_DAY = "day"
+        const val DEFAULT_TAG_TIME = "time"
     }
 
     object CreatePackage {
@@ -24,5 +29,4 @@ object Constants {
         const val PATH_TEST = "test"
         const val MAIN_PATH = "main"
     }
-
 }
