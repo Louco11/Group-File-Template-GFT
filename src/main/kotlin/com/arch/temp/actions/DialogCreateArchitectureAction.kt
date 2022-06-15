@@ -49,6 +49,7 @@ class DialogCreateArchitectureAction(private val mainClass: MainClassJson) :
         val pathCreate = "$basePath${mainClass.path}"
         mainClass.fileTemplate.forEach { file ->
             CreateTemplate.createFileTemplate(
+                basePath,
                 event.getData(CommonDataKeys.VIRTUAL_FILE)?.path.orEmpty(),
                 pathCreate,
                 mapParam,

@@ -6,6 +6,7 @@ from param_camel_case to ParamCamelCase - {name}[-C]
 from param_camel_case to paramCamelCase - {name}[-c]
 from param_camel_case or paramSnakeCase or ParamSnakeCase to param.camel.case - {name}[-p]
 from param_camel_case or paramSnakeCase or ParamSnakeCase to param/camel/case - {name}[-sl]
+from param_camel_case or paramSnakeCase or ParamSnakeCase to param-camel-case - {name}[-d]
 ide - {ide}
 version - {version}
 time - {time}

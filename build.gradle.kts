@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "com.arch"
-version = "beta-3.8"
+version = "beta-3.9"
 
 repositories {
     mavenCentral()
@@ -19,7 +19,6 @@ dependencies {
 }
 
 intellij {
-    @Suppress("UnstableApiUsage")
     version.value("212.5712.43")
 //    version.set("212.5712.43")
 //    type.set("IC")

@@ -36,6 +36,11 @@
       "fileTemplatePath": "example.tm"
     },
     {
+      "name": "{name}[-C].txt",
+      "path": "~",
+      "fileTemplatePath": "example.tm"
+    },
+    {
       "name": "{name}[-s]_main.xml",
       "path": "res/layout",
       "fileTemplatePath": "layout.tm"

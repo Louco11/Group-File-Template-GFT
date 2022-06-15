@@ -26,6 +26,7 @@ object Constants {
         const val MAIN_JAVA = "java"
         const val MAIN_KOTLIN = "kotlin"
         const val ANDROID_RES = "res"
+        const val PATH_PROJECT = "~"
         const val PATH_TEST = "test"
         const val MAIN_PATH = "main"
     }

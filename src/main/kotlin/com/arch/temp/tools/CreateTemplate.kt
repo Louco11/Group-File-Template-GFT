@@ -11,6 +11,7 @@ private const val SPLASH = "/"
 object CreateTemplate {
 
     fun createFileTemplate(
+        basePath: String,
         pathChoose: String,
         pathTemplate: String,
         map: Map<String, String>,
@@ -28,6 +29,10 @@ object CreateTemplate {
                 )
                 Constants.CreatePackage.PATH_TEST -> createPathTest(
                     pathChoose,
+                    fileTemplatePath.replaceTemplate(map)
+                )
+                Constants.CreatePackage.PATH_PROJECT -> createPathProject(
+                    basePath,
                     fileTemplatePath.replaceTemplate(map)
                 )
                 else -> create(pathChoose, fileTemplatePath.replaceTemplate(map))
@@ -70,12 +75,22 @@ object CreateTemplate {
         return create(path.first(), pathTemplate)
     }
 
+    fun createPathProject(pathProject: String, pathFileTemplate: String): File {
+        val pathFile = if (pathFileTemplate.length >= 2) {
+            pathFileTemplate.removeRange(0, 2)
+        } else {
+            pathFileTemplate.removeRange(0, 1)
+        }
+        println("pathFile " + pathFile)
+        return create(pathProject, pathFile)
+    }
+
     private fun create(pathProject: String, pathFileTemplate: String): File {
         var pathStep = pathProject
         pathFileTemplate.split(SPLASH).forEach {
             val file = File(pathStep, it)
             if (!file.isDirectory) file.mkdir()
-            pathStep = "$pathStep/$it"
+            pathStep = "$pathStep$SPLASH$it"
         }
         return File(pathStep)
     }
