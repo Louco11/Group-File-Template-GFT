@@ -2,7 +2,7 @@
 
 Create a group of File Templates.
 
-[Version 3.9](https://github.com/Louco11/ArchitecturalTemplates/wiki/Release-Notes)
+[Version 4.0](https://github.com/Louco11/ArchitecturalTemplates/wiki/Release-Notes)
 
 [Example](https://github.com/Louco11/ArchitecturalTemplates/tree/master/templates/TestTemplate)
 

@@ -16,10 +16,18 @@ fun String.replaceTemplate(map: Map<String, String>): String {
 
 fun String.toTmFile() = "$this.tm"
 
+// defise-case or point.case to wordCase or WordCase
+fun String.toCamelCase(): String {
+    val slashRegex = "-[a-zA-Z]".toRegex()
+    val pointRegex = "\\.[a-zA-Z]".toRegex()
+    val firstString = slashRegex.replace(this) {it.value.replace("-", "").uppercase()}
+    return pointRegex.replace(firstString) { it.value.replace(".", "").uppercase()}
+}
+
 // wordCase or WordCase to word_case
 fun String.camelToSnakeCase(): String {
     val camelRegex = "(?<=[a-zA-Z])[A-Z]".toRegex()
-    return camelRegex.replace(this) { "_${it.value}" }.lowercase()
+    return camelRegex.replace(this.toCamelCase()) { "_${it.value}" }.lowercase()
 }
 
 // wordCase or WordCase or word_case to word.case
@@ -40,7 +48,7 @@ fun String.slashDashWords(): String {
 // word_case to wordCase
 fun String.snakeToLowerCamelCase(): String {
     val snakeRegex = "_[a-zA-Z]".toRegex()
-    return snakeRegex.replace(this) {
+    return snakeRegex.replace(this.toCamelCase()) {
         it.value.replace("_", "").uppercase()
     }.replaceFirstChar { it.lowercase() }
 }

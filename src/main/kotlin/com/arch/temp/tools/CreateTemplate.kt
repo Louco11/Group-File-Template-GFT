@@ -17,6 +17,21 @@ object CreateTemplate {
         map: Map<String, String>,
         fileTemplateModel: FileTemplate
     ) {
+        if (fileTemplateModel.name.isEmpty()) {
+            val fileTemplatePath = fileTemplateModel.getPath()
+            create(pathChoose, fileTemplatePath.replaceTemplate(map))
+        } else {
+            createFile(fileTemplateModel, map, pathTemplate, pathChoose, basePath)
+        }
+    }
+
+    private fun createFile(
+        fileTemplateModel: FileTemplate,
+        map: Map<String, String>,
+        pathTemplate: String,
+        pathChoose: String,
+        basePath: String
+    ) {
         val nameFile = fileTemplateModel.name.replaceTemplate(map)
         val fileTemplate = File(pathTemplate, fileTemplateModel.fileTemplatePath)
         if (fileTemplate.isFile) {
@@ -37,9 +52,19 @@ object CreateTemplate {
                 )
                 else -> create(pathChoose, fileTemplatePath.replaceTemplate(map))
             }
-            val fileTemplateInPath = File(filePath.path, nameFile)
-            fileTemplateInPath.createNewFile()
-            fileTemplateInPath.writeText(fileTemplate.readText(Charset.defaultCharset()).replaceTemplate(map))
+            try {
+                val fileTemplateInPath = File(filePath.path, nameFile)
+                fileTemplateInPath.createNewFile()
+                fileTemplateInPath.writeText(fileTemplate.readText(Charset.defaultCharset()).replaceTemplate(map))
+            } catch (e: Exception) {
+                Messages.showDialog(
+                    "No such file or directory (${nameFile})",
+                    "Error",
+                    listOf("OK").toTypedArray(),
+                    0,
+                    Messages.getWarningIcon()
+                )
+            }
         } else {
             Messages.showDialog(
                 "File template (${fileTemplateModel.fileTemplatePath}) not found",

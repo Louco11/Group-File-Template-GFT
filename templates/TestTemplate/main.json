@@ -41,6 +41,11 @@
       "fileTemplatePath": "example.tm"
     },
     {
+      "name": "",
+      "path": "path/test/catalog",
+      "fileTemplatePath": "example.tm"
+    },
+    {
       "name": "{name}[-s]_main.xml",
       "path": "res/layout",
       "fileTemplatePath": "layout.tm"
