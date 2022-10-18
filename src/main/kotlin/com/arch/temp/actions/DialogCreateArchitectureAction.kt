@@ -83,10 +83,10 @@ class DialogCreateArchitectureAction(private val mainClass: MainClassJson) :
         val valuePackage = event.getPackage()
         mapParam[DEFAULT_TAG_FULL_PACKAGE] = valuePackage
 
-        val path = event.getData(CommonDataKeys.VIRTUAL_FILE)?.path.orEmpty()
-        val mainPath = path.removeRange(path.indexOf(MAIN_PATH) + MAIN_PATH.length + 1, path.length)
-
         try {
+            val path = event.getData(CommonDataKeys.VIRTUAL_FILE)?.path.orEmpty()
+            val mainPath = path.removeRange(path.indexOf(MAIN_PATH) + MAIN_PATH.length + 1, path.length)
+
             val androidManifest = File(mainPath, ANDROID_MANIFEST_FILE)
             if (androidManifest.isFile) {
                 val text = androidManifest.readText(Charset.defaultCharset())
