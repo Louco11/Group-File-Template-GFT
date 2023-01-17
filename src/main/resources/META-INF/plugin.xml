@@ -5,9 +5,9 @@
 
     <vendor email="dor2014spb@gmail.com" url="https://www.linkedin.com/in/mikhail-dorontsov-396266100">Doronec</vendor>
 
-    <version>4.1</version>
+    <version>4.2</version>
 
-    <idea-version since-build="210" until-build="213.*"/>
+    <idea-version since-build="210" until-build="221.*"/>
 
     <description>
         <![CDATA[
@@ -26,6 +26,9 @@
         `v4.1`
         <br/>
         - bug fix <br/>
+        `v4.2`
+        <br/>
+        - up version <br/>
         `v4.0`
         <br/>
         - bug fix <br/>
