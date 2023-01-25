@@ -6,6 +6,8 @@
 
 Plugin create a group of files by custom templates from IDEA interface.
 
+[Version 4.1](https://github.com/Louco11/ArchitecturalTemplates/wiki/Release-Notes)
+
 # Quick start
 [Templates Example](https://github.com/Louco11/ArchitecturalTemplates/tree/master/templates/TestTemplate)
 
