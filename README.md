@@ -1,6 +1,6 @@
 # Architectural Templates IDEA Plugin
 
-[![Version](https://img.shields.io/badge/Version-4.0-green.svg)](https://github.com/Louco11/ArchitecturalTemplates/wiki/Release-Notes)
+[![Version](https://img.shields.io/badge/Version-4.2-green.svg)](https://github.com/Louco11/ArchitecturalTemplates/wiki/Release-Notes)
 [![Version](https://img.shields.io/badge/IDEA-Marketplace-pink.svg)](https://plugins.jetbrains.com/plugin/16836-architectural-templates)
 [![License](https://img.shields.io/github/license/srs/gradle-node-plugin.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 
