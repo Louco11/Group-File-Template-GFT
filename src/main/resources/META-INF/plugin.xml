@@ -1,13 +1,13 @@
 <idea-plugin url="https://www.jetbrains.com/idea">
     <id>com.arch.temp</id>
 
-    <name>Architectural Templates</name>
+    <name>Group File Template (GFT)</name>
 
     <vendor email="dor2014spb@gmail.com" url="https://www.linkedin.com/in/mikhail-dorontsov-396266100">Doronec</vendor>
 
-    <version>4.2</version>
+    <version>4.4</version>
 
-    <idea-version since-build="210" until-build="221.*"/>
+    <idea-version since-build="210" until-build="223.*"/>
 
     <description>
         <![CDATA[
@@ -23,12 +23,19 @@
 
     <change-notes>
         <![CDATA[
-        `v4.1`
+        `v4.4`
         <br/>
-        - bug fix <br/>
+        - up version <br/>
+        `v4.3`
+        <br/>
+        - up version <br/>
+        - fix space name <br/>
         `v4.2`
         <br/>
         - up version <br/>
+        `v4.1`
+        <br/>
+        - bug fix <br/>
         `v4.0`
         <br/>
         - bug fix <br/>
