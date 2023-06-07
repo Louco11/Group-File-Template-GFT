@@ -13,7 +13,7 @@ Plugin create a group of files by custom templates from IDEA interface.
 
 First of all install the [Plugin From Marketplace](https://plugins.jetbrains.com/plugin/16836-architectural-templates).
 
-[buymeacoffee](https://www.buymeacoffee.com/doronec)
+[![buymeacoffee](https://img.shields.io/badge/buy%20me%20a-coffee-yellow)](https://www.buymeacoffee.com/doronec)
 ```
 IMPORTANT!!! If, when creating a "Template, Files" or adding a file to templates, 
 there were no changes in the Project Catalog. Then remove the focus from the IDEA 
