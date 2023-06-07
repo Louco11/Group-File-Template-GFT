@@ -3,6 +3,7 @@
 [![Version](https://img.shields.io/badge/Version-4.4-green.svg)](https://github.com/Louco11/ArchitecturalTemplates/wiki/Release-Notes)
 [![Version](https://img.shields.io/badge/IDEA-Marketplace-pink.svg)](https://plugins.jetbrains.com/plugin/16836-architectural-templates)
 [![License](https://img.shields.io/github/license/srs/gradle-node-plugin.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
+[![buymeacoffee](https://img.shields.io/badge/buy%20me%20a-coffee-yellow)](https://www.buymeacoffee.com/doronec)
 
 Plugin create a group of files by custom templates from IDEA interface.
 
@@ -13,7 +14,6 @@ Plugin create a group of files by custom templates from IDEA interface.
 
 First of all install the [Plugin From Marketplace](https://plugins.jetbrains.com/plugin/16836-architectural-templates).
 
-[![buymeacoffee](https://img.shields.io/badge/buy%20me%20a-coffee-yellow)](https://www.buymeacoffee.com/doronec)
 ```
 IMPORTANT!!! If, when creating a "Template, Files" or adding a file to templates, 
 there were no changes in the Project Catalog. Then remove the focus from the IDEA 
