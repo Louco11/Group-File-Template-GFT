@@ -32,7 +32,7 @@ class DialogCreateArchitectureAction(private val mainClass: MainClassJson) :
         if (mainClass.param.isEmpty() && mainClass.selectParam.isEmpty()) {
             createTemplate(mapOf(), event)
         } else {
-            CreateTemplateDialog(mainClass, event.project) { inputMap ->
+            CreateTemplateDialog(event.project, mainClass) { inputMap ->
                 createTemplate(inputMap, event)
             }.showAndGet()
         }

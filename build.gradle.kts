@@ -1,11 +1,11 @@
 plugins {
-    id ("org.jetbrains.intellij") version "1.6.0"
+    id ("org.jetbrains.intellij") version "1.14.1"
     java
-    kotlin("jvm") version "1.6.21"
+    kotlin("jvm") version "1.8.0"
 }
 
 group = "com.arch"
-version = "beta-3.9"
+version = "4.5"
 
 repositories {
     mavenCentral()
@@ -13,13 +13,10 @@ repositories {
 
 dependencies {
     implementation(kotlin("stdlib"))
-
-    @Suppress("DEPRECATION")
-    testCompile("junit", "junit", "4.12")
 }
 
 intellij {
-    version.value("212.5712.43")
+    version.value("IC-2023.1")
 //    version.set("212.5712.43")
 //    type.set("IC")
 //    plugins.set(listOf("android"))

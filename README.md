@@ -1,13 +1,13 @@
 # Group File Template (GFT) IDEA Plugin
 
-[![Version](https://img.shields.io/badge/Version-4.4-green.svg)](https://github.com/Louco11/ArchitecturalTemplates/wiki/Release-Notes)
+[![Version](https://img.shields.io/badge/Version-4.5-green.svg)](https://github.com/Louco11/ArchitecturalTemplates/wiki/Release-Notes)
 [![Version](https://img.shields.io/badge/IDEA-Marketplace-pink.svg)](https://plugins.jetbrains.com/plugin/16836-architectural-templates)
 [![License](https://img.shields.io/github/license/srs/gradle-node-plugin.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 [![buymeacoffee](https://img.shields.io/badge/buy%20me%20a-coffee-yellow)](https://www.buymeacoffee.com/doronec)
 
 Plugin create a group of files by custom templates from IDEA interface.
 
-[Version 4.4](https://github.com/Louco11/Group-File-Template-GFT/wiki/Release-Notes)
+[Version 4.5](https://github.com/Louco11/Group-File-Template-GFT/wiki/Release-Notes)
 
 # Quick start
 [Templates Example](https://github.com/Louco11/Group-File-Template-GFT/tree/master/templates/TestTemplate)

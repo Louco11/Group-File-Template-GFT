@@ -5,9 +5,9 @@
 
     <vendor email="dor2014spb@gmail.com" url="https://www.linkedin.com/in/mikhail-dorontsov-396266100">Doronec</vendor>
 
-    <version>4.4</version>
+    <version>4.5</version>
 
-    <idea-version since-build="210" until-build="223.*"/>
+    <idea-version since-build="210" until-build="231.*"/>
 
     <description>
         <![CDATA[
@@ -23,6 +23,9 @@
 
     <change-notes>
         <![CDATA[
+        `v4.5`
+        <br/>
+        - dialog ui dsl2<br/>
         `v4.4`
         <br/>
         - up version <br/>
