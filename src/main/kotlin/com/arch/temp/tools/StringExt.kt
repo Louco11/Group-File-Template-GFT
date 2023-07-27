@@ -5,6 +5,7 @@ fun String.replaceTemplate(map: Map<String, String>): String {
     map.keys.forEach { key ->
         stringTemp = stringTemp.replace("{$key}[-C]", map[key]!!.snakeToUpperCamelCase())
             .replace("{$key}[-c]", map[key]!!.snakeToLowerCamelCase())
+            .replace("{$key}[-S]", map[key]!!.camelToScreamingSnakeCase())
             .replace("{$key}[-s]", map[key]!!.camelToSnakeCase())
             .replace("{$key}[-p]", map[key]!!.pointBetweenWords())
             .replace("{$key}[-sl]", map[key]!!.slashBetweenWords())
@@ -30,6 +31,12 @@ fun String.toCamelCase(): String {
 fun String.camelToSnakeCase(): String {
     val camelRegex = "(?<=[a-zA-Z])[A-Z]".toRegex()
     return camelRegex.replace(this.toCamelCase()) { "_${it.value}" }.lowercase()
+}
+
+// wordCase or WordCase to WORD_CASE
+fun String.camelToScreamingSnakeCase(): String {
+    val camelRegex = "(?<=[a-zA-Z])[A-Z]".toRegex()
+    return camelRegex.replace(this.toCamelCase()) { "_${it.value}" }.uppercase()
 }
 
 // wordCase or WordCase or word_case to word.case
