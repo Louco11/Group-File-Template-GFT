@@ -6,6 +6,7 @@ object Constants {
     const val EMPTY_TEMPLATE_PATH_NAME = "EmptyTemplate"
     const val MAIN_FILE_TEMPLATE = "main.json"
     const val ANDROID_MANIFEST_FILE = "AndroidManifest.xml"
+    const val BUILD_GRADLE_FILE = "build.gradle.kts"
 
     object TagXml {
         const val FIELD_NAME = "name"
@@ -29,5 +30,6 @@ object Constants {
         const val PATH_PROJECT = "~"
         const val PATH_TEST = "test"
         const val MAIN_PATH = "main"
+        const val SRC_PATH = "src"
     }
 }
