@@ -5,6 +5,7 @@ object Constants {
     const val PATH_TEMPLATE = "/templates"
     const val EMPTY_TEMPLATE_PATH_NAME = "EmptyTemplate"
     const val MAIN_FILE_TEMPLATE = "main.json"
+    const val MAIN_SHORT_FILE_TEMPLATE = "main_short.json"
     const val ANDROID_MANIFEST_FILE = "AndroidManifest.xml"
 
     object TagXml {

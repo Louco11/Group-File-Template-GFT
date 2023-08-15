@@ -5,9 +5,9 @@
 
     <vendor email="dor2014spb@gmail.com" url="https://www.linkedin.com/in/mikhail-dorontsov-396266100">Doronec</vendor>
 
-    <version>4.5</version>
+    <version>4.6</version>
 
-    <idea-version since-build="210" until-build="231.*"/>
+    <idea-version since-build="223" until-build="231.*"/>
 
     <description>
         <![CDATA[
@@ -23,6 +23,9 @@
 
     <change-notes>
         <![CDATA[
+        `v4.6`
+        <br/>
+        - create short template<br/>
         `v4.5`
         <br/>
         - dialog ui dsl2<br/>
@@ -71,15 +74,35 @@
 
     <actions>
 
-        <action id="com.arch.temp.actions.CreateEmptyTemplateAction"
-                class="com.arch.temp.actions.CreateEmptyTemplateAction"
-                text="Create New Template"
-                description="Create new template">
+        <group
+                id="com.arch.temp.actions.CustomDefaultActionGroup"
+                class="com.arch.temp.actions.CustomDefaultActionGroup"
+                text="GFT Creator"
+                popup="true">
             <add-to-group group-id="ToolsMenu" anchor="before" relative-to-action="CreateDesktopEntry"/>
-        </action>
+            <action id="com.arch.temp.actions.CreateEmptyTemplateAction"
+                    class="com.arch.temp.actions.CreateEmptyTemplateAction"
+                    text="Create New Template"
+                    description="Create new template">
+            </action>
 
-        <group id="com.arch.temp.actions.ListTemplateGroup"
-               class="com.arch.temp.actions.ListTemplateGroup"
+            <action id="com.arch.temp.actions.CreateEmptyShortTemplateAction"
+                    class="com.arch.temp.actions.CreateEmptyShortTemplateAction"
+                    text="Create New Short Template"
+                    description="Create New Short Template">
+            </action>
+        </group>
+
+        <group id="com.arch.temp.actions.ListShortTemplateActionGroup"
+               class="com.arch.temp.actions.ListShortTemplateActionGroup"
+               text="Create from template"
+               description="Create piece of code from template">
+            <add-to-group group-id="EditorPopupMenu" anchor="before" relative-to-action="RefactoringMenu"/>
+            <add-to-group group-id="GenerateGroup" anchor="before" relative-to-action="ConsoleView.PopupMenu"/>
+        </group>
+
+        <group id="com.arch.temp.actions.ListTemplateActionGroup"
+               class="com.arch.temp.actions.ListTemplateActionGroup"
                text="Templates" popup="true">
             <add-to-group group-id="ProjectViewPopupMenu" anchor="after" relative-to-action="WeighingNewGroup"/>
         </group>
@@ -89,6 +112,13 @@
                 class="com.arch.temp.actions.AddFileInTemplate"
                 text="Add File In Template">
             <add-to-group group-id="ProjectViewPopupMenu" anchor="after" relative-to-action="WeighingNewGroup"/>
+        </action>
+
+        <action
+                id="com.arch.temp.actions.AddTextInShortTemplateAction"
+                class="com.arch.temp.actions.AddTextInShortTemplateAction"
+                text="Add In Template">
+            <add-to-group group-id="EditorPopupMenu" anchor="after" relative-to-action="$Paste"/>
         </action>
 
     </actions>

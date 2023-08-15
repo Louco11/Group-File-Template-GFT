@@ -25,7 +25,7 @@ import java.util.regex.Pattern
 
 const val REX = "package=\"+[A-Za-z0-9.]+\""
 
-class DialogCreateArchitectureAction(private val mainClass: MainClassJson) :
+class CreateStructureFromTemplateAction(private val mainClass: MainClassJson) :
     AnAction(mainClass.name, mainClass.description, null) {
 
     override fun actionPerformed(event: AnActionEvent) {

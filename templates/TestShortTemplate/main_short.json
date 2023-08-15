@@ -1,0 +1,12 @@
+{
+  "name": "TestShortTemplate",
+  "description": "Empty Template Description",
+  "path": "/templates/TestShortTemplate",
+  "addFile": [
+    {
+      "name": "ShortTemplate",
+      "filePath": "ShortTemplate.tm"
+    }
+  ],
+  "globalBasePath": ""
+}

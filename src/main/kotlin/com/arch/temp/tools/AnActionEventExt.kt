@@ -5,6 +5,7 @@ import com.intellij.openapi.actionSystem.CommonDataKeys
 import com.arch.temp.constant.Constants
 import com.arch.temp.mapper.JsonModelMapper
 import com.arch.temp.model.MainClassJson
+import com.arch.temp.model.MainShortClassJson
 import java.io.File
 import java.nio.charset.Charset
 
@@ -15,13 +16,41 @@ fun AnActionEvent.getListTemplate(): List<MainClassJson> {
         val basePath = "${it.basePath}${Constants.PATH_TEMPLATE}"
         val dirTemplate = File(basePath)
         if (dirTemplate.isDirectory) {
-            dirTemplate.list().forEach { templatePath ->
+            dirTemplate.list()?.forEach { templatePath ->
                 val pathMainFile = "$basePath/$templatePath"
                 val mainFile = File(pathMainFile, Constants.MAIN_FILE_TEMPLATE)
                 if (mainFile.isFile) {
                     try {
                         listTemplate.add(
                             JsonModelMapper.mapToMainClass(mainFile.readText(Charset.defaultCharset())).apply {
+                                globalBasePath = pathMainFile
+                            }
+                        )
+                    } catch (e: Exception) {
+                    }
+                }
+
+            }
+        }
+    }
+
+    return listTemplate
+}
+
+fun AnActionEvent.getListShortTemplate(): List<MainShortClassJson> {
+    val listTemplate = mutableListOf<MainShortClassJson>()
+
+    this.getData(CommonDataKeys.PROJECT)?.let {
+        val basePath = "${it.basePath}${Constants.PATH_TEMPLATE}"
+        val dirTemplate = File(basePath)
+        if (dirTemplate.isDirectory) {
+            dirTemplate.list()?.forEach { templatePath ->
+                val pathMainFile = "$basePath/$templatePath"
+                val mainFile = File(pathMainFile, Constants.MAIN_SHORT_FILE_TEMPLATE)
+                if (mainFile.isFile) {
+                    try {
+                        listTemplate.add(
+                            JsonModelMapper.mapToShortMainClass(mainFile.readText(Charset.defaultCharset())).apply {
                                 globalBasePath = pathMainFile
                             }
                         )

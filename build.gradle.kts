@@ -16,7 +16,7 @@ dependencies {
 }
 
 intellij {
-    version.value("IC-2023.1")
+    version.value("IC-2022.2")
 //    version.set("212.5712.43")
 //    type.set("IC")
 //    plugins.set(listOf("android"))

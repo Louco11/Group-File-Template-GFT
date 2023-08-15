@@ -1,28 +1,68 @@
 # Group File Template (GFT) IDEA Plugin
 
-[![Version](https://img.shields.io/badge/Version-4.5-green.svg)](https://github.com/Louco11/ArchitecturalTemplates/wiki/Release-Notes)
-[![Version](https://img.shields.io/badge/IDEA-Marketplace-pink.svg)](https://plugins.jetbrains.com/plugin/16836-architectural-templates)
+[![Version](https://img.shields.io/badge/Version-4.6-blue.svg)](https://github.com/Louco11/ArchitecturalTemplates/wiki/Release-Notes)
+[![Version](https://img.shields.io/badge/IDEA-Marketplace-blue.svg)](https://plugins.jetbrains.com/plugin/16836-architectural-templates)
 [![License](https://img.shields.io/github/license/srs/gradle-node-plugin.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
-[![buymeacoffee](https://img.shields.io/badge/buy%20me%20a-coffee-yellow)](https://www.buymeacoffee.com/doronec)
+[![buymeacoffee](https://img.shields.io/badge/buy%20me%20a-coffee-blue)](https://www.buymeacoffee.com/doronec)
 
 Plugin create a group of files by custom templates from IDEA interface.
 
-[Version 4.5](https://github.com/Louco11/Group-File-Template-GFT/wiki/Release-Notes)
+[Version 4.6](https://github.com/Louco11/Group-File-Template-GFT/wiki/Release-Notes)
 
 # Quick start
 [Templates Example](https://github.com/Louco11/Group-File-Template-GFT/tree/master/templates/TestTemplate)
 
 First of all install the [Plugin From Marketplace](https://plugins.jetbrains.com/plugin/16836-architectural-templates).
 
-```
-IMPORTANT!!! If, when creating a "Template, Files" or adding a file to templates, 
-there were no changes in the Project Catalog. Then remove the focus from the IDEA 
-and return it back, THE PROBLEM IS UNDERSTANDING !!
-```
+## Short Template
+To create an empty short template, click on the `"Tools"` -> `"GFT Creator"` -> `"Create New Short Template"` menu item
 
-To create an empty template, click on the `"Tools"` -> `"Create New Template"` menu item
+<img src="screencut/create_empty_short_tamplate.png" alt="drawing" width="50%" />
 
-<img src="screencut/Create%20New%20Empty%20Template.png" alt="drawing" width="30%" />
+### Add a piece of code to short templates
+
+- Highlight code
+- Right-click on the highlight code
+- Choose `"Add in Template"`
+
+<img src="screencut/add_pease_of_code.png" alt="drawing" width="50%" />
+
+- If there is more than one template, choose which one to save it to, otherwise the plugin will add it to the only created template
+- Enter the name of the short template
+
+<img src="screencut/enter_name.png" alt="drawing" width="50%" />
+
+### Use short templates
+
+Right-click or generic menu
+
+<img src="screencut/righr_click_menu.png" alt="drawing" width="50%" />
+<img src="screencut/generic_menu.png" alt="drawing" width="50%" />
+
+
+### Structure short templates
+
+The heart of the short template is the Json file main_short
+
+| Key            | 	Value                      |	Comment                 |
+|----------------|-----------------------------|--------------------------|
+| name           | 	Name Short Template        |                          |
+| description    | 	Description Short Template |                          |
+| path           | 	Path to short Template     |                          |
+| addFile        | 	Files to create            |	list object File        |
+
+structure `addFile`
+
+| Key        | Value	                              | comment |
+|------------|-------------------------------------|---------|
+| name       | name short template in menu         |         |
+| filePath   | file with template                	 |         |
+
+
+## Template
+To create an empty template, click on the `"Tools"` -> `"GFT Creator"`->`"Create New Template"` menu item
+
+<img src="screencut/create_empty_template.png" alt="drawing" width="30%" />
 
 In the Dialog box enter the name of the template
 

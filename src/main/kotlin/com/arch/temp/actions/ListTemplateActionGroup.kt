@@ -6,10 +6,10 @@ import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.CommonDataKeys
 import com.arch.temp.tools.getListTemplate
 
-class ListTemplateGroup : ActionGroup() {
+class ListTemplateActionGroup : ActionGroup() {
 
     override fun getChildren(event: AnActionEvent?): Array<AnAction> {
-        return event?.getListTemplate()?.map { DialogCreateArchitectureAction(it) }?.toTypedArray() ?: emptyArray()
+        return event?.getListTemplate()?.map { CreateStructureFromTemplateAction(it) }?.toTypedArray() ?: emptyArray()
     }
 
     override fun update(e: AnActionEvent) {
