@@ -102,6 +102,7 @@ The parameter is an array of strings. It can be in the File Structure in name an
 And also in the template itself. It is declared in brackets `{param}`.
 
 Options after param:
+* `[-S]` - SCREAMING_SNAKE_CASE
 * `[-s]` - snake_case
 * `[-C]` - CamelCase
 * `[-c]` - camelCase

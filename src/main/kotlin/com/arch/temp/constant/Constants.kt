@@ -7,6 +7,7 @@ object Constants {
     const val MAIN_FILE_TEMPLATE = "main.json"
     const val MAIN_SHORT_FILE_TEMPLATE = "main_short.json"
     const val ANDROID_MANIFEST_FILE = "AndroidManifest.xml"
+    const val BUILD_GRADLE_FILE = "build.gradle.kts"
 
     object TagXml {
         const val FIELD_NAME = "name"
@@ -30,5 +31,6 @@ object Constants {
         const val PATH_PROJECT = "~"
         const val PATH_TEST = "test"
         const val MAIN_PATH = "main"
+        const val SRC_PATH = "src"
     }
 }
