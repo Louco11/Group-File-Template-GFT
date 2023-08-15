@@ -10,7 +10,7 @@ Plugin create a group of files by custom templates from IDEA interface.
 [Version 4.6](https://github.com/Louco11/Group-File-Template-GFT/wiki/Release-Notes)
 
 # Quick start
-[Templates Example](https://github.com/Louco11/Group-File-Template-GFT/tree/master/templates/TestTemplate)
+[Templates Example](https://github.com/Louco11/Group-File-Template-GFT/tree/master/templates)
 
 First of all install the [Plugin From Marketplace](https://plugins.jetbrains.com/plugin/16836-architectural-templates).
 
