@@ -1,6 +1,7 @@
 package - {package}.viewModels.{name}[-c]
 package from manifest - {pack}
 param normal - {name}
+from paramSnakeCase or ParamSnakeCase to SCREAMING_SNAKE_CASE - {name}[-S]
 from paramSnakeCase or ParamSnakeCase to param_snake_case - {name}[-s]
 from param_camel_case to ParamCamelCase - {name}[-C]
 from param_camel_case to paramCamelCase - {name}[-c]
