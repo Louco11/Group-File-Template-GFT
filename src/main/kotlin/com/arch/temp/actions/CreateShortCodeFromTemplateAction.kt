@@ -6,6 +6,7 @@ import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.CommonDataKeys
 import com.intellij.openapi.command.WriteCommandAction
+import com.intellij.openapi.editor.ScrollType
 import org.jetbrains.annotations.NonNls
 import java.io.File
 
@@ -28,7 +29,7 @@ class CreateShortCodeFromTemplateAction(
         editor?.let { edit ->
             edit.caretModel.primaryCaret.let {
                 val start = it.selectionStart
-                val text = createText(it.visualPosition.column, file)
+                val text = createText(it.visualPosition.column, file).trimEnd()
                 if (it.selectionStart == it.selectionEnd) {
                     WriteCommandAction.runWriteCommandAction(project) {
                         document?.insertString(
@@ -46,6 +47,8 @@ class CreateShortCodeFromTemplateAction(
                     }
                     it.removeSelection()
                 }
+                it.moveToOffset(it.selectionStart + text.length)
+                edit.scrollingModel.scrollTo(it.logicalPosition, ScrollType.RELATIVE)
             }
         }
     }
