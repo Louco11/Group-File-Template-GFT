@@ -7,7 +7,7 @@
 
 Plugin create a group of files by custom templates from IDEA interface.
 
-[Version 4.6](https://github.com/Louco11/Group-File-Template-GFT/wiki/Release-Notes)
+[Version 4.7](https://github.com/Louco11/Group-File-Template-GFT/wiki/Release-Notes)
 
 # Quick start
 [Templates Example](https://github.com/Louco11/Group-File-Template-GFT/tree/master/templates)
