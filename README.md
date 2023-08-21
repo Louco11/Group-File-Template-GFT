@@ -1,6 +1,6 @@
 # Group File Template (GFT) IDEA Plugin
 
-[![Version](https://img.shields.io/badge/Version-4.6-blue.svg)](https://github.com/Louco11/ArchitecturalTemplates/wiki/Release-Notes)
+[![Version](https://img.shields.io/badge/Version-4.7-blue.svg)](https://github.com/Louco11/ArchitecturalTemplates/wiki/Release-Notes)
 [![Version](https://img.shields.io/badge/IDEA-Marketplace-blue.svg)](https://plugins.jetbrains.com/plugin/16836-architectural-templates)
 [![License](https://img.shields.io/github/license/srs/gradle-node-plugin.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 [![buymeacoffee](https://img.shields.io/badge/buy%20me%20a-coffee-blue)](https://www.buymeacoffee.com/doronec)
