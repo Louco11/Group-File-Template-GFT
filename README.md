@@ -8,6 +8,7 @@
 Plugin create a group of files by custom templates from IDEA interface.
 
 [Medium](https://medium.com/@Doronec/how-to-create-modules-with-all-the-bindings-for-the-project-like-thanos-snap-ebf40fec8cd6)
+
 [habr](https://habr.com/ru/companies/cian/articles/740928/)
 
 [Version 4.7](https://github.com/Louco11/Group-File-Template-GFT/wiki/Release-Notes)
