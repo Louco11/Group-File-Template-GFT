@@ -1,15 +1,16 @@
 package com.arch.temp.actions
 
-import com.intellij.openapi.actionSystem.ActionGroup
-import com.intellij.openapi.actionSystem.AnAction
-import com.intellij.openapi.actionSystem.AnActionEvent
-import com.intellij.openapi.actionSystem.CommonDataKeys
 import com.arch.temp.tools.getListTemplate
+import com.intellij.openapi.actionSystem.*
 
 class ListTemplateActionGroup : ActionGroup() {
 
     override fun getChildren(event: AnActionEvent?): Array<AnAction> {
         return event?.getListTemplate()?.map { CreateStructureFromTemplateAction(it) }?.toTypedArray() ?: emptyArray()
+    }
+
+    override fun getActionUpdateThread(): ActionUpdateThread {
+        return ActionUpdateThread.BGT
     }
 
     override fun update(e: AnActionEvent) {

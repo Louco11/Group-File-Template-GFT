@@ -6,6 +6,7 @@ import com.arch.temp.model.MainClassJson
 import com.arch.temp.model.MainShortClassJson
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.CommonDataKeys
+import com.intellij.openapi.application.PathManager
 import java.io.File
 import java.nio.charset.Charset
 import java.util.regex.Pattern
@@ -16,24 +17,36 @@ private const val NAMESPACE_REX = "namespace = \"+[A-Za-z0-9.]+\""
 fun AnActionEvent.getListTemplate(): List<MainClassJson> {
     val listTemplate = mutableListOf<MainClassJson>()
 
-    this.getData(CommonDataKeys.PROJECT)?.let {
+    getData(CommonDataKeys.PROJECT)?.let {
         val basePath = "${it.basePath}${Constants.PATH_TEMPLATE}"
-        val dirTemplate = File(basePath)
-        if (dirTemplate.isDirectory) {
-            dirTemplate.list()?.forEach { templatePath ->
-                val pathMainFile = "$basePath/$templatePath"
-                val mainFile = File(pathMainFile, Constants.MAIN_FILE_TEMPLATE)
-                if (mainFile.isFile) {
-                    try {
-                        listTemplate.add(
-                            JsonModelMapper.mapToMainClass(mainFile.readText(Charset.defaultCharset())).apply {
-                                globalBasePath = pathMainFile
-                            }
-                        )
-                    } catch (_: Exception) {
-                    }
-                }
+        listTemplate.addAll(getListMainClassTemplate(basePath))
+    }
+    val pathHomeTemplate = "${PathManager.getHomePath()}${Constants.PATH_TEMPLATE}"
+    listTemplate.addAll(getListMainClassTemplate(pathHomeTemplate))
+    return listTemplate
+}
 
+private fun getListMainClassTemplate(
+    basePath: String
+): List<MainClassJson> {
+    val listTemplate = mutableListOf<MainClassJson>()
+
+    val dirTemplate = File(basePath)
+    if (dirTemplate.isDirectory) {
+        dirTemplate.list()?.forEach { templatePath ->
+            val pathMainFile = "$basePath/$templatePath"
+            val mainFile = File(pathMainFile, Constants.MAIN_FILE_TEMPLATE)
+            if (mainFile.isFile) {
+                try {
+                    listTemplate.add(
+                        JsonModelMapper.mapToMainClass(
+                            mainFile.readText(Charset.defaultCharset())
+                        ).apply {
+                            globalBasePath = pathMainFile
+                        }
+                    )
+                } catch (_: Exception) {
+                }
             }
         }
     }
@@ -46,26 +59,38 @@ fun AnActionEvent.getListShortTemplate(): List<MainShortClassJson> {
 
     this.getData(CommonDataKeys.PROJECT)?.let {
         val basePath = "${it.basePath}${Constants.PATH_TEMPLATE}"
-        val dirTemplate = File(basePath)
-        if (dirTemplate.isDirectory) {
-            dirTemplate.list()?.forEach { templatePath ->
-                val pathMainFile = "$basePath/$templatePath"
-                val mainFile = File(pathMainFile, Constants.MAIN_SHORT_FILE_TEMPLATE)
-                if (mainFile.isFile) {
-                    try {
-                        listTemplate.add(
-                            JsonModelMapper.mapToShortMainClass(mainFile.readText(Charset.defaultCharset())).apply {
-                                globalBasePath = pathMainFile
-                            }
-                        )
-                    } catch (e: Exception) {
-                    }
-                }
+        listTemplate.addAll(getListMainShortClassTemplate(basePath))
+    }
+    val pathHomeTemplate = "${PathManager.getHomePath()}${Constants.PATH_TEMPLATE}"
+    listTemplate.addAll(getListMainShortClassTemplate(pathHomeTemplate))
 
+    return listTemplate
+}
+
+private fun getListMainShortClassTemplate(
+    basePath: String,
+) : List<MainShortClassJson>{
+    val listTemplate = mutableListOf<MainShortClassJson>()
+
+    val dirTemplate = File(basePath)
+    if (dirTemplate.isDirectory) {
+        dirTemplate.list()?.forEach { templatePath ->
+            val pathMainFile = "$basePath/$templatePath"
+            val mainFile = File(pathMainFile, Constants.MAIN_SHORT_FILE_TEMPLATE)
+            if (mainFile.isFile) {
+                try {
+                    listTemplate.add(
+                        JsonModelMapper.mapToShortMainClass(
+                            mainFile.readText(Charset.defaultCharset())
+                        ).apply {
+                            globalBasePath = pathMainFile
+                        }
+                    )
+                } catch (_: Exception) {
+                }
             }
         }
     }
-
     return listTemplate
 }
 

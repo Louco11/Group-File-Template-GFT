@@ -22,7 +22,7 @@ class CreateEmptyTemplateAction : AnAction() {
         if (!pathTemplate.isDirectory) pathTemplate.mkdir()
         val pathNewTemplate = "${pathTemplate.path}/$nameTemplate"
         createPath(
-            if (File(pathNewTemplate).isDirectory) "$pathNewTemplate${pathTemplate.list().size}"
+            if (File(pathNewTemplate).isDirectory) "$pathNewTemplate${pathTemplate.list()?.size}"
             else pathNewTemplate,
             "${Constants.PATH_TEMPLATE}/$nameTemplate"
         )

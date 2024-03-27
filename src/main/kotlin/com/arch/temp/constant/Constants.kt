@@ -3,6 +3,7 @@ package com.arch.temp.constant
 object Constants {
 
     const val PATH_TEMPLATE = "/templates"
+    const val TEMPLATE = "templates"
     const val EMPTY_TEMPLATE_PATH_NAME = "EmptyTemplate"
     const val MAIN_FILE_TEMPLATE = "main.json"
     const val MAIN_SHORT_FILE_TEMPLATE = "main_short.json"
@@ -33,4 +34,12 @@ object Constants {
         const val MAIN_PATH = "main"
         const val SRC_PATH = "src"
     }
+
+    object ExtensionConst {
+        const val GFT_ROOT_ID = "gft_root"
+        const val GFT_ROOT_NAME = "Ide Templates"
+        const val GFT_PROJECT_ID = "gft_project"
+        const val GFT_PROJECT_NAME = "Project Templates"
+    }
+
 }

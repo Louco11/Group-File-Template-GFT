@@ -5,9 +5,9 @@
 
     <vendor email="dor2014spb@gmail.com" url="https://www.linkedin.com/in/mikhail-dorontsov-396266100">Doronec</vendor>
 
-    <version>4.7</version>
+    <version>4.9</version>
 
-    <idea-version since-build="223" until-build="231.*"/>
+    <idea-version since-build="223" until-build="241.*"/>
 
     <description>
         <![CDATA[
@@ -23,6 +23,13 @@
 
     <change-notes>
         <![CDATA[
+        `v4.9`
+        <br/>
+        - up version on 2024.1<br/>
+        - migration template in idea
+        `v4.8`
+        <br/>
+        - up version<br/>
         `v4.7`
         <br/>
         - bug fix cursor<br/>
@@ -47,38 +54,19 @@
         `v4.1`
         <br/>
         - bug fix <br/>
-        `v4.0`
-        <br/>
-        - bug fix <br/>
-        - create empty directory without file<br/>
-        `v3.9`
-        <br/>
-        - create file in path project if path start "~/" <br/>
-        - new options after param [-d] dash-between-words<br/>
-        `v3.8`
-        <br/>
-        - fix bug tag {pack} <br/>
-        - new default tag {time} {day} {month} {year} <br/>
-        - dialog not found file template <br/>
-        `v3.7`
-        <br/>
-        - new options after param [-p] point.between.words and [-sl] slash/between/word <br/>
-        - create file with tests if path start "test"<br/>
-        v3.6
-        <br/>
-        - options after param [-s] - snake_case, [-C] - CamelCase [-c] -camelCase<br/>
-        - new key in main.json:( selectParam {"paramName" : "name", "paramValue": ["val1","val2"]}) show drop list with values<br/>
         ]]>
     </change-notes>
 
     <depends>com.intellij.modules.platform</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <treeStructureProvider implementation="com.arch.temp.extensions.TreeStructure"/>
+        <projectViewPane implementation="com.arch.temp.projectView.TemplateProjectView"/>
+        <scratch.rootType implementation="com.arch.temp.extension.TemplateRootType"/>
+        <scratch.rootType implementation="com.arch.temp.extension.TemplateProjectType"/>
     </extensions>
 
-    <actions>
 
+    <actions>
         <group
                 id="com.arch.temp.actions.CustomDefaultActionGroup"
                 class="com.arch.temp.actions.CustomDefaultActionGroup"
@@ -120,6 +108,13 @@
         </action>
 
         <action
+                id="com.arch.temp.actions.MigrateTemplateAction"
+                class="com.arch.temp.actions.MigrateTemplateAction"
+                text="Migrate Template">
+            <add-to-group group-id="ProjectViewPopupMenu" anchor="after" relative-to-action="CutCopyPasteGroup"/>
+        </action>
+
+        <action
                 id="com.arch.temp.actions.AddTextInShortTemplateAction"
                 class="com.arch.temp.actions.AddTextInShortTemplateAction"
                 text="Add In Template">
@@ -127,5 +122,6 @@
         </action>
 
     </actions>
+
 
 </idea-plugin>

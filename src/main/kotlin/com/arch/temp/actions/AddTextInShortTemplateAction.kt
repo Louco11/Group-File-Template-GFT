@@ -8,6 +8,7 @@ import com.arch.temp.model.MainShortClassJson
 import com.arch.temp.tools.getListShortTemplate
 import com.arch.temp.tools.toTmFile
 import com.arch.temp.view.CheckShortTemplateDialog
+import com.intellij.openapi.actionSystem.ActionUpdateThread
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.CommonDataKeys
@@ -34,7 +35,7 @@ class AddTextInShortTemplateAction : AnAction() {
         val nameTemplate =
             Messages.showInputDialog(
                 "Name short Template",
-                "Add short template",
+                "Add Short Template",
                 null,
                 "",
                 null
@@ -92,6 +93,10 @@ class AddTextInShortTemplateAction : AnAction() {
             val jsonParce = JsonModelMapper.mapToString(mainJson.copy(fileTemplate = listFile))
             mainFileTemplate.writeText(jsonParce)
         }
+    }
+
+    override fun getActionUpdateThread(): ActionUpdateThread {
+        return ActionUpdateThread.BGT
     }
 
     override fun update(e: AnActionEvent) {

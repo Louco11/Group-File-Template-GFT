@@ -13,6 +13,7 @@ import com.arch.temp.model.MainClassJson
 import com.arch.temp.tools.getListTemplate
 import com.arch.temp.tools.toTmFile
 import com.arch.temp.view.CheckTemplateDialog
+import com.intellij.openapi.actionSystem.ActionUpdateThread
 import java.io.File
 import java.nio.charset.Charset
 
@@ -83,6 +84,10 @@ class AddFileInTemplate : AnAction() {
             val jsonParce = JsonModelMapper.mapToString(mainJson.copy(fileTemplate = listFile))
             mainFileTemplate.writeText(jsonParce)
         }
+    }
+
+    override fun getActionUpdateThread(): ActionUpdateThread {
+        return ActionUpdateThread.BGT
     }
 
     override fun update(e: AnActionEvent) {
