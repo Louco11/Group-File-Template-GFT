@@ -82,13 +82,13 @@
             <action id="com.arch.temp.actions.CreateEmptyShortTemplateAction"
                     class="com.arch.temp.actions.CreateEmptyShortTemplateAction"
                     text="Create New Short Template"
-                    description="Create New Short Template">
+                    description="Create new short template">
             </action>
         </group>
 
         <group id="com.arch.temp.actions.ListShortTemplateActionGroup"
                class="com.arch.temp.actions.ListShortTemplateActionGroup"
-               text="Create from template"
+               text="Create From Template"
                description="Create piece of code from template">
             <add-to-group group-id="EditorPopupMenu" anchor="before" relative-to-action="RefactoringMenu"/>
             <add-to-group group-id="GenerateGroup" anchor="before" relative-to-action="ConsoleView.PopupMenu"/>
