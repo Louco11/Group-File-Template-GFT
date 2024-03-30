@@ -1,6 +1,6 @@
 package com.arch.temp.node
 
-import com.arch.temp.constant.Constants
+import com.arch.temp.tools.FileTemplateExt.getRootPathTemplate
 import com.arch.temp.tools.TemplateUtils
 import com.intellij.ide.projectView.PresentationData
 import com.intellij.ide.projectView.ProjectView
@@ -11,7 +11,6 @@ import com.intellij.ide.projectView.impl.ProjectViewPane
 import com.intellij.ide.scratch.RootType
 import com.intellij.ide.util.treeView.AbstractTreeNode
 import com.intellij.openapi.Disposable
-import com.intellij.openapi.application.PathManager
 import com.intellij.openapi.application.ReadAction
 import com.intellij.openapi.extensions.ExtensionPointListener
 import com.intellij.openapi.extensions.PluginDescriptor
@@ -26,6 +25,7 @@ import com.intellij.openapi.vfs.newvfs.events.VFileCreateEvent
 import com.intellij.openapi.vfs.newvfs.events.VFileEvent
 import com.intellij.openapi.vfs.newvfs.events.VFileMoveEvent
 import com.intellij.util.PlatformIcons
+import com.intellij.util.RunnableCallable
 import com.intellij.util.concurrency.NonUrgentExecutor
 import com.intellij.util.containers.ConcurrentFactoryMap
 import com.intellij.util.containers.ContainerUtil
@@ -39,7 +39,7 @@ class TemplateViewProjectNode(
 ) : ProjectViewNode<Project>(project, project, viewSettings) {
 
     init {
-        registerUpdaters(project, project, object : Runnable {
+        registerUpdaters(project, object : Runnable {
             var updateTarget: AbstractProjectViewPane? = null
             override fun run() {
                 if (project.isDisposed) return
@@ -51,7 +51,7 @@ class TemplateViewProjectNode(
         })
     }
 
-    private fun registerUpdaters(project: Project, disposable: Disposable, onUpdate: Runnable) {
+    private fun registerUpdaters(project: Project, onUpdate: Runnable) {
         VirtualFileManager.getInstance().addAsyncFileListener({ events: List<VFileEvent?>? ->
             val update = JBIterable.from(events)
                 .find { e: VFileEvent? ->
@@ -59,10 +59,6 @@ class TemplateViewProjectNode(
                     val parent = getNewParent(e!!)
                     if (TemplateUtils.isTemplate(parent)) return@find true
                     if (!isDirectory(e)) return@find false
-                    for (rootType in RootType.getAllRootTypes()) {
-                        if (rootType.id == Constants.ExtensionConst.GFT_ROOT_ID ||
-                                rootType.id == Constants.ExtensionConst.GFT_PROJECT_ID) return@find true
-                    }
                     false
                 } != null
             if (!update) null else object : AsyncFileListener.ChangeApplier {
@@ -70,19 +66,19 @@ class TemplateViewProjectNode(
                     onUpdate.run()
                 }
             }
-        }, disposable)
+        }, project)
         val disposables = ConcurrentFactoryMap.createMap { o: RootType ->
             Disposer.newDisposable(
                 o.displayName!!
             )
         }
         for (rootType in RootType.getAllRootTypes()) {
-            registerRootTypeUpdater(project, rootType, onUpdate, disposable, disposables)
+            registerRootTypeUpdater(project, rootType, onUpdate, project, disposables)
         }
         RootType.ROOT_EP.addExtensionPointListener(
             object : ExtensionPointListener<RootType?> {
                 override fun extensionAdded(extension: RootType?, pluginDescriptor: PluginDescriptor) {
-                    registerRootTypeUpdater(project, extension!!, onUpdate, disposable, disposables)
+                    registerRootTypeUpdater(project, extension!!, onUpdate, project, disposables)
                 }
 
                 override fun extensionRemoved(extension: RootType?, pluginDescriptor: PluginDescriptor) {
@@ -106,25 +102,17 @@ class TemplateViewProjectNode(
         val rootDisposable = disposables[rootType]
         Disposer.register(parentDisposable, rootDisposable!!)
         ReadAction
-            .nonBlocking { rootType.registerTreeUpdater(project, parentDisposable, onUpdate) }
+            .nonBlocking(RunnableCallable { rootType.registerTreeUpdater(project, parentDisposable, onUpdate) })
             .expireWith(parentDisposable)
             .submit(NonUrgentExecutor.getInstance())
     }
 
     private fun getNewParent(e: VFileEvent): VirtualFile {
         return when (e) {
-            is VFileMoveEvent -> {
-                e.newParent
-            }
-            is VFileCopyEvent -> {
-                e.newParent
-            }
-            is VFileCreateEvent -> {
-                e.parent
-            }
-            else -> {
-                Objects.requireNonNull(e.file)!!.parent
-            }
+            is VFileMoveEvent -> e.newParent
+            is VFileCopyEvent -> e.newParent
+            is VFileCreateEvent -> e.parent
+            else -> Objects.requireNonNull(e.file)!!.parent
         }
     }
 
@@ -137,7 +125,7 @@ class TemplateViewProjectNode(
     }
 
     override fun canRepresent(element: Any?): Boolean {
-        val fileClassTemplate = File("${PathManager.getHomePath()}${Constants.PATH_TEMPLATE}")
+        val fileClassTemplate = File(getRootPathTemplate())
         return fileClassTemplate.isDirectory
     }
 

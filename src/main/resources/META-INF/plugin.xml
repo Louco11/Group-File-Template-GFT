@@ -61,8 +61,8 @@
 
     <extensions defaultExtensionNs="com.intellij">
         <projectViewPane implementation="com.arch.temp.projectView.TemplateProjectView"/>
-        <scratch.rootType implementation="com.arch.temp.extension.TemplateRootType"/>
-        <scratch.rootType implementation="com.arch.temp.extension.TemplateProjectType"/>
+        <scratch.rootType implementation="com.arch.temp.extension.GFTemplateRootType"/>
+        <scratch.rootType implementation="com.arch.temp.extension.GFTemplateProjectType"/>
     </extensions>
 
 
@@ -106,13 +106,19 @@
                 text="Add File In Template">
             <add-to-group group-id="ProjectViewPopupMenu" anchor="after" relative-to-action="WeighingNewGroup"/>
         </action>
-
         <action
-                id="com.arch.temp.actions.MigrateTemplateAction"
+                id="MigrateTemplateActionCopy"
                 class="com.arch.temp.actions.MigrateTemplateAction"
-                text="Migrate Template">
+                text="Copy Template">
             <add-to-group group-id="ProjectViewPopupMenu" anchor="after" relative-to-action="CutCopyPasteGroup"/>
         </action>
+        <action
+                id="MigrateTemplateActionRemove"
+                class="com.arch.temp.actions.MigrateTemplateAction"
+                text="Migrate Template">
+            <add-to-group group-id="ProjectViewPopupMenu" anchor="after" relative-to-action="MigrateTemplateActionCopy"/>
+        </action>
+
 
         <action
                 id="com.arch.temp.actions.AddTextInShortTemplateAction"

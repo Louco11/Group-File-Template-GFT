@@ -4,9 +4,10 @@ import com.arch.temp.constant.Constants
 import com.arch.temp.mapper.JsonModelMapper
 import com.arch.temp.model.MainClassJson
 import com.arch.temp.model.MainShortClassJson
+import com.arch.temp.tools.FileTemplateExt.getRootPathTemplate
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.CommonDataKeys
-import com.intellij.openapi.application.PathManager
+import com.intellij.openapi.project.Project
 import java.io.File
 import java.nio.charset.Charset
 import java.util.regex.Pattern
@@ -14,14 +15,17 @@ import java.util.regex.Pattern
 private const val PACKAGE_REX = "package=\"+[A-Za-z0-9.]+\""
 private const val NAMESPACE_REX = "namespace = \"+[A-Za-z0-9.]+\""
 
+fun AnActionEvent.getBasePathTemplate() = project?.getBasePathTemplate().orEmpty()
+fun Project.getBasePathTemplate() = "${basePath}${Constants.PATH_TEMPLATE}"
+
 fun AnActionEvent.getListTemplate(): List<MainClassJson> {
     val listTemplate = mutableListOf<MainClassJson>()
 
     getData(CommonDataKeys.PROJECT)?.let {
-        val basePath = "${it.basePath}${Constants.PATH_TEMPLATE}"
+        val basePath = getBasePathTemplate()
         listTemplate.addAll(getListMainClassTemplate(basePath))
     }
-    val pathHomeTemplate = "${PathManager.getHomePath()}${Constants.PATH_TEMPLATE}"
+    val pathHomeTemplate = getRootPathTemplate()
     listTemplate.addAll(getListMainClassTemplate(pathHomeTemplate))
     return listTemplate
 }
@@ -58,10 +62,11 @@ fun AnActionEvent.getListShortTemplate(): List<MainShortClassJson> {
     val listTemplate = mutableListOf<MainShortClassJson>()
 
     this.getData(CommonDataKeys.PROJECT)?.let {
-        val basePath = "${it.basePath}${Constants.PATH_TEMPLATE}"
+        val basePath = it.getBasePathTemplate()
         listTemplate.addAll(getListMainShortClassTemplate(basePath))
     }
-    val pathHomeTemplate = "${PathManager.getHomePath()}${Constants.PATH_TEMPLATE}"
+
+    val pathHomeTemplate = getRootPathTemplate()
     listTemplate.addAll(getListMainShortClassTemplate(pathHomeTemplate))
 
     return listTemplate
@@ -98,14 +103,14 @@ fun AnActionEvent.getPackage(): String {
     val mainJava = Constants.CreatePackage.MAIN_JAVA
     val mainKotlin = Constants.CreatePackage.MAIN_KOTLIN
     val path = getData(CommonDataKeys.VIRTUAL_FILE)?.path.orEmpty()
-    var packge = ""
+    var toPack = ""
     if (path.indexOf(mainJava) > 0) {
-        packge = path.removeRange(0, path.indexOf(mainJava) + mainJava.length + 1)
+        toPack = path.removeRange(0, path.indexOf(mainJava) + mainJava.length + 1)
     }
     if (path.indexOf(mainKotlin) > 0) {
-        packge = path.removeRange(0, path.indexOf(mainKotlin) + mainKotlin.length + 1)
+        toPack = path.removeRange(0, path.indexOf(mainKotlin) + mainKotlin.length + 1)
     }
-    return packge.replace("/", ".")
+    return toPack.replace("/", ".")
 }
 
 fun AnActionEvent.getPackFromManifest(): String {

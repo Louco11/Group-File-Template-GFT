@@ -3,7 +3,6 @@ package com.arch.temp.actions
 import com.arch.temp.constant.Constants
 import com.arch.temp.mapper.JsonModelMapper
 import com.arch.temp.model.FileShortTemplate
-import com.arch.temp.model.FileTemplate
 import com.arch.temp.model.MainShortClassJson
 import com.arch.temp.tools.getListShortTemplate
 import com.arch.temp.tools.toTmFile
@@ -22,6 +21,7 @@ class AddTextInShortTemplateAction : AnAction() {
     override fun actionPerformed(event: AnActionEvent) {
         val editor = event.getData(CommonDataKeys.EDITOR)
         val templateList = event.getListShortTemplate()
+
         if (templateList.size > 1) {
             CheckShortTemplateDialog(templateList, event.project) {
                 addTemplate(it, editor)
@@ -32,14 +32,13 @@ class AddTextInShortTemplateAction : AnAction() {
     }
 
     private fun addTemplate(result: MainShortClassJson, editor: Editor?) {
-        val nameTemplate =
-            Messages.showInputDialog(
+        val nameTemplate = Messages.showInputDialog(
                 "Name short Template",
                 "Add Short Template",
                 null,
                 "",
                 null
-            ).orEmpty()
+            ) ?: return
 
         val file = File(result.globalBasePath, nameTemplate.toTmFile())
         file.createNewFile()
@@ -72,7 +71,6 @@ class AddTextInShortTemplateAction : AnAction() {
             file.writeText(textCorrect)
         }
 
-
         addInMainFile(
             result,
             nameTemplate
@@ -90,8 +88,8 @@ class AddTextInShortTemplateAction : AnAction() {
                     filePath = nameTemplate.toTmFile()
                 )
             )
-            val jsonParce = JsonModelMapper.mapToString(mainJson.copy(fileTemplate = listFile))
-            mainFileTemplate.writeText(jsonParce)
+            val jsonParse = JsonModelMapper.mapToString(mainJson.copy(fileTemplate = listFile))
+            mainFileTemplate.writeText(jsonParse)
         }
     }
 

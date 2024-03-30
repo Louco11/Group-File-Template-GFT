@@ -5,7 +5,6 @@ import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.CommonDataKeys
 import com.intellij.openapi.ui.Messages
 import com.intellij.openapi.vfs.VirtualFile
-import com.intellij.openapi.vfs.VirtualFileManager
 import com.arch.temp.constant.Constants
 import com.arch.temp.mapper.JsonModelMapper
 import com.arch.temp.model.FileTemplate
@@ -25,15 +24,13 @@ class AddFileInTemplate : AnAction() {
     override fun actionPerformed(event: AnActionEvent) {
         val fileToTemplate = event.getData(CommonDataKeys.VIRTUAL_FILE)
         val templateList = event.getListTemplate()
+
         if (templateList.size > 1) {
             CheckTemplateDialog(templateList, event.project!!) {
                 addFile(it, fileToTemplate)
             }.showAndGet()
         } else {
             addFile(templateList.first(), fileToTemplate)
-        }
-        VirtualFileManager.getInstance().asyncRefresh {
-            VirtualFileManager.getInstance().syncRefresh()
         }
     }
 
@@ -44,16 +41,16 @@ class AddFileInTemplate : AnAction() {
         val fileToTemp = File(fileToTemplate?.path.orEmpty())
         if (fileToTemp.isFile) {
             val contentFile = fileToTemp.readText(Charset.defaultCharset())
-
             val fileName = fileToTemplate?.name.orEmpty().split(".").first()
-            val renameFileName =
-                Messages.showInputDialog(
-                    NAME_FILE_IN_TEMPLATE,
-                    ADD_FILE_IN_TEMPLATE,
-                    null,
-                    fileName,
-                    null
-                ).orEmpty()
+
+            val renameFileName = Messages.showInputDialog(
+                NAME_FILE_IN_TEMPLATE,
+                ADD_FILE_IN_TEMPLATE,
+                null,
+                fileName,
+                null
+            ) ?: return
+
             val file = File(result.globalBasePath, renameFileName.toTmFile())
             file.createNewFile()
             file.writeText(contentFile)
@@ -81,8 +78,8 @@ class AddFileInTemplate : AnAction() {
                     fileTemplatePath = fileName
                 )
             )
-            val jsonParce = JsonModelMapper.mapToString(mainJson.copy(fileTemplate = listFile))
-            mainFileTemplate.writeText(jsonParce)
+            val jsonParse = JsonModelMapper.mapToString(mainJson.copy(fileTemplate = listFile))
+            mainFileTemplate.writeText(jsonParse)
         }
     }
 

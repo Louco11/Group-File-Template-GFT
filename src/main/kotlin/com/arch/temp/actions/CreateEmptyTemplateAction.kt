@@ -8,38 +8,48 @@ import com.intellij.openapi.vfs.VirtualFileManager
 import com.arch.temp.constant.Constants
 import com.arch.temp.mapper.JsonModelMapper
 import com.arch.temp.model.MainClassJson
+import com.arch.temp.tools.getBasePathTemplate
+import com.intellij.openapi.application.Application
+import com.intellij.openapi.application.ApplicationManager
+import com.intellij.openapi.components.ComponentManager
+import com.intellij.openapi.vfs.LocalFileSystem
+import com.intellij.openapi.vfs.newvfs.events.VFileCreateEvent
+import com.intellij.openapi.vfs.newvfs.events.VFileEvent
+import com.intellij.serviceContainer.ComponentManagerImpl
 import java.io.File
 
 class CreateEmptyTemplateAction : AnAction() {
 
     override fun actionPerformed(event: AnActionEvent) {
-        val basePath = event.getData(CommonDataKeys.PROJECT)?.basePath.orEmpty()
-        val pathTemplate = File("$basePath${Constants.PATH_TEMPLATE}")
+        val project = event.getData(CommonDataKeys.PROJECT)
+        val pathTemplate = File(project?.getBasePathTemplate().orEmpty())
+
         var nameTemplate = Messages.showInputDialog("", "New Template", null) ?: return
         if (nameTemplate.isEmpty()) {
             nameTemplate = Constants.EMPTY_TEMPLATE_PATH_NAME
         }
+
         if (!pathTemplate.isDirectory) pathTemplate.mkdir()
         val pathNewTemplate = "${pathTemplate.path}/$nameTemplate"
         createPath(
             if (File(pathNewTemplate).isDirectory) "$pathNewTemplate${pathTemplate.list()?.size}"
-            else pathNewTemplate,
-            "${Constants.PATH_TEMPLATE}/$nameTemplate"
+            else pathNewTemplate
         )
+
         VirtualFileManager.getInstance().asyncRefresh {
             VirtualFileManager.getInstance().syncRefresh()
         }
     }
 
-    private fun createPath(path: String, pathInFile: String) {
+    private fun createPath(path: String) {
         File(path).mkdir()
-        createMainFileTemplate(path, pathInFile)
+        createMainFileTemplate(path)
     }
 
-    private fun createMainFileTemplate(path: String, pathInFile: String) {
+    private fun createMainFileTemplate(path: String) {
         val mainFile = File(path, Constants.MAIN_FILE_TEMPLATE)
         mainFile.createNewFile()
-        val template = MainClassJson(name = path.split("/").last(), path = pathInFile)
+        val template = MainClassJson(name = path.split("/").last())
         mainFile.writeText(JsonModelMapper.mapToString(template))
     }
 
