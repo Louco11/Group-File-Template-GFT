@@ -6,10 +6,8 @@ import com.intellij.openapi.ui.Messages
 import java.io.File
 import java.nio.charset.Charset
 
-private const val SPLASH = "/"
-
 object CreateTemplate {
-
+    private val SPLASH = File.separatorChar
     fun createFileTemplate(
         basePath: String,
         pathChoose: String,
@@ -17,6 +15,7 @@ object CreateTemplate {
         map: Map<String, String>,
         fileTemplateModel: FileTemplate
     ) {
+
         if (fileTemplateModel.name.isEmpty()) {
             val fileTemplatePath = fileTemplateModel.getPath()
             create(pathChoose, fileTemplatePath.replaceTemplate(map))
@@ -57,23 +56,21 @@ object CreateTemplate {
                 fileTemplateInPath.createNewFile()
                 fileTemplateInPath.writeText(fileTemplate.readText(Charset.defaultCharset()).replaceTemplate(map))
             } catch (e: Exception) {
-                Messages.showDialog(
-                    "No such file or directory (${nameFile})",
-                    "Error",
-                    listOf("OK").toTypedArray(),
-                    0,
-                    Messages.getWarningIcon()
-                )
+                showError("No such file or directory (${nameFile})")
             }
         } else {
-            Messages.showDialog(
-                "File template (${fileTemplateModel.fileTemplatePath}) not found",
-                "Error",
-                listOf("OK").toTypedArray(),
-                0,
-                Messages.getWarningIcon()
-            )
+            showError("File template (${fileTemplateModel.fileTemplatePath}) not found")
         }
+    }
+
+    private fun showError(message: String) {
+        Messages.showDialog(
+            message,
+            "Error",
+            listOf("OK").toTypedArray(),
+            0,
+            Messages.getWarningIcon()
+        )
     }
 
     private fun createPathRes(pathProject: String, pathFileTemplate: String): File {
@@ -89,8 +86,8 @@ object CreateTemplate {
         return create(packge, pathFileTemplate)
     }
 
-    fun createPathTest(pathProject: String, pathFileTemplate: String): File {
-        val pathTest = "${Constants.CreatePackage.PATH_TEST}/"
+    private fun createPathTest(pathProject: String, pathFileTemplate: String): File {
+        val pathTest = "${Constants.CreatePackage.PATH_TEST}$SPLASH"
         val path = pathProject.replace(Constants.CreatePackage.MAIN_PATH, Constants.CreatePackage.PATH_TEST)
             .split(pathTest)
 
@@ -100,23 +97,18 @@ object CreateTemplate {
         return create(path.first(), pathTemplate)
     }
 
-    fun createPathProject(pathProject: String, pathFileTemplate: String): File {
+    private fun createPathProject(pathProject: String, pathFileTemplate: String): File {
         val pathFile = if (pathFileTemplate.length >= 2) {
             pathFileTemplate.removeRange(0, 2)
         } else {
             pathFileTemplate.removeRange(0, 1)
         }
-        println("pathFile " + pathFile)
         return create(pathProject, pathFile)
     }
 
     private fun create(pathProject: String, pathFileTemplate: String): File {
-        var pathStep = pathProject
-        pathFileTemplate.split(SPLASH).forEach {
-            val file = File(pathStep, it)
-            if (!file.isDirectory) file.mkdir()
-            pathStep = "$pathStep$SPLASH$it"
-        }
-        return File(pathStep)
+        val pathStep = File("$pathProject$SPLASH$pathFileTemplate")
+        pathStep.mkdirs()
+        return pathStep
     }
 }

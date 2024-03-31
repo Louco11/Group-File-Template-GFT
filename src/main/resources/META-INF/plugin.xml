@@ -5,9 +5,9 @@
 
     <vendor email="dor2014spb@gmail.com" url="https://www.linkedin.com/in/mikhail-dorontsov-396266100">Doronec</vendor>
 
-    <version>4.7</version>
+    <version>4.9</version>
 
-    <idea-version since-build="223" until-build="231.*"/>
+    <idea-version since-build="223" until-build="241.*"/>
 
     <description>
         <![CDATA[
@@ -23,62 +23,23 @@
 
     <change-notes>
         <![CDATA[
-        `v4.7`
+        `v4.9`
         <br/>
-        - bug fix cursor<br/>
-        `v4.6`
-        <br/>
-        - create short template<br/>
-        - bug fix<br/>
-        - [-S] - SCREAMING_SNAKE_CASE<br/>
-        `v4.5`
-        <br/>
-        - dialog ui dsl2<br/>
-        `v4.4`
-        <br/>
-        - up version <br/>
-        `v4.3`
-        <br/>
-        - up version <br/>
-        - fix space name <br/>
-        `v4.2`
-        <br/>
-        - up version <br/>
-        `v4.1`
-        <br/>
-        - bug fix <br/>
-        `v4.0`
-        <br/>
-        - bug fix <br/>
-        - create empty directory without file<br/>
-        `v3.9`
-        <br/>
-        - create file in path project if path start "~/" <br/>
-        - new options after param [-d] dash-between-words<br/>
-        `v3.8`
-        <br/>
-        - fix bug tag {pack} <br/>
-        - new default tag {time} {day} {month} {year} <br/>
-        - dialog not found file template <br/>
-        `v3.7`
-        <br/>
-        - new options after param [-p] point.between.words and [-sl] slash/between/word <br/>
-        - create file with tests if path start "test"<br/>
-        v3.6
-        <br/>
-        - options after param [-s] - snake_case, [-C] - CamelCase [-c] -camelCase<br/>
-        - new key in main.json:( selectParam {"paramName" : "name", "paramValue": ["val1","val2"]}) show drop list with values<br/>
+        - up version on 2024.1<br/>
+        - migration template in idea<br/>
         ]]>
     </change-notes>
 
     <depends>com.intellij.modules.platform</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <treeStructureProvider implementation="com.arch.temp.extensions.TreeStructure"/>
+        <projectViewPane implementation="com.arch.temp.projectView.TemplateProjectView"/>
+        <scratch.rootType implementation="com.arch.temp.extension.GFTemplateRootType"/>
+        <scratch.rootType implementation="com.arch.temp.extension.GFTemplateProjectType"/>
     </extensions>
 
-    <actions>
 
+    <actions>
         <group
                 id="com.arch.temp.actions.CustomDefaultActionGroup"
                 class="com.arch.temp.actions.CustomDefaultActionGroup"
@@ -94,13 +55,13 @@
             <action id="com.arch.temp.actions.CreateEmptyShortTemplateAction"
                     class="com.arch.temp.actions.CreateEmptyShortTemplateAction"
                     text="Create New Short Template"
-                    description="Create New Short Template">
+                    description="Create new short template">
             </action>
         </group>
 
         <group id="com.arch.temp.actions.ListShortTemplateActionGroup"
                class="com.arch.temp.actions.ListShortTemplateActionGroup"
-               text="Create from template"
+               text="Create From Template"
                description="Create piece of code from template">
             <add-to-group group-id="EditorPopupMenu" anchor="before" relative-to-action="RefactoringMenu"/>
             <add-to-group group-id="GenerateGroup" anchor="before" relative-to-action="ConsoleView.PopupMenu"/>
@@ -118,6 +79,21 @@
                 text="Add File In Template">
             <add-to-group group-id="ProjectViewPopupMenu" anchor="after" relative-to-action="WeighingNewGroup"/>
         </action>
+        <action
+                id="MigrateTemplateActionCopy"
+                class="com.arch.temp.actions.MigrateTemplateAction"
+                text="Copy Template">
+            <add-to-group group-id="ProjectViewPopupMenu" anchor="after" relative-to-action="CutCopyPasteGroup"/>
+        </action>
+
+        <!--  Если поменял text замени его Constants.ACTION_MIGRATE  -->
+        <action
+                id="MigrateTemplateActionRemove"
+                class="com.arch.temp.actions.MigrateTemplateAction"
+                text="Move Template">
+            <add-to-group group-id="ProjectViewPopupMenu" anchor="after" relative-to-action="MigrateTemplateActionCopy"/>
+        </action>
+
 
         <action
                 id="com.arch.temp.actions.AddTextInShortTemplateAction"
@@ -127,5 +103,6 @@
         </action>
 
     </actions>
+
 
 </idea-plugin>

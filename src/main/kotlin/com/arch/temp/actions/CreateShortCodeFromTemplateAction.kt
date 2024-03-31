@@ -23,9 +23,7 @@ class CreateShortCodeFromTemplateAction(
         val editor = event.getData(CommonDataKeys.EDITOR)
         val project = event.getRequiredData(CommonDataKeys.PROJECT)
         val document = editor?.document
-        val basePath = event.getData(CommonDataKeys.PROJECT)?.basePath.orEmpty()
-        val pathCreate = "$basePath${mainShortClassJson.path}"
-        val file = File(pathCreate, fileShortTemplate.filePath)
+        val file = File(mainShortClassJson.globalBasePath, fileShortTemplate.filePath)
         editor?.let { edit ->
             edit.caretModel.primaryCaret.let {
                 val start = it.selectionStart

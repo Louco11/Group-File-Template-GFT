@@ -1,9 +1,8 @@
 # Group File Template (GFT) IDEA Plugin
 
-[![Version](https://img.shields.io/badge/Version-4.7-blue.svg)](https://github.com/Louco11/ArchitecturalTemplates/wiki/Release-Notes)
+[![Version](https://img.shields.io/badge/Version-4.9-blue.svg)](https://github.com/Louco11/ArchitecturalTemplates/wiki/Release-Notes)
 [![Version](https://img.shields.io/badge/IDEA-Marketplace-blue.svg)](https://plugins.jetbrains.com/plugin/16836-architectural-templates)
 [![License](https://img.shields.io/github/license/srs/gradle-node-plugin.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
-[![buymeacoffee](https://img.shields.io/badge/buy%20me%20a-coffee-blue)](https://www.buymeacoffee.com/doronec)
 
 Plugin create a group of files by custom templates from IDEA interface.
 
@@ -11,7 +10,7 @@ Plugin create a group of files by custom templates from IDEA interface.
 
 [habr](https://habr.com/ru/companies/cian/articles/740928/)
 
-[Version 4.7](https://github.com/Louco11/Group-File-Template-GFT/wiki/Release-Notes)
+[Version 4.9](https://github.com/Louco11/Group-File-Template-GFT/wiki/Release-Notes)
 
 # Quick start
 [Templates Example](https://github.com/Louco11/Group-File-Template-GFT/tree/master/templates)
@@ -52,7 +51,6 @@ The heart of the short template is the Json file main_short
 |----------------|-----------------------------|--------------------------|
 | name           | 	Name Short Template        |                          |
 | description    | 	Description Short Template |                          |
-| path           | 	Path to short Template     |                          |
 | addFile        | 	Files to create            |	list object File        |
 
 structure `addFile`
@@ -70,17 +68,15 @@ To create an empty template, click on the `"Tools"` -> `"GFT Creator"`->`"Create
 
 In the Dialog box enter the name of the template
 
-<img src="screencut/Create%20File%20from%20Template.png" alt="drawing" width="50%" />
+<img src="screencut/DialogCreateEmptyTemplate.png" alt="drawing" width="50%" />
 
 The plugin will create an empty template at the root of your project.
 
 All templates are stored in the folder `"Your project name"/templates`
 
-<img src="screencut/Template%20In%20Tree%20Project.png" alt="drawing" width="20%" />
+<img src="screencut/TemplateInTreeProject.png" alt="drawing" width="20%" />
 
 The heart of the template is the Json file Main
-
-
 
 Inside it has a structure
 
@@ -88,7 +84,6 @@ Inside it has a structure
 |----------------|-------------------------------------------------------|--------------------------|
 | name           |	Name Template                                        |                          |
 | description    |	Description Template                                 |                          |
-| path           |	Path to Template                                     |                          |
 | param          |	Variables to insert into the template                |	list String             |
 | selectParam    |	Variables to drop list with values into the template |	list object SelectParam |
 | addFile        |	Files to create                                      |	list object File        |
@@ -134,15 +129,15 @@ Default parameter for Java and Kotlin `{package}` and `{pack}` for R.class examp
 When creating files from a template, the plugin will correct to fill in the parameter fields.
 
 <img src="screencut/FillParam.png" alt="drawing" width="50%" />
-<img src="screencut/FillParam2.png" alt="drawing" width="30%" />
+<img src="screencut/FillParam2.png" alt="drawing" width="50%" />
 
 ### File it has a structure
 
-| Key               |	Value                                                   |	Comment                                                                                                  |
-|-------------------|-----------------------------------------------------------|------------------------------------------------------------------------------------------------------------|
-| name              |	Name when creating a file                               |	You can use Param in the name                                                                            |
-| path              |	Additional directories for saving                       |	You can use Param in the name. Creates a catalog automatically if it does not exist                      |
-| fileTemplatePath  |	The name of the template from which the file is created |	It must be specified with the extension .tm and you can specify the directory where this file is located |
+| Key                |	Value                                                   |	Comment                                                                                                  |
+|--------------------|-----------------------------------------------------------|------------------------------------------------------------------------------------------------------------|
+| name               |	Name when creating a file                               |	You can use Param in the name                                                                            |
+| path               |	Additional directories for saving                       |	You can use Param in the name. Creates a catalog automatically if it does not exist                      |
+| fileTemplatePath   |	The name of the template from which the file is created |	It must be specified with the extension .tm and you can specify the directory where this file is located |
 
 If file name empty then create only directory
 
@@ -157,7 +152,7 @@ To add file in path project, write the `"~/"` to the parameter `"path"` paramete
 To create a file from a template, right-click on the path in which 
 we want to create and select the template we need from the list
 
-<img src="screencut/Create%20File%20from%20Template.png" alt="drawing" width="50%" />
+<img src="screencut/CreateFileFromTemplate.png" alt="drawing" width="60%" />
 
 ### Add File In Template
 
@@ -171,10 +166,35 @@ and will ask you to rename the file as it will be named in the template.
 <img src="screencut/addFile4.png" alt="drawing" width="40%" />
 <img src="screencut/addFile5.png" alt="drawing" width="60%" />
 
+
+### Move template in IDE
+
+In the project tool window, a new field is GFTemplate.
+
+<img src="screencut/Treetools.png" alt="drawing" width="50%" />
+
+Having selected we will be shown all our templates in the project and in the IDE
+
+<img src="screencut/templatepath.png" alt="drawing" width="60%" />
+
+You can move templates from a project to an IDE and back.
+`ide/templates` or `project/templates`
+
+To move or copy a template in a view or into a project. 
+Right-click on the template and select `Copy Template` or `Move Template`
+
+<img src="screencut/moveTemplate.png" alt="drawing" width="42%" />
+<img src="screencut/copyTemplate.png" alt="drawing" width="38%" />
+
+After this we can rename the template.
+
+<img src="screencut/renameTemplate.png" alt="drawing" width="60%" />
+
+
 # License
 
 ```
-Copyright 2022 Doroncov Mihail
+Copyright 2021 Doroncov Mihail
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

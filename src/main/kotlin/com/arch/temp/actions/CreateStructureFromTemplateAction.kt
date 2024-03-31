@@ -41,12 +41,11 @@ class CreateStructureFromTemplateAction(private val mainClass: MainClassJson) :
         PsiParserFacadeImpl(event.project!!)
         createDefaultTag(mapParam, event)
         val basePath = event.getData(CommonDataKeys.PROJECT)?.basePath.orEmpty()
-        val pathCreate = "$basePath${mainClass.path}"
         mainClass.fileTemplate.forEach { file ->
             CreateTemplate.createFileTemplate(
                 basePath,
                 event.getData(CommonDataKeys.VIRTUAL_FILE)?.path.orEmpty(),
-                pathCreate,
+                mainClass.globalBasePath,
                 mapParam,
                 file
             )

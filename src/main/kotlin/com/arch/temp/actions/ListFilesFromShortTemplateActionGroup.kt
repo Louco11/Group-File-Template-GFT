@@ -6,7 +6,7 @@ import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.DefaultActionGroup
 
 class ListFilesFromShortTemplateActionGroup(
-    val mainShortClassJson: MainShortClassJson
+    private val mainShortClassJson: MainShortClassJson
 ) : DefaultActionGroup(
     mainShortClassJson.name,
     true

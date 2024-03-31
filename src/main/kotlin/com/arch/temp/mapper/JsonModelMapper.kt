@@ -15,6 +15,10 @@ object JsonModelMapper {
         return gson.toJson(main)
     }
 
-    fun mapToMainClass(main: String) = GsonBuilder().create().fromJson(main, MainClassJson::class.java)
-    fun mapToShortMainClass(main: String) = GsonBuilder().create().fromJson(main, MainShortClassJson::class.java)
+    fun mapToMainClass(main: String): MainClassJson {
+        return GsonBuilder().create().fromJson(main, MainClassJson::class.java)
+    }
+    fun mapToShortMainClass(main: String): MainShortClassJson {
+        return GsonBuilder().create().fromJson(main, MainShortClassJson::class.java)
+    }
 }
