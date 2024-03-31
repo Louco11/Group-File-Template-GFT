@@ -10,7 +10,7 @@ object Constants {
     const val MAIN_SHORT_FILE_TEMPLATE = "main_short.json"
     const val ANDROID_MANIFEST_FILE = "AndroidManifest.xml"
     const val BUILD_GRADLE_FILE = "build.gradle.kts"
-    const val ACTION_MIGRATE = "Migrate Template"
+    const val ACTION_MIGRATE = "Move Template"
 
     object TagXml {
         const val FIELD_NAME = "name"

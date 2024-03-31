@@ -26,34 +26,7 @@
         `v4.9`
         <br/>
         - up version on 2024.1<br/>
-        - migration template in idea
-        `v4.8`
-        <br/>
-        - up version<br/>
-        `v4.7`
-        <br/>
-        - bug fix cursor<br/>
-        `v4.6`
-        <br/>
-        - create short template<br/>
-        - bug fix<br/>
-        - [-S] - SCREAMING_SNAKE_CASE<br/>
-        `v4.5`
-        <br/>
-        - dialog ui dsl2<br/>
-        `v4.4`
-        <br/>
-        - up version <br/>
-        `v4.3`
-        <br/>
-        - up version <br/>
-        - fix space name <br/>
-        `v4.2`
-        <br/>
-        - up version <br/>
-        `v4.1`
-        <br/>
-        - bug fix <br/>
+        - migration template in idea<br/>
         ]]>
     </change-notes>
 
@@ -112,10 +85,12 @@
                 text="Copy Template">
             <add-to-group group-id="ProjectViewPopupMenu" anchor="after" relative-to-action="CutCopyPasteGroup"/>
         </action>
+
+        <!--  Если поменял text замени его Constants.ACTION_MIGRATE  -->
         <action
                 id="MigrateTemplateActionRemove"
                 class="com.arch.temp.actions.MigrateTemplateAction"
-                text="Migrate Template">
+                text="Move Template">
             <add-to-group group-id="ProjectViewPopupMenu" anchor="after" relative-to-action="MigrateTemplateActionCopy"/>
         </action>
 
