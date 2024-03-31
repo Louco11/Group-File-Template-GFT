@@ -88,11 +88,17 @@ internal class MyRootTemplatesNode(project: Project?, type: RootType, settings: 
 
         val templateRootFile = File(rootPath)
         return if (templateRootFile.isDirectory) {
-            LocalFileSystem.getInstance()
-                .refreshAndFindFileByPath(rootPath)
-                ?.let { virtualFile ->
-                    psiManager.findDirectory(virtualFile)
-                }
+            try {
+                LocalFileSystem.getInstance().refreshAndFindFileByPath(rootPath)
+                    ?.let { virtualFile ->
+                        psiManager.findDirectory(virtualFile)
+                    }
+            } catch (_ : Throwable) {
+                LocalFileSystem.getInstance().findFileByPath(rootPath)
+                    ?.let { virtualFile ->
+                        psiManager.findDirectory(virtualFile)
+                    }
+            }
         } else {
             null
         }
