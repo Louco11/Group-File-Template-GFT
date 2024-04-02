@@ -15,8 +15,6 @@ import com.arch.temp.view.CreateTemplateDialog
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.CommonDataKeys
-import com.intellij.openapi.vfs.VirtualFileManager
-import com.intellij.psi.impl.PsiParserFacadeImpl
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -38,20 +36,16 @@ class CreateStructureFromTemplateAction(private val mainClass: MainClassJson) :
         event: AnActionEvent
     ) {
         val mapParam = inputMap.toMutableMap()
-        PsiParserFacadeImpl(event.project!!)
         createDefaultTag(mapParam, event)
-        val basePath = event.getData(CommonDataKeys.PROJECT)?.basePath.orEmpty()
-        mainClass.fileTemplate.forEach { file ->
+
+        mainClass.fileTemplate.forEach { fileTemplateModel ->
             CreateTemplate.createFileTemplate(
-                basePath,
+                event.project!!,
                 event.getData(CommonDataKeys.VIRTUAL_FILE)?.path.orEmpty(),
                 mainClass.globalBasePath,
                 mapParam,
-                file
+                fileTemplateModel
             )
-        }
-        VirtualFileManager.getInstance().asyncRefresh {
-            VirtualFileManager.getInstance().syncRefresh()
         }
     }
 
