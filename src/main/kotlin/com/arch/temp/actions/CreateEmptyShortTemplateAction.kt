@@ -4,11 +4,16 @@ import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.CommonDataKeys
 import com.intellij.openapi.ui.Messages
-import com.intellij.openapi.vfs.VirtualFileManager
 import com.arch.temp.constant.Constants
 import com.arch.temp.mapper.JsonModelMapper
 import com.arch.temp.model.MainShortClassJson
 import com.arch.temp.tools.getBasePathTemplate
+import com.intellij.openapi.application.ApplicationManager
+import com.intellij.openapi.vfs.VfsUtil
+import com.intellij.openapi.vfs.VirtualFile
+import com.intellij.openapi.vfs.VirtualFileEvent
+import com.intellij.openapi.vfs.VirtualFileManager
+import com.intellij.testFramework.utils.vfs.createFile
 import java.io.File
 
 class CreateEmptyShortTemplateAction : AnAction() {
@@ -20,27 +25,25 @@ class CreateEmptyShortTemplateAction : AnAction() {
         if (nameTemplate.isEmpty()) {
             nameTemplate = Constants.EMPTY_SHORT_TEMPLATE_PATH_NAME
         }
-        if (!pathTemplate.isDirectory) pathTemplate.mkdir()
+        if (!pathTemplate.isDirectory) VfsUtil.createDirectories(pathTemplate.path)
         val pathNewTemplate = "${pathTemplate.path}/$nameTemplate"
         createPath(
             if (File(pathNewTemplate).isDirectory) "$pathNewTemplate${pathTemplate.list()?.size}"
             else pathNewTemplate
         )
-        VirtualFileManager.getInstance().asyncRefresh {
-            VirtualFileManager.getInstance().syncRefresh()
-        }
     }
 
     private fun createPath(path: String) {
-        File(path).mkdir()
-        createMainFileTemplate(path)
+        val vFile = VfsUtil.createDirectories(path)
+        createMainFileTemplate(vFile)
     }
 
-    private fun createMainFileTemplate(path: String) {
-        val mainFile = File(path, Constants.MAIN_SHORT_FILE_TEMPLATE)
-        mainFile.createNewFile()
-        val template = MainShortClassJson(name = path.split("/").last())
-        mainFile.writeText(JsonModelMapper.mapToString(template))
+    private fun createMainFileTemplate(vFile: VirtualFile) {
+        ApplicationManager.getApplication().runWriteAction {
+            val mainFile = vFile.createChildData(null, Constants.MAIN_SHORT_FILE_TEMPLATE)
+            val template = MainShortClassJson(name = vFile.path.split("/").last())
+            mainFile.setBinaryContent(JsonModelMapper.mapToString(template).toByteArray())
+        }
     }
 
 }

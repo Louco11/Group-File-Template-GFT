@@ -9,7 +9,7 @@ import javax.swing.JComponent
 
 class CheckTemplateDialog(
     private val param: List<MainClassJson>,
-    project: Project?,
+    project: Project,
     private val callOk: (MainClassJson) -> Unit
 ) : DialogWrapper(project) {
 

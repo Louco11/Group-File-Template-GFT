@@ -4,7 +4,6 @@ import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.CommonDataKeys
 import com.intellij.openapi.ui.Messages
-import com.intellij.openapi.vfs.VirtualFile
 import com.arch.temp.constant.Constants
 import com.arch.temp.mapper.JsonModelMapper
 import com.arch.temp.model.FileTemplate
@@ -13,8 +12,11 @@ import com.arch.temp.tools.getListTemplate
 import com.arch.temp.tools.toTmFile
 import com.arch.temp.view.CheckTemplateDialog
 import com.intellij.openapi.actionSystem.ActionUpdateThread
+import com.intellij.openapi.application.ApplicationManager
+import com.intellij.openapi.project.Project
+import com.intellij.openapi.vfs.*
+import com.intellij.psi.impl.PsiManagerImpl
 import java.io.File
-import java.nio.charset.Charset
 
 const val ADD_FILE_IN_TEMPLATE = "Add file in Template"
 const val NAME_FILE_IN_TEMPLATE = "Name File Template"
@@ -25,23 +27,27 @@ class AddFileInTemplate : AnAction() {
         val fileToTemplate = event.getData(CommonDataKeys.VIRTUAL_FILE)
         val templateList = event.getListTemplate()
 
-        if (templateList.size > 1) {
-            CheckTemplateDialog(templateList, event.project!!) {
-                addFile(it, fileToTemplate)
-            }.showAndGet()
-        } else {
-            addFile(templateList.first(), fileToTemplate)
+        if (event.project == null) return
+
+        fileToTemplate?.let {
+            if (templateList.size > 1) {
+                CheckTemplateDialog(templateList, event.project!!) {
+                    addFile(event.project!!, it, fileToTemplate)
+                }.showAndGet()
+            } else {
+                addFile(event.project!!, templateList.first(), fileToTemplate)
+            }
         }
     }
 
     private fun addFile(
+        project: Project,
         result: MainClassJson,
-        fileToTemplate: VirtualFile?
+        fileToTemplate: VirtualFile
     ) {
-        val fileToTemp = File(fileToTemplate?.path.orEmpty())
-        if (fileToTemp.isFile) {
-            val contentFile = fileToTemp.readText(Charset.defaultCharset())
-            val fileName = fileToTemplate?.name.orEmpty().split(".").first()
+        if (fileToTemplate.isFile) {
+            val contentFile = fileToTemplate.readText()
+            val fileName = fileToTemplate.name.split(".").first()
 
             val renameFileName = Messages.showInputDialog(
                 NAME_FILE_IN_TEMPLATE,
@@ -51,36 +57,48 @@ class AddFileInTemplate : AnAction() {
                 null
             ) ?: return
 
-            val file = File(result.globalBasePath, renameFileName.toTmFile())
-            file.createNewFile()
-            file.writeText(contentFile)
+            ApplicationManager.getApplication().runWriteAction {
+                LocalFileSystem.getInstance().findFileByPath(result.globalBasePath)
+                    ?.createChildData(
+                        null,
+                        renameFileName.toTmFile()
+                    )?.writeText(contentFile)
 
-            addFileMainFile(
-                renameFileName.toTmFile(),
-                result,
-                fileToTemplate!!
-            )
+                addFileMainFile(
+                    project,
+                    renameFileName.toTmFile(),
+                    result,
+                    fileToTemplate
+                )
+            }
         }
     }
 
     private fun addFileMainFile(
+        project: Project,
         fileName: String,
         result: MainClassJson,
         fileToTemplate: VirtualFile
     ) {
-        val mainFileTemplate = File(result.globalBasePath, Constants.MAIN_FILE_TEMPLATE)
-        if (mainFileTemplate.isFile) {
-            val mainJson = JsonModelMapper.mapToMainClass(mainFileTemplate.readText(Charset.defaultCharset()))
-            val listFile = mainJson.fileTemplate.toMutableList()
-            listFile.add(
-                FileTemplate(
-                    name = fileToTemplate.name,
-                    fileTemplatePath = fileName
+        val mainFile = File(result.globalBasePath, Constants.MAIN_FILE_TEMPLATE)
+        LocalFileSystem.getInstance().findFileByIoFile(mainFile)?.let { mainVFile ->
+            if (mainVFile.isFile) {
+                val mainText = PsiManagerImpl.getInstance(project).findFile(mainVFile)?.text
+                    ?: mainVFile.readText()
+                val mainJson = JsonModelMapper.mapToMainClass(mainText)
+                val listFile = mainJson.fileTemplate.toMutableList()
+                listFile.add(
+                    FileTemplate(
+                        name = fileToTemplate.name,
+                        fileTemplatePath = fileName
+                    )
                 )
-            )
-            val jsonParse = JsonModelMapper.mapToString(mainJson.copy(fileTemplate = listFile))
-            mainFileTemplate.writeText(jsonParse)
+                val jsonParse = JsonModelMapper.mapToString(mainJson.copy(fileTemplate = listFile))
+                mainVFile.writeText(jsonParse)
+            }
         }
+
+
     }
 
     override fun getActionUpdateThread(): ActionUpdateThread {

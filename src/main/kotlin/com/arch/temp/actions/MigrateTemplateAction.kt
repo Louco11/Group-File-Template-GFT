@@ -4,16 +4,22 @@ import com.arch.temp.constant.Constants
 import com.arch.temp.constant.Constants.MAIN_FILE_TEMPLATE
 import com.arch.temp.constant.Constants.MAIN_SHORT_FILE_TEMPLATE
 import com.arch.temp.mapper.JsonModelMapper
+import com.arch.temp.model.MainClassJson
 import com.arch.temp.tools.FileTemplateExt.getRootPathTemplate
 import com.arch.temp.tools.getBasePathTemplate
 import com.intellij.openapi.actionSystem.ActionUpdateThread
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.CommonDataKeys
+import com.intellij.openapi.application.ApplicationManager
+import com.intellij.openapi.project.Project
 import com.intellij.openapi.ui.Messages
-import org.jetbrains.annotations.NonNls
+import com.intellij.openapi.vfs.VfsUtil
+import com.intellij.openapi.vfs.VirtualFile
+import com.intellij.openapi.vfs.readText
+import com.intellij.openapi.vfs.writeText
+import com.intellij.psi.impl.PsiManagerImpl
 import java.io.File
-import java.nio.charset.Charset
 
 class MigrateTemplateAction : AnAction() {
 
@@ -25,48 +31,66 @@ class MigrateTemplateAction : AnAction() {
         } else {
             getRootPathTemplate()
         }
+        val oldName = pathTemplateSelect?.name ?: ""
         val nameTemplate = Messages.showInputDialog(
             "Do you want to rename?",
             "Rename",
             null,
-            pathTemplateSelect?.name,
+            oldName,
             null
         ) ?: return
 
-        val fileIde = File("$migratePathTemplate/$nameTemplate").apply {
-            if (!isDirectory) mkdirs()
+        pathTemplateSelect?.let { vFileSelect ->
+            migrateTemplate(
+                actionEvent.project!!,
+                vFileSelect,
+                nameTemplate,
+                oldName,
+                migratePathTemplate
+            )
         }
-
-        pathTemplateSelect?.path?.let { path ->
-            migrateTemplate(path, fileIde)
-        }
-
-        if (pathTemplateSelect?.name != nameTemplate) {
-            renameMainFile(fileIde, nameTemplate)
-        }
-    }
-
-    private fun renameMainFile(fileIde: File, nameTemplate: String) {
-        fileIde.listFiles()
-            ?.firstOrNull {
-                it.name == MAIN_FILE_TEMPLATE
-                        || it.name == MAIN_SHORT_FILE_TEMPLATE
-            }?.let {
-                val mainJson = JsonModelMapper.mapToMainClass(it.readText(Charset.defaultCharset()))
-                val jsonParse = JsonModelMapper.mapToString(mainJson.copy(name = nameTemplate))
-                it.writeText(jsonParse)
-            }
     }
 
     private fun migrateTemplate(
-        pathTemplateSelect: @NonNls String,
-        fileIde: File
+        project: Project,
+        pathTemplateSelect: VirtualFile,
+        renamePath: String,
+        oldName: String,
+        migratePathTemplate: String
     ) {
         try {
-            if (templateText == Constants.ACTION_MIGRATE) {
-                File(pathTemplateSelect).renameTo(fileIde)
-            } else {
-                File(pathTemplateSelect).copyRecursively(fileIde)
+            ApplicationManager.getApplication().runWriteAction {
+                val mainFile = pathTemplateSelect.children
+                    ?.firstOrNull {
+                        it.name == MAIN_FILE_TEMPLATE
+                                || it.name == MAIN_SHORT_FILE_TEMPLATE
+                    }?.let {
+                        val text = PsiManagerImpl.getInstance(project).findFile(it)?.text ?: it.readText()
+                        JsonModelMapper.mapToMainClass(text)
+                    }
+
+                val vFIlePathTemplate = if (templateText == Constants.ACTION_MIGRATE) {
+                    pathTemplateSelect.move(null, VfsUtil.createDirectories(migratePathTemplate))
+                    pathTemplateSelect.rename(null, renamePath)
+                    pathTemplateSelect
+                } else {
+                    val vFile = VfsUtil.copy(
+                        null,
+                        pathTemplateSelect,
+                        VfsUtil.createDirectories(migratePathTemplate)
+                    )
+                    vFile.rename(null, renamePath)
+                    vFile
+                }
+                if (oldName != renamePath) {
+                    mainFile?.let { mainFileJson ->
+                        renameMainFile(
+                            mainFileJson,
+                            vFIlePathTemplate,
+                            renamePath
+                        )
+                    }
+                }
             }
         } catch (_: SecurityException) {
             Messages.showDialog(
@@ -78,6 +102,22 @@ class MigrateTemplateAction : AnAction() {
             )
         }
     }
+
+    private fun renameMainFile(
+        mainJson: MainClassJson,
+        fileIde: VirtualFile,
+        nameTemplate: String
+    ) {
+        fileIde.children
+            ?.firstOrNull {
+                it.name == MAIN_FILE_TEMPLATE
+                        || it.name == MAIN_SHORT_FILE_TEMPLATE
+            }?.let {
+                val jsonParse = JsonModelMapper.mapToString(mainJson.copy(name = nameTemplate))
+                it.writeText(jsonParse)
+            }
+    }
+
 
     override fun getActionUpdateThread(): ActionUpdateThread {
         return ActionUpdateThread.BGT
