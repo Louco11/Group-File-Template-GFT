@@ -7,7 +7,7 @@
 
     <version>5.0</version>
 
-    <idea-version since-build="223" until-build="241.*"/>
+    <idea-version since-build="231" until-build="241.*"/>
 
     <description>
         <![CDATA[
