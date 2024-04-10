@@ -1,6 +1,6 @@
 package com.arch.temp.node
 
-import com.arch.temp.tools.FileTemplateExt.getRootPathTemplate
+import com.arch.temp.constant.Constants
 import com.arch.temp.tools.TemplateUtils
 import com.intellij.ide.projectView.PresentationData
 import com.intellij.ide.projectView.ProjectView
@@ -24,13 +24,14 @@ import com.intellij.openapi.vfs.newvfs.events.VFileCopyEvent
 import com.intellij.openapi.vfs.newvfs.events.VFileCreateEvent
 import com.intellij.openapi.vfs.newvfs.events.VFileEvent
 import com.intellij.openapi.vfs.newvfs.events.VFileMoveEvent
+import com.intellij.psi.PsiElement
+import com.intellij.psi.util.PsiUtilCore
 import com.intellij.util.PlatformIcons
 import com.intellij.util.RunnableCallable
 import com.intellij.util.concurrency.NonUrgentExecutor
 import com.intellij.util.containers.ConcurrentFactoryMap
 import com.intellij.util.containers.ContainerUtil
 import com.intellij.util.containers.JBIterable
-import java.io.File
 import java.util.*
 
 class TemplateViewProjectNode(
@@ -125,23 +126,23 @@ class TemplateViewProjectNode(
     }
 
     override fun canRepresent(element: Any?): Boolean {
-        val fileClassTemplate = File(getRootPathTemplate())
-        return fileClassTemplate.isDirectory
+        if (super.canRepresent(element)) return true
+
+        val file = when (element) {
+            is VirtualFile -> element
+            is PsiElement -> PsiUtilCore.getVirtualFile(element)
+            else -> null
+        } ?: return false
+        return file.path.contains(Constants.TEMPLATE)
     }
 
     override fun contains(file: VirtualFile): Boolean {
-        return false
+        return file.path.contains(Constants.TEMPLATE)
     }
 
     override fun update(presentation: PresentationData) {
         presentation.setIcon(PlatformIcons.PROJECT_ICON)
         presentation.presentableText = myProject.name
-    }
-
-    private fun createRootTypeNode(project: Project, rootType: RootType, settings: ViewSettings): AbstractTreeNode<*>? {
-        if (rootType.isHidden) return null
-        val node = MyRootTemplatesNode(project, rootType, settings)
-        return if (node.isEmpty) null else node
     }
 
     override fun getChildren(): List<AbstractTreeNode<*>> {
@@ -160,5 +161,11 @@ class TemplateViewProjectNode(
         }
 
         return nodes
+    }
+
+    private fun createRootTypeNode(project: Project, rootType: RootType, settings: ViewSettings): AbstractTreeNode<*>? {
+        if (rootType.isHidden) return null
+        val node = MyRootTemplatesNode(project, rootType, settings)
+        return if (node.isEmpty) null else node
     }
 }
