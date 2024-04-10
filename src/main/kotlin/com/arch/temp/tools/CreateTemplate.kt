@@ -118,7 +118,17 @@ object CreateTemplate {
     }
 
     private fun create(pathProject: String, pathFileTemplate: String): VirtualFile {
-        return VfsUtil.createDirectories("$pathProject$SPLASH$pathFileTemplate")
+        val path = "$pathProject$SPLASH$pathFileTemplate"
+        val formatPath = if (path[path.length-1] == SPLASH) path.substring(0, path.length-1) else path
+        return try {
+             if (!File(formatPath).isDirectory) {
+                VfsUtil.createDirectories(formatPath)
+            } else {
+                LocalFileSystem.getInstance().findFileByPath(formatPath)!!
+            }
+        } catch (e: Exception) {
+            LocalFileSystem.getInstance().findFileByPath(formatPath)!!
+        }
     }
 
     private fun showError(message: String) {

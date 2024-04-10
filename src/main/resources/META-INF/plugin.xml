@@ -5,7 +5,7 @@
 
     <vendor email="dor2014spb@gmail.com" url="https://www.linkedin.com/in/mikhail-dorontsov-396266100">Doronec</vendor>
 
-    <version>5.0</version>
+    <version>5.0.1</version>
 
     <idea-version since-build="231" until-build="241.*"/>
 
@@ -36,7 +36,6 @@
         <scratch.rootType implementation="com.arch.temp.extension.GFTemplateRootType"/>
         <scratch.rootType implementation="com.arch.temp.extension.GFTemplateProjectType"/>
     </extensions>
-
 
     <actions>
         <group
@@ -92,7 +91,6 @@
                 text="Move Template">
             <add-to-group group-id="ProjectViewPopupMenu" anchor="after" relative-to-action="MigrateTemplateActionCopy"/>
         </action>
-
 
         <action
                 id="com.arch.temp.actions.AddTextInShortTemplateAction"
