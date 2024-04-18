@@ -1,13 +1,13 @@
 package com.arch.temp.tools
 
 import com.arch.temp.constant.Constants
-import com.arch.temp.model.FileTemplate
+import com.arch.temp.model.FileTemplateModel
 import com.intellij.ide.scratch.RootType
 import com.intellij.ide.scratch.ScratchFileServiceImpl
 import com.intellij.openapi.application.PathManager
 import com.intellij.openapi.util.io.FileUtilRt
 
-fun FileTemplate.getPath(splash: Char) =
+fun FileTemplateModel.getPath(splash: Char) =
     if (path.isNotEmpty() && path.toCharArray().first() == splash) path.removeRange(0, 1) else path
 
 object FileTemplateExt {

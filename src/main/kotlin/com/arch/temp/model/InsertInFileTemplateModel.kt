@@ -1,7 +1,7 @@
 package com.arch.temp.model
 
-class FileTemplate(
-    val name: String = "",
+class InsertInFileTemplateModel(
+    val line: Int = 0,
     val path: String = "",
     val fileTemplatePath: String = ""
 )

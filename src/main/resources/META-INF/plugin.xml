@@ -5,7 +5,7 @@
 
     <vendor email="dor2014spb@gmail.com" url="https://www.linkedin.com/in/mikhail-dorontsov-396266100">Doronec</vendor>
 
-    <version>5.0.1</version>
+    <version>5.1</version>
 
     <idea-version since-build="231" until-build="241.*"/>
 
@@ -25,9 +25,9 @@
 
     <change-notes>
         <![CDATA[
-        `v5.0`
+        `v5.1`
         <br/>
-        - fast show file in project tool<br/>
+        - Paste code into existing files<br/>
         ]]>
     </change-notes>
 
@@ -98,6 +98,13 @@
                 id="com.arch.temp.actions.AddTextInShortTemplateAction"
                 class="com.arch.temp.actions.AddTextInShortTemplateAction"
                 text="Add In Template">
+            <add-to-group group-id="EditorPopupMenu" anchor="after" relative-to-action="$Paste"/>
+        </action>
+
+        <action
+                id="com.arch.temp.actions.AddInsertFromTemplateAction"
+                class="com.arch.temp.actions.AddInsertFromTemplateAction"
+                text="Add Insert From Template">
             <add-to-group group-id="EditorPopupMenu" anchor="after" relative-to-action="$Paste"/>
         </action>
 

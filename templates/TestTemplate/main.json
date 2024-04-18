@@ -1,7 +1,6 @@
 {
   "name": "TestTemplate",
   "description": "Example for documentation",
-  "path": "/templates/TestTemplate",
   "param": [
     "name"
   ],
@@ -50,5 +49,13 @@
       "path": "res/layout",
       "fileTemplatePath": "layout.tm"
     }
-  ]
+  ],
+  "insertInFile": [
+    {
+      "line": -1,
+      "path": "{name}[-C].txt",
+      "fileTemplatePath": "insert.tm"
+    }
+  ],
+  "globalBasePath": ""
 }

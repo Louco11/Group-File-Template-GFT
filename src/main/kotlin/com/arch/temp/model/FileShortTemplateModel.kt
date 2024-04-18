@@ -1,6 +1,6 @@
 package com.arch.temp.model
 
-class FileShortTemplate(
+class FileShortTemplateModel(
     val name: String = "",
     val filePath: String = ""
 )

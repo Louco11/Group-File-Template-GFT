@@ -1,7 +1,7 @@
 package com.arch.temp.tools
 
 import com.arch.temp.constant.Constants
-import com.arch.temp.model.FileTemplate
+import com.arch.temp.model.FileTemplateModel
 import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.ui.Messages
@@ -16,7 +16,7 @@ object CreateTemplate {
         selectPath: String,
         pathTemplate: String,
         mapParam: Map<String, String>,
-        fileTemplateModel: FileTemplate
+        fileTemplateModel: FileTemplateModel
     ) {
         ApplicationManager.getApplication().runWriteAction {
             if (fileTemplateModel.name.isEmpty()) {
@@ -41,7 +41,7 @@ object CreateTemplate {
         project: Project,
         pathTemplate: String,
         pathChoose: String,
-        fileTemplateModel: FileTemplate,
+        fileTemplateModel: FileTemplateModel,
         mapParam: Map<String, String>,
     ) {
         val nameFile = fileTemplateModel.name.replaceTemplate(mapParam)
