@@ -6,20 +6,23 @@ import com.arch.temp.constant.Constants.TagXml.DEFAULT_TAG_MAIN_PACKAGE
 import com.arch.temp.constant.Constants.TagXml.DEFAULT_TAG_MONTH
 import com.arch.temp.constant.Constants.TagXml.DEFAULT_TAG_TIME
 import com.arch.temp.constant.Constants.TagXml.DEFAULT_TAG_YEAR
+import com.arch.temp.model.InsertInFileTemplateModel
 import com.arch.temp.model.MainClassJson
-import com.arch.temp.tools.CreateTemplate
-import com.arch.temp.tools.getPackFromBuildGradleFile
-import com.arch.temp.tools.getPackFromManifest
-import com.arch.temp.tools.getPackage
+import com.arch.temp.tools.*
 import com.arch.temp.view.CreateTemplateDialog
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.CommonDataKeys
+import com.intellij.openapi.application.ApplicationManager
+import com.intellij.openapi.project.Project
+import com.intellij.openapi.ui.Messages
+import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
 
 class CreateStructureFromTemplateAction(private val mainClass: MainClassJson) :
     AnAction(mainClass.name, mainClass.description, null) {
+    private val SPLASH = File.separatorChar
 
     override fun actionPerformed(event: AnActionEvent) {
         if (mainClass.param.isEmpty() && mainClass.selectParam.isEmpty()) {
@@ -35,18 +38,73 @@ class CreateStructureFromTemplateAction(private val mainClass: MainClassJson) :
         inputMap: Map<String, String>,
         event: AnActionEvent
     ) {
+        val project = event.project ?: return
+
         val mapParam = inputMap.toMutableMap()
         createDefaultTag(mapParam, event)
 
         mainClass.fileTemplate.forEach { fileTemplateModel ->
             CreateTemplate.createFileTemplate(
-                event.project!!,
+                project,
                 event.getData(CommonDataKeys.VIRTUAL_FILE)?.path.orEmpty(),
                 mainClass.globalBasePath,
                 mapParam,
                 fileTemplateModel
             )
         }
+
+        mainClass.insertInFileTemplate.forEach { template ->
+            insertInFileFromTemplate(template, project, mapParam)
+        }
+    }
+
+    private fun insertInFileFromTemplate(
+        template: InsertInFileTemplateModel,
+        project: Project,
+        mapParam: MutableMap<String, String>
+    ) {
+        val replacePath = template.path.replaceTemplate(mapParam)
+        val insertFilePath = if (template.path.first() == SPLASH) replacePath else "$SPLASH${replacePath}"
+
+        ApplicationManager.getApplication().runWriteAction {
+            val file = File("${project.basePath}$insertFilePath")
+            if (!file.isFile) {
+                showError("In path $insertFilePath not found")
+                return@runWriteAction
+            }
+            val buffer = StringBuilder()
+            val temp = File(mainClass.globalBasePath, template.fileTemplatePath)
+            if (!temp.isFile) {
+                showError("In fileTemplatePath ${template.fileTemplatePath} not found")
+                return@runWriteAction
+            }
+            if (template.line == 0) {
+                buffer.appendLine(temp.readText().replaceTemplate(mapParam))
+            }
+            val lines = file.readLines()
+            lines.forEachIndexed { index, s ->
+                if (index == (template.line - 1)) {
+                    buffer.appendLine(temp.readText().replaceTemplate(mapParam))
+                }
+                buffer.appendLine(s)
+            }
+
+            if (template.line < 0 || template.line > lines.size) {
+                buffer.appendLine(temp.readText().replaceTemplate(mapParam))
+            }
+
+            file.writeText(buffer.toString().trimEnd())
+        }
+    }
+
+    private fun showError(message: String) {
+        Messages.showDialog(
+            message,
+            "Error",
+            listOf("OK").toTypedArray(),
+            0,
+            Messages.getWarningIcon()
+        )
     }
 
     private fun createDefaultTag(

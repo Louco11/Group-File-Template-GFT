@@ -9,7 +9,7 @@ data class MainShortClassJson (
     @SerializedName(Constants.TagXml.FIELD_DESCRIPTION)
     val description: String = "Empty Template Description",
     @SerializedName(Constants.TagXml.FIELD_ADD_FILE)
-    val fileTemplate: List<FileShortTemplate> = listOf()
+    val fileTemplate: List<FileShortTemplateModel> = listOf()
 ) {
     var globalBasePath: String = ""
 }

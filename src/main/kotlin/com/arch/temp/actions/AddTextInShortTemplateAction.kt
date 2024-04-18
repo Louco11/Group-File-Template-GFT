@@ -2,7 +2,7 @@ package com.arch.temp.actions
 
 import com.arch.temp.constant.Constants
 import com.arch.temp.mapper.JsonModelMapper
-import com.arch.temp.model.FileShortTemplate
+import com.arch.temp.model.FileShortTemplateModel
 import com.arch.temp.model.MainShortClassJson
 import com.arch.temp.tools.getListShortTemplate
 import com.arch.temp.tools.toTmFile
@@ -23,7 +23,6 @@ import com.intellij.openapi.vfs.*
 import com.intellij.openapi.wm.WindowManager
 import com.intellij.psi.impl.PsiManagerImpl
 import com.intellij.ui.awt.RelativePoint
-import java.awt.TrayIcon
 import java.io.File
 
 
@@ -129,7 +128,7 @@ class AddTextInShortTemplateAction : AnAction() {
                 val mainJson = JsonModelMapper.mapToShortMainClass(mainText)
                 val listFile = mainJson.fileTemplate.toMutableList()
                 listFile.add(
-                    FileShortTemplate(
+                    FileShortTemplateModel(
                         name = nameTemplate,
                         filePath = nameTemplate.toTmFile()
                     )

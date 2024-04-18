@@ -13,7 +13,9 @@ data class MainClassJson (
     @SerializedName(Constants.TagXml.FIELD_SELECT_PARAMETERS)
     val selectParam: List<SelectParam> = listOf(),
     @SerializedName(Constants.TagXml.FIELD_ADD_FILE)
-    val fileTemplate: List<FileTemplate> = listOf()
+    val fileTemplate: List<FileTemplateModel> = listOf(),
+    @SerializedName(Constants.TagXml.FIELD_INSERT_IN_FILE)
+    val insertInFileTemplate: List<InsertInFileTemplateModel> = listOf()
 ) {
     var globalBasePath: String = ""
 }

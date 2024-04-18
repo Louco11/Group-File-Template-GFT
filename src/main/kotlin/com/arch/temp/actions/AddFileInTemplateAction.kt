@@ -6,7 +6,7 @@ import com.intellij.openapi.actionSystem.CommonDataKeys
 import com.intellij.openapi.ui.Messages
 import com.arch.temp.constant.Constants
 import com.arch.temp.mapper.JsonModelMapper
-import com.arch.temp.model.FileTemplate
+import com.arch.temp.model.FileTemplateModel
 import com.arch.temp.model.MainClassJson
 import com.arch.temp.tools.getListTemplate
 import com.arch.temp.tools.toTmFile
@@ -24,20 +24,19 @@ const val NAME_FILE_IN_TEMPLATE = "Name File Template"
 class AddFileInTemplate : AnAction() {
 
     override fun actionPerformed(event: AnActionEvent) {
-        val fileToTemplate = event.getData(CommonDataKeys.VIRTUAL_FILE)
+        val fileToTemplate = event.getData(CommonDataKeys.VIRTUAL_FILE) ?: return
+        val project = event.project ?: return
+
         val templateList = event.getListTemplate()
 
-        if (event.project == null) return
-
-        fileToTemplate?.let {
-            if (templateList.size > 1) {
-                CheckTemplateDialog(templateList, event.project!!) {
-                    addFile(event.project!!, it, fileToTemplate)
-                }.showAndGet()
-            } else {
-                addFile(event.project!!, templateList.first(), fileToTemplate)
-            }
+        if (templateList.size > 1) {
+            CheckTemplateDialog(templateList, project) {
+                addFile(project, it, fileToTemplate)
+            }.showAndGet()
+        } else {
+            addFile(project, templateList.first(), fileToTemplate)
         }
+
     }
 
     private fun addFile(
@@ -88,7 +87,7 @@ class AddFileInTemplate : AnAction() {
                 val mainJson = JsonModelMapper.mapToMainClass(mainText)
                 val listFile = mainJson.fileTemplate.toMutableList()
                 listFile.add(
-                    FileTemplate(
+                    FileTemplateModel(
                         name = fileToTemplate.name,
                         fileTemplatePath = fileName
                     )
