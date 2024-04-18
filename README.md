@@ -1,16 +1,19 @@
 # Group File Template (GFT) IDEA Plugin
 
-[![Version](https://img.shields.io/badge/Version-5.0-blue.svg)](https://github.com/Louco11/ArchitecturalTemplates/wiki/Release-Notes)
+[![Version](https://img.shields.io/badge/Version-5.1-blue.svg)](https://github.com/Louco11/ArchitecturalTemplates/wiki/Release-Notes)
 [![Version](https://img.shields.io/badge/IDEA-Marketplace-blue.svg)](https://plugins.jetbrains.com/plugin/16836-architectural-templates)
 [![License](https://img.shields.io/github/license/srs/gradle-node-plugin.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 
 Plugin create a group of files by custom templates from IDEA interface.
 
-[Medium](https://medium.com/@Doronec/how-to-create-modules-with-all-the-bindings-for-the-project-like-thanos-snap-ebf40fec8cd6)
+[Version 5.1](https://github.com/Louco11/Group-File-Template-GFT/wiki/Release-Notes)
+## ARTICLES
+### Medium
+- https://medium.com/@Doronec/how-to-create-modules-with-all-the-bindings-for-the-project-like-thanos-snap-ebf40fec8cd6
+- https://medium.com/@Doronec/create-a-plugin-for-jetbrains-ide-how-to-display-a-directory-not-from-a-project-in-the-project-510aaf42fa1c
 
-[habr](https://habr.com/ru/companies/cian/articles/740928/)
-
-[Version 5.0](https://github.com/Louco11/Group-File-Template-GFT/wiki/Release-Notes)
+### Habr
+- https://habr.com/ru/companies/cian/articles/740928/
 
 # Quick start
 [Templates Example](https://github.com/Louco11/Group-File-Template-GFT/tree/master/templates)
@@ -80,13 +83,14 @@ The heart of the template is the Json file Main
 
 Inside it has a structure
 
-| Key            |	Value                                                |	Comment                 |
-|----------------|-------------------------------------------------------|--------------------------|
-| name           |	Name Template                                        |                          |
-| description    |	Description Template                                 |                          |
-| param          |	Variables to insert into the template                |	list String             |
-| selectParam    |	Variables to drop list with values into the template |	list object SelectParam |
-| addFile        |	Files to create                                      |	list object File        |
+| Key            | 	Value                                                | 	Comment                   |
+|----------------|-------------------------------------------------------|----------------------------|
+| name           | 	Name Template                                        |                            |
+| description    | 	Description Template                                 |                            |
+| param          | 	Variables to insert into the template                | 	list String               |
+| selectParam    | 	Variables to drop list with values into the template | 	list object SelectParam   |
+| addFile        | 	Files to create                                      | 	list object File          |
+| insertInFile   | 	Insert in file structure                             | 	list object InsertInFile  |
 
 structure `SelectParam`
 
@@ -147,6 +151,18 @@ To add test to android, write the `"test/"` to the parameter `"path"` parameter
 
 To add file in path project, write the `"~/"` to the parameter `"path"` parameter
 
+### InsertInFile it has a structure
+
+| Key              | 	Value                                         | 	Comment                                                                                                 |
+|------------------|------------------------------------------------|----------------------------------------------------------------------------------------------------------|
+| line             | 	Position line insert                          | 	                                                                                                        |
+| path             | 	Path to the file where to paste the code      | Path in project to file. You can use Param in the name.                                                                                |
+| fileTemplatePath | 	The name of the template from insert the code | It must be specified with the extension .tm and you can specify the directory where this file is located |
+
+if line == 0, insert code at the beginning of the file
+if line == -1, code insert in end file
+if count line > size line in file, insert the code at the end of the file
+
 # Create Template
 
 To create a file from a template, right-click on the path in which 
@@ -166,6 +182,16 @@ and will ask you to rename the file as it will be named in the template.
 <img src="screencut/addFile4.png" alt="drawing" width="40%" />
 <img src="screencut/addFile5.png" alt="drawing" width="60%" />
 
+### Add new line insert in Template
+- In the file in which we want to insert, right-click on the line we need.
+- Select in the context menu `Add Insert From Template`
+- Select the template from which the insert will be made
+- In fileTemplatePath we specify the template from which the insertion will be made
+- When creating new files, an insertion will be made into the file we selected
+
+<img src="screencut/InserttoFile.png" alt="drawing" width="50%" />
+<img src="screencut/InserttoFile2.png" alt="drawing" width="50%" />
+<img src="screencut/InserttoFile3.png" alt="drawing" width="50%" />
 
 ### Move template in IDE
 

@@ -1,6 +1,6 @@
 package com.arch.temp.actions
 
-import com.arch.temp.model.FileShortTemplate
+import com.arch.temp.model.FileShortTemplateModel
 import com.arch.temp.model.MainShortClassJson
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
@@ -12,7 +12,7 @@ import java.io.File
 
 class CreateShortCodeFromTemplateAction(
     private val mainShortClassJson: MainShortClassJson,
-    private val fileShortTemplate: FileShortTemplate
+    private val fileShortTemplate: FileShortTemplateModel
 ) : AnAction(
     fileShortTemplate.name,
     fileShortTemplate.filePath,
