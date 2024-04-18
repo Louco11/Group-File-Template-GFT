@@ -11,14 +11,16 @@
 
     <description>
         <![CDATA[
-        Helps to create a group template.
-        <br/>
-        - To create a new template, call Tools -> Create New Template    <br/>
-        - To create files from templates, right-click on the directory in which you want to create files,
-        select the Templates menu item and select the one that suits you <br/>
-        - To add a file to a template, right-click on the file you need and select add a file to a template,
-        in the dialog box select which template to add to and create a file name as it will look in it.
-         ]]>
+        Benefits of using the GFT plugin:<br/>
+        - Saves time: Automates the creation of repeating groups of files. Reduces errors: Reduces the likelihood of errors when manually creating files.<br/>
+        - Improves consistency: Ensures consistent file formatting and structure.<br/>
+        - Simplifies collaboration: Allows you to easily share templates with other developers.<br/>
+
+        The GFT plugin may be useful:<br/>
+        - Developers who often create groups of files with - similar structure.<br/>
+        - Development teams who want to unify the style and formatting of their projects.<br/>
+        - Anyone who wants to increase their productivity when working with an IDE.<br/>
+    ]]>
     </description>
 
     <change-notes>

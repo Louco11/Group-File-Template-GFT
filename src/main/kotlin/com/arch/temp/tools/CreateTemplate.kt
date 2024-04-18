@@ -8,7 +8,6 @@ import com.intellij.openapi.ui.Messages
 import com.intellij.openapi.vfs.*
 import com.intellij.psi.impl.PsiManagerImpl
 import java.io.File
-import java.nio.charset.Charset
 
 object CreateTemplate {
     private val SPLASH = File.separatorChar
