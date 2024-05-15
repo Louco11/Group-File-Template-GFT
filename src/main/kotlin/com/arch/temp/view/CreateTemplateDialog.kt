@@ -3,9 +3,16 @@ package com.arch.temp.view
 import com.arch.temp.model.MainClassJson
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.ui.DialogWrapper
+import com.intellij.ui.dsl.builder.Align
+import com.intellij.ui.dsl.builder.AlignX
+import com.intellij.ui.dsl.builder.RowLayout
 import com.intellij.ui.dsl.builder.panel
 import java.awt.Dimension
-import javax.swing.*
+import javax.swing.JComboBox
+import javax.swing.JComponent
+import javax.swing.JTextArea
+import javax.swing.JTextField
+
 
 const val TITLE_DIALOG = "Fill param"
 
@@ -25,6 +32,14 @@ class CreateTemplateDialog(
 
     override fun createCenterPanel(): JComponent {
         return panel {
+            row {
+                val textArea = JTextArea().apply {
+                    lineWrap = true
+                    wrapStyleWord = true
+                    text = mainClassJson.description
+                }
+                cell(textArea).resizableColumn().align(AlignX.FILL)
+            }
             mainClassJson.param.forEach { param  ->
                 row(param) {
                     val input = JTextField(20)
