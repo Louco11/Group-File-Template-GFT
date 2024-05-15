@@ -7,7 +7,7 @@ data class MainClassJson (
     @SerializedName(Constants.TagXml.FIELD_NAME)
     val name: String = "No Name",
     @SerializedName(Constants.TagXml.FIELD_DESCRIPTION)
-    val description: String = "Empty Template Description",
+    val description: String = "",
     @SerializedName(Constants.TagXml.FIELD_PARAMETERS)
     val param: List<String> = listOf(),
     @SerializedName(Constants.TagXml.FIELD_SELECT_PARAMETERS)

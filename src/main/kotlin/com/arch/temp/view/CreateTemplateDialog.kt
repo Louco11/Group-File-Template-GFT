@@ -32,15 +32,17 @@ class CreateTemplateDialog(
 
     override fun createCenterPanel(): JComponent {
         return panel {
-            row {
-                val textArea = JTextArea().apply {
-                    lineWrap = true
-                    wrapStyleWord = true
-                    text = mainClassJson.description
+            if (mainClassJson.description.isNotEmpty()) {
+                row {
+                    val textArea = JTextArea().apply {
+                        lineWrap = true
+                        wrapStyleWord = true
+                        text = mainClassJson.description
+                    }
+                    cell(textArea).resizableColumn().align(AlignX.FILL)
                 }
-                cell(textArea).resizableColumn().align(AlignX.FILL)
             }
-            mainClassJson.param.forEach { param  ->
+            mainClassJson.param.forEach { param ->
                 row(param) {
                     val input = JTextField(20)
                     mapInput[param] = input
@@ -48,9 +50,9 @@ class CreateTemplateDialog(
                 }
             }
             mainClassJson.selectParam.forEach {
-                row(it.paramName){
+                row(it.paramName) {
                     val combo = JComboBox(it.paramValue.toTypedArray())
-                    combo.preferredSize = Dimension(223,30)
+                    combo.preferredSize = Dimension(223, 30)
                     mapComboBox[it.paramName] = combo
                     cell(combo)
                 }
