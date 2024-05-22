@@ -14,6 +14,7 @@ Plugin create a group of files by custom templates from IDEA interface.
 
 ### Habr
 - https://habr.com/ru/companies/cian/articles/740928/
+- https://habr.com/ru/companies/cian/articles/816149/
 
 # Quick start
 [Templates Example](https://github.com/Louco11/Group-File-Template-GFT/tree/master/templates)
