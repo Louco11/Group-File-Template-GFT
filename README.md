@@ -1,12 +1,11 @@
 # Group File Template (GFT) IDEA Plugin
 
-[![Version](https://img.shields.io/badge/Version-5.2-blue.svg)](https://github.com/Louco11/ArchitecturalTemplates/wiki/Release-Notes)
+[![Version](https://img.shields.io/badge/Version-5.3-blue.svg)](https://github.com/Louco11/ArchitecturalTemplates/wiki/Release-Notes)
 [![Version](https://img.shields.io/badge/IDEA-Marketplace-blue.svg)](https://plugins.jetbrains.com/plugin/16836-architectural-templates)
 [![License](https://img.shields.io/github/license/srs/gradle-node-plugin.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 
 Plugin create a group of files by custom templates from IDEA interface.
 
-[Version 5.2](https://github.com/Louco11/Group-File-Template-GFT/wiki/Release-Notes)
 ## ARTICLES
 ### Medium
 - https://medium.com/@Doronec/how-to-create-modules-with-all-the-bindings-for-the-project-like-thanos-snap-ebf40fec8cd6
