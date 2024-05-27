@@ -1,17 +1,19 @@
 package com.arch.temp.tools
 
-import com.arch.temp.constant.Constants.SPLASH
+import com.arch.temp.constant.Constants.Options
+import com.arch.temp.constant.Constants.SLASH
 
 fun String.replaceTemplate(map: Map<String, String>): String {
     var stringTemp = this
     map.keys.forEach { key ->
-        stringTemp = stringTemp.replace("{$key}[-C]", map[key]!!.snakeToUpperCamelCase())
-            .replace("{$key}[-c]", map[key]!!.snakeToLowerCamelCase())
-            .replace("{$key}[-S]", map[key]!!.camelToScreamingSnakeCase())
-            .replace("{$key}[-s]", map[key]!!.camelToSnakeCase())
-            .replace("{$key}[-p]", map[key]!!.pointBetweenWords())
-            .replace("{$key}[-sl]", map[key]!!.slashBetweenWords())
-            .replace("{$key}[-d]", map[key]!!.slashDashWords())
+        stringTemp = stringTemp.replace("{$key}${Options.UPPER_CAMEL_CASE.nameOption}", map[key]!!.snakeToUpperCamelCase())
+            .replace("{$key}${Options.LOWER_CAMEL_CASE.nameOption}", map[key]!!.snakeToLowerCamelCase())
+            .replace("{$key}${Options.SCREAMING_SNAKE_CASE.nameOption}", map[key]!!.camelToScreamingSnakeCase())
+            .replace("{$key}${Options.SNAKE_CASE.nameOption}", map[key]!!.camelToSnakeCase())
+            .replace("{$key}${Options.POINT_BETWEEN.nameOption}", map[key]!!.pointBetweenWords())
+            .replace("{$key}${Options.SLASH_BETWEEN.nameOption}", map[key]!!.slashBetweenWords())
+            .replace("{$key}${Options.DASH_BETWEEN.nameOption}", map[key]!!.slashDashWords())
+            .replace("{$key}${Options.LOWER_CASE.nameOption}", map[key]!!.lowWords())
             .replace("{$key}", map[key]!!)
     }
     return stringTemp
@@ -46,9 +48,14 @@ fun String.pointBetweenWords(): String {
     return this.camelToSnakeCase().replace("_",".")
 }
 
+// to wordcase
+fun String.lowWords(): String {
+    return this.camelToSnakeCase().replace("_","")
+}
+
 // to word/case
 fun String.slashBetweenWords(): String {
-    return this.camelToSnakeCase().replace("_", "$SPLASH")
+    return this.camelToSnakeCase().replace("_", "$SLASH")
 }
 
 // to word-case

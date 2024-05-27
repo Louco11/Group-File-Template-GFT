@@ -3,7 +3,6 @@ package com.arch.temp.actions
 import com.arch.temp.constant.Constants
 import com.arch.temp.constant.Constants.MAIN_FILE_TEMPLATE
 import com.arch.temp.constant.Constants.MAIN_SHORT_FILE_TEMPLATE
-import com.arch.temp.constant.Constants.SPLASH
 import com.arch.temp.mapper.JsonModelMapper
 import com.arch.temp.model.MainClassJson
 import com.arch.temp.tools.FileTemplateExt.getRootPathTemplate
@@ -17,8 +16,6 @@ import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.openapi.vfs.readText
 import com.intellij.openapi.vfs.writeText
 import com.intellij.psi.impl.PsiManagerImpl
-import org.jetbrains.annotations.NonNls
-import java.io.File
 
 class MigrateTemplateAction : AnAction() {
 

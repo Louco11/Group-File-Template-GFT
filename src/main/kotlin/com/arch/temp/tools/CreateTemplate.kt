@@ -1,7 +1,7 @@
 package com.arch.temp.tools
 
 import com.arch.temp.constant.Constants
-import com.arch.temp.constant.Constants.SPLASH
+import com.arch.temp.constant.Constants.SLASH
 import com.arch.temp.model.FileTemplateModel
 import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.project.Project
@@ -21,7 +21,7 @@ object CreateTemplate {
     ) {
         ApplicationManager.getApplication().runWriteAction {
             if (fileTemplateModel.name.isEmpty()) {
-                val fileTemplatePath = fileTemplateModel.getPath(SPLASH)
+                val fileTemplatePath = fileTemplateModel.getPath(SLASH)
                 create(
                     selectPath,
                     fileTemplatePath.replaceTemplate(mapParam)
@@ -48,9 +48,9 @@ object CreateTemplate {
         val nameFile = fileTemplateModel.name.replaceTemplate(mapParam)
         val fileTemplate = File(pathTemplate, fileTemplateModel.fileTemplatePath)
         if (fileTemplate.isFile) {
-            val fileTemplatePath = fileTemplateModel.getPath(SPLASH)
+            val fileTemplatePath = fileTemplateModel.getPath(SLASH)
 
-            val filePath = when (fileTemplatePath.split(SPLASH).first()) {
+            val filePath = when (fileTemplatePath.split(SLASH).first()) {
                 Constants.CreatePackage.ANDROID_RES -> createPathRes(
                     pathChoose,
                     fileTemplatePath.replaceTemplate(mapParam)
@@ -98,11 +98,11 @@ object CreateTemplate {
     }
 
     private fun createPathTest(pathProject: String, pathFileTemplate: String): VirtualFile {
-        val pathTest = "${Constants.CreatePackage.PATH_TEST}$SPLASH"
+        val pathTest = "${Constants.CreatePackage.PATH_TEST}$SLASH"
         val path = pathProject.replace(Constants.CreatePackage.MAIN_PATH, Constants.CreatePackage.PATH_TEST)
             .split(pathTest)
 
-        val pathTemplate = "$pathTest${path.last()}$SPLASH" +
+        val pathTemplate = "$pathTest${path.last()}$SLASH" +
                 pathFileTemplate.replace(Constants.CreatePackage.PATH_TEST, "")
 
         return create(path.first(), pathTemplate)
@@ -118,8 +118,8 @@ object CreateTemplate {
     }
 
     private fun create(pathProject: String, pathFileTemplate: String): VirtualFile {
-        val path = "$pathProject$SPLASH$pathFileTemplate"
-        val formatPath = if (path[path.length-1] == SPLASH) path.substring(0, path.length-1) else path
+        val path = "$pathProject$SLASH$pathFileTemplate"
+        val formatPath = if (path[path.length-1] == SLASH) path.substring(0, path.length-1) else path
         return try {
              if (!File(formatPath).isDirectory) {
                 VfsUtil.createDirectories(formatPath)

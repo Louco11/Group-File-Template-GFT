@@ -13,7 +13,7 @@ object Constants {
     const val ANDROID_MANIFEST_FILE = "AndroidManifest.xml"
     const val BUILD_GRADLE_FILE = "build.gradle.kts"
     const val ACTION_MIGRATE = "MigrateTemplateActionRemove"
-    val SPLASH = File.separatorChar
+    val SLASH = File.separatorChar
 
     object TagXml {
         const val FIELD_NAME = "name"
@@ -48,4 +48,14 @@ object Constants {
         const val GFT_PROJECT_NAME = "Project GFTemplates"
     }
 
+    enum class Options(val nameOption: String, val  example : String) {
+        UPPER_CAMEL_CASE("[-C]", "ExampleName"),
+        LOWER_CAMEL_CASE("[-c]", "exampleName"),
+        SCREAMING_SNAKE_CASE("[-S]", "EXAMPLE_NAME"),
+        SNAKE_CASE("[-s]", "example_name"),
+        POINT_BETWEEN("[-p]", "example.name"),
+        SLASH_BETWEEN("[-sl]", "example${SLASH}name"),
+        DASH_BETWEEN("[-d]", "example-name"),
+        LOWER_CASE("[-low]","examplename")
+    }
 }

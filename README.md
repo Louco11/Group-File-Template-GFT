@@ -113,6 +113,7 @@ Options after param:
 * `[-p]` - point.between.words
 * `[-sl]` - slash/between/word
 * `[-d]` - dash-between-word
+* `[-low]` - lowercase
 
 example {"NewFeature"}[-s] equals new_feature
 
