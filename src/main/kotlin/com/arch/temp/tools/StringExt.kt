@@ -1,5 +1,7 @@
 package com.arch.temp.tools
 
+import com.arch.temp.constant.Constants.SPLASH
+
 fun String.replaceTemplate(map: Map<String, String>): String {
     var stringTemp = this
     map.keys.forEach { key ->
@@ -46,7 +48,7 @@ fun String.pointBetweenWords(): String {
 
 // to word/case
 fun String.slashBetweenWords(): String {
-    return this.camelToSnakeCase().replace("_","/")
+    return this.camelToSnakeCase().replace("_", "$SPLASH")
 }
 
 // to word-case

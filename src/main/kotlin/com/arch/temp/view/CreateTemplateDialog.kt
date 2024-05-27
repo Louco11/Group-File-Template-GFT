@@ -3,9 +3,7 @@ package com.arch.temp.view
 import com.arch.temp.model.MainClassJson
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.ui.DialogWrapper
-import com.intellij.ui.dsl.builder.Align
 import com.intellij.ui.dsl.builder.AlignX
-import com.intellij.ui.dsl.builder.RowLayout
 import com.intellij.ui.dsl.builder.panel
 import java.awt.Dimension
 import javax.swing.JComboBox
