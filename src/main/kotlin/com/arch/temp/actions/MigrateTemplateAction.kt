@@ -3,14 +3,12 @@ package com.arch.temp.actions
 import com.arch.temp.constant.Constants
 import com.arch.temp.constant.Constants.MAIN_FILE_TEMPLATE
 import com.arch.temp.constant.Constants.MAIN_SHORT_FILE_TEMPLATE
+import com.arch.temp.constant.Constants.SPLASH
 import com.arch.temp.mapper.JsonModelMapper
 import com.arch.temp.model.MainClassJson
 import com.arch.temp.tools.FileTemplateExt.getRootPathTemplate
 import com.arch.temp.tools.getBasePathTemplate
-import com.intellij.openapi.actionSystem.ActionUpdateThread
-import com.intellij.openapi.actionSystem.AnAction
-import com.intellij.openapi.actionSystem.AnActionEvent
-import com.intellij.openapi.actionSystem.CommonDataKeys
+import com.intellij.openapi.actionSystem.*
 import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.ui.Messages
@@ -19,6 +17,7 @@ import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.openapi.vfs.readText
 import com.intellij.openapi.vfs.writeText
 import com.intellij.psi.impl.PsiManagerImpl
+import org.jetbrains.annotations.NonNls
 import java.io.File
 
 class MigrateTemplateAction : AnAction() {
@@ -39,6 +38,7 @@ class MigrateTemplateAction : AnAction() {
             oldName,
             null
         ) ?: return
+        val idEvent = ActionManager.getInstance().getId(this) ?: ""
 
         pathTemplateSelect?.let { vFileSelect ->
             migrateTemplate(
@@ -46,7 +46,8 @@ class MigrateTemplateAction : AnAction() {
                 vFileSelect,
                 nameTemplate,
                 oldName,
-                migratePathTemplate
+                migratePathTemplate,
+                idEvent
             )
         }
     }
@@ -56,7 +57,8 @@ class MigrateTemplateAction : AnAction() {
         pathTemplateSelect: VirtualFile,
         renamePath: String,
         oldName: String,
-        migratePathTemplate: String
+        migratePathTemplate: String,
+        idEvent: String
     ) {
         try {
             ApplicationManager.getApplication().runWriteAction {
@@ -69,7 +71,7 @@ class MigrateTemplateAction : AnAction() {
                         JsonModelMapper.mapToMainClass(text)
                     }
 
-                val vFIlePathTemplate = if (templateText == Constants.ACTION_MIGRATE) {
+                val vFIlePathTemplate = if (idEvent == Constants.ACTION_MIGRATE) {
                     pathTemplateSelect.move(null, VfsUtil.createDirectories(migratePathTemplate))
                     pathTemplateSelect.rename(null, renamePath)
                     pathTemplateSelect
@@ -125,10 +127,10 @@ class MigrateTemplateAction : AnAction() {
 
     override fun update(e: AnActionEvent) {
         val project = e.project
-        val pathTemplate = e.getData(CommonDataKeys.VIRTUAL_FILE)?.path
-        val shortMainTemplate = File("$pathTemplate/$MAIN_SHORT_FILE_TEMPLATE")
-        val shortTemplate = File("$pathTemplate/$MAIN_FILE_TEMPLATE")
-        e.presentation.isEnabledAndVisible = project != null && (shortMainTemplate.isFile || shortTemplate.isFile)
+        val pathTemplate = e.getData(CommonDataKeys.VIRTUAL_FILE)
+        val shortMainTemplate = pathTemplate?.findChild(MAIN_SHORT_FILE_TEMPLATE)
+        val shortTemplate = pathTemplate?.findChild(MAIN_FILE_TEMPLATE)
+        e.presentation.isEnabledAndVisible = project != null && (shortMainTemplate != null || shortTemplate != null)
     }
 
 }

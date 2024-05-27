@@ -1,6 +1,7 @@
 package com.arch.temp.tools
 
 import com.arch.temp.constant.Constants
+import com.arch.temp.constant.Constants.SPLASH
 import com.arch.temp.model.FileTemplateModel
 import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.project.Project
@@ -10,7 +11,7 @@ import com.intellij.psi.impl.PsiManagerImpl
 import java.io.File
 
 object CreateTemplate {
-    private val SPLASH = File.separatorChar
+
     fun createFileTemplate(
         project: Project,
         selectPath: String,

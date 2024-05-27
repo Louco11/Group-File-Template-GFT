@@ -1,6 +1,7 @@
 package com.arch.temp.tools
 
 import com.arch.temp.constant.Constants
+import com.arch.temp.constant.Constants.SPLASH
 import com.arch.temp.mapper.JsonModelMapper
 import com.arch.temp.model.MainClassJson
 import com.arch.temp.model.MainShortClassJson
@@ -38,7 +39,7 @@ private fun getListMainClassTemplate(
     val dirTemplate = File(basePath)
     if (dirTemplate.isDirectory) {
         dirTemplate.list()?.forEach { templatePath ->
-            val pathMainFile = "$basePath/$templatePath"
+            val pathMainFile = "$basePath$SPLASH$templatePath"
             val mainFile = File(pathMainFile, Constants.MAIN_FILE_TEMPLATE)
             if (mainFile.isFile) {
                 try {
@@ -80,7 +81,7 @@ private fun getListMainShortClassTemplate(
     val dirTemplate = File(basePath)
     if (dirTemplate.isDirectory) {
         dirTemplate.list()?.forEach { templatePath ->
-            val pathMainFile = "$basePath/$templatePath"
+            val pathMainFile = "$basePath$SPLASH$templatePath"
             val mainFile = File(pathMainFile, Constants.MAIN_SHORT_FILE_TEMPLATE)
             if (mainFile.isFile) {
                 try {
@@ -110,7 +111,7 @@ fun AnActionEvent.getPackage(): String {
     if (path.indexOf(mainKotlin) > 0) {
         toPack = path.removeRange(0, path.indexOf(mainKotlin) + mainKotlin.length + 1)
     }
-    return toPack.replace("/", ".")
+    return toPack.replace("$SPLASH", ".")
 }
 
 fun AnActionEvent.getPackFromManifest(): String {
