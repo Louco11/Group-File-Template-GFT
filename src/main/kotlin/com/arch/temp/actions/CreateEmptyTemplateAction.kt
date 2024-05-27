@@ -4,11 +4,9 @@ import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.CommonDataKeys
 import com.intellij.openapi.ui.Messages
-import com.intellij.openapi.vfs.VirtualFileManager
 import com.arch.temp.constant.Constants
-import com.arch.temp.constant.Constants.SPLASH
+import com.arch.temp.constant.Constants.SLASH
 import com.arch.temp.mapper.JsonModelMapper
-import com.arch.temp.model.MainClassJson
 import com.arch.temp.model.MainShortClassJson
 import com.arch.temp.tools.getBasePathTemplate
 import com.intellij.openapi.application.ApplicationManager
@@ -28,7 +26,7 @@ class CreateEmptyTemplateAction : AnAction() {
         }
 
         if (!pathTemplate.isDirectory) pathTemplate.mkdir()
-        val pathNewTemplate = "${pathTemplate.path}$SPLASH$nameTemplate"
+        val pathNewTemplate = "${pathTemplate.path}$SLASH$nameTemplate"
 
         createPath(
             if (File(pathNewTemplate).isDirectory) "$pathNewTemplate${pathTemplate.list()?.size}"
@@ -45,7 +43,7 @@ class CreateEmptyTemplateAction : AnAction() {
     private fun createMainFileTemplate(vFile: VirtualFile) {
         ApplicationManager.getApplication().runWriteAction {
             val mainFile = vFile.createChildData(null, Constants.MAIN_FILE_TEMPLATE)
-            val template = MainShortClassJson(name = vFile.path.split(SPLASH).last())
+            val template = MainShortClassJson(name = vFile.path.split(SLASH).last())
             mainFile.setBinaryContent(JsonModelMapper.mapToString(template).toByteArray())
         }
     }

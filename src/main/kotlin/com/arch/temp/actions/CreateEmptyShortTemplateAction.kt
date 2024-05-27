@@ -5,16 +5,13 @@ import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.CommonDataKeys
 import com.intellij.openapi.ui.Messages
 import com.arch.temp.constant.Constants
-import com.arch.temp.constant.Constants.SPLASH
+import com.arch.temp.constant.Constants.SLASH
 import com.arch.temp.mapper.JsonModelMapper
 import com.arch.temp.model.MainShortClassJson
 import com.arch.temp.tools.getBasePathTemplate
 import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.vfs.VfsUtil
 import com.intellij.openapi.vfs.VirtualFile
-import com.intellij.openapi.vfs.VirtualFileEvent
-import com.intellij.openapi.vfs.VirtualFileManager
-import com.intellij.testFramework.utils.vfs.createFile
 import java.io.File
 
 class CreateEmptyShortTemplateAction : AnAction() {
@@ -27,7 +24,7 @@ class CreateEmptyShortTemplateAction : AnAction() {
             nameTemplate = Constants.EMPTY_SHORT_TEMPLATE_PATH_NAME
         }
         if (!pathTemplate.isDirectory) VfsUtil.createDirectories(pathTemplate.path)
-        val pathNewTemplate = "${pathTemplate.path}$SPLASH$nameTemplate"
+        val pathNewTemplate = "${pathTemplate.path}$SLASH$nameTemplate"
         createPath(
             if (File(pathNewTemplate).isDirectory) "$pathNewTemplate${pathTemplate.list()?.size}"
             else pathNewTemplate
@@ -42,7 +39,7 @@ class CreateEmptyShortTemplateAction : AnAction() {
     private fun createMainFileTemplate(vFile: VirtualFile) {
         ApplicationManager.getApplication().runWriteAction {
             val mainFile = vFile.createChildData(null, Constants.MAIN_SHORT_FILE_TEMPLATE)
-            val template = MainShortClassJson(name = vFile.path.split(SPLASH).last())
+            val template = MainShortClassJson(name = vFile.path.split(SLASH).last())
             mainFile.setBinaryContent(JsonModelMapper.mapToString(template).toByteArray())
         }
     }

@@ -5,7 +5,7 @@
 
     <vendor email="dor2014spb@gmail.com" url="https://www.linkedin.com/in/mikhail-dorontsov-396266100">Doronec</vendor>
 
-    <version>5.2</version>
+    <version>5.3</version>
 
     <idea-version since-build="231" until-build="241.*"/>
 
@@ -25,9 +25,9 @@
 
     <change-notes>
         <![CDATA[
-        `v5.2`
+        `v5.3`
         <br/>
-        - show description in dialog<br/>
+        - new option [-low]<br/>
         ]]>
     </change-notes>
 
@@ -86,7 +86,6 @@
             <add-to-group group-id="ProjectViewPopupMenu" anchor="after" relative-to-action="CutCopyPasteGroup"/>
         </action>
 
-        <!--  Если поменял text замени его Constants.ACTION_MIGRATE  -->
         <action
                 id="MigrateTemplateActionRemove"
                 class="com.arch.temp.actions.MigrateTemplateAction"
