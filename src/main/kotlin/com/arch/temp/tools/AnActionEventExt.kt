@@ -111,7 +111,7 @@ fun AnActionEvent.getPackage(): String {
     if (path.indexOf(mainKotlin) > 0) {
         toPack = path.removeRange(0, path.indexOf(mainKotlin) + mainKotlin.length + 1)
     }
-    return toPack.replace("$SLASH", ".")
+    return toPack.replace("/", ".")
 }
 
 fun AnActionEvent.getPackFromManifest(): String {
