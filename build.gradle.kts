@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "com.arch"
-version = "5.2"
+version = "5.4"
 
 repositories {
     mavenCentral()
@@ -13,7 +13,6 @@ repositories {
 
 dependencies {
     implementation(kotlin("stdlib"))
-
 }
 
 intellij {

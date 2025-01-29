@@ -194,6 +194,33 @@ and will ask you to rename the file as it will be named in the template.
 <img src="screencut/InserttoFile2.png" alt="drawing" width="50%" />
 <img src="screencut/InserttoFile3.png" alt="drawing" width="50%" />
 
+### Template extension callbacks
+You can add a kts scripts callback extension to the template. 
+You can use it for analytics, logging, modifying templates from variables or other actions.
+
+Just add extensions block to your template `main.json`
+```json
+{
+  "extensions": [
+    {
+      "path": "TestTemplateExtensions.kts"
+    }
+  ]
+}
+```
+
+Kts script must extends `StructureFromTemplateExtension`
+```kotlin
+import com.arch.temp.extensions.StructureFromTemplateExtension
+
+object : StructureFromTemplateExtension {
+    // Extension methods
+}
+```
+See extension methods documentation [StructureFromTemplateExtension.kt](src/main/kotlin/com/arch/temp/extensions/StructureFromTemplateExtension.kt)
+
+See extension example [TestTemplateExtensions.kts](templates/TestTemplate/TestTemplateExtensions.kts)
+
 ### Move template in IDE
 
 In the project tool window, a new field is GFTemplate.
