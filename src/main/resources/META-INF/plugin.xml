@@ -5,9 +5,9 @@
 
     <vendor email="dor2014spb@gmail.com" url="https://www.linkedin.com/in/mikhail-dorontsov-396266100">Doronec</vendor>
 
-    <version>5.3</version>
+    <version>5.4</version>
 
-    <idea-version since-build="231" until-build="241.*"/>
+    <idea-version since-build="231" until-build="251.*"/>
 
     <description>
         <![CDATA[
@@ -25,9 +25,10 @@
 
     <change-notes>
         <![CDATA[
-        `v5.3`
+        `v5.4`
         <br/>
-        - new option [-low]<br/>
+        - Add extensions callbacks for template creation
+        - Up max IDEA version
         ]]>
     </change-notes>
 

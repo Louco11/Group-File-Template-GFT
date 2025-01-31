@@ -6,10 +6,12 @@ import com.arch.temp.constant.Constants.TagXml.DEFAULT_TAG_MAIN_PACKAGE
 import com.arch.temp.constant.Constants.TagXml.DEFAULT_TAG_MONTH
 import com.arch.temp.constant.Constants.TagXml.DEFAULT_TAG_TIME
 import com.arch.temp.constant.Constants.TagXml.DEFAULT_TAG_YEAR
+import com.arch.temp.extensions.StructureFromTemplateExtension
 import com.arch.temp.model.InsertInFileTemplateModel
 import com.arch.temp.model.MainClassJson
 import com.arch.temp.tools.*
 import com.arch.temp.view.CreateTemplateDialog
+import com.intellij.ide.script.IdeScriptEngineManager
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.CommonDataKeys
@@ -17,6 +19,7 @@ import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.ui.Messages
 import java.io.File
+import java.nio.file.Path
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -40,21 +43,56 @@ class CreateStructureFromTemplateAction(private val mainClass: MainClassJson) :
     ) {
         val project = event.project ?: return
 
+        val structureFromTemplateExtensions = loadExtensions()
+
         val mapParam = inputMap.toMutableMap()
         createDefaultTag(mapParam, event)
+        val selectPath = event.getData(CommonDataKeys.VIRTUAL_FILE)?.path.orEmpty()
+
+        structureFromTemplateExtensions.forEach {
+            it.onBeforeCreateTemplate(
+                templateName = mainClass.name,
+                templateDescription = mainClass.description,
+                selectedPath = selectPath,
+                pathToTemplate = mainClass.globalBasePath,
+                mapParam = mapParam
+            )
+        }
 
         mainClass.fileTemplate.forEach { fileTemplateModel ->
             CreateTemplate.createFileTemplate(
                 project,
-                event.getData(CommonDataKeys.VIRTUAL_FILE)?.path.orEmpty(),
+                selectPath,
                 mainClass.globalBasePath,
                 mapParam,
-                fileTemplateModel
+                fileTemplateModel,
+                structureFromTemplateExtensions
             )
         }
 
         mainClass.insertInFileTemplate.forEach { template ->
             insertInFileFromTemplate(template, project, mapParam)
+        }
+
+        structureFromTemplateExtensions.forEach {
+            it.onAfterCreateTemplate(
+                templateName = mainClass.name,
+                templateDescription = mainClass.description,
+                selectedPath = selectPath,
+                pathToTemplate = mainClass.globalBasePath,
+                mapParam = mapParam
+            )
+        }
+    }
+
+    private fun loadExtensions(): List<StructureFromTemplateExtension> {
+        return mainClass.extensionModel.map { extensionModel ->
+            val path = Path.of(mainClass.globalBasePath, extensionModel.path)
+            val file = File(path.toUri())
+            val script = file.readText()
+            val scriptEngine = IdeScriptEngineManager.getInstance().getEngineByFileExtension(file.extension, null)
+            kotlin.runCatching { scriptEngine!!.eval(script) as StructureFromTemplateExtension }
+                .getOrElse { throw RuntimeException("Cannot load script", it) }
         }
     }
 

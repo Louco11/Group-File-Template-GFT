@@ -57,5 +57,10 @@
       "fileTemplatePath": "insert.tm"
     }
   ],
+  "extensions": [
+    {
+      "path": "TestTemplateExtensions.kts"
+    }
+  ],
   "globalBasePath": ""
 }

@@ -2,6 +2,7 @@ package com.arch.temp.tools
 
 import com.arch.temp.constant.Constants
 import com.arch.temp.constant.Constants.SLASH
+import com.arch.temp.extensions.StructureFromTemplateExtension
 import com.arch.temp.model.FileTemplateModel
 import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.project.Project
@@ -17,7 +18,8 @@ object CreateTemplate {
         selectPath: String,
         pathTemplate: String,
         mapParam: Map<String, String>,
-        fileTemplateModel: FileTemplateModel
+        fileTemplateModel: FileTemplateModel,
+        structureFromTemplateExtensions: List<StructureFromTemplateExtension>
     ) {
         ApplicationManager.getApplication().runWriteAction {
             if (fileTemplateModel.name.isEmpty()) {
@@ -32,7 +34,8 @@ object CreateTemplate {
                     pathTemplate,
                     selectPath,
                     fileTemplateModel,
-                    mapParam
+                    mapParam,
+                    structureFromTemplateExtensions
                 )
             }
         }
@@ -44,6 +47,7 @@ object CreateTemplate {
         pathChoose: String,
         fileTemplateModel: FileTemplateModel,
         mapParam: Map<String, String>,
+        structureFromTemplateExtensions: List<StructureFromTemplateExtension>,
     ) {
         val nameFile = fileTemplateModel.name.replaceTemplate(mapParam)
         val fileTemplate = File(pathTemplate, fileTemplateModel.fileTemplatePath)
@@ -71,10 +75,34 @@ object CreateTemplate {
             try {
                 LocalFileSystem.getInstance().findFileByIoFile(fileTemplate)?.let {
                     val fileTemplateInPath = filePath.createChildData(null, nameFile)
-                    val text = PsiManagerImpl.getInstance(project).findFile(it)?.text
+                    val textOriginal = PsiManagerImpl.getInstance(project).findFile(it)?.text
                         ?: fileTemplate.readText()
 
-                    fileTemplateInPath.writeText(text.replaceTemplate(mapParam))
+                    var textOriginalModifiedByExtensions = textOriginal
+                    structureFromTemplateExtensions.forEach { extension ->
+                        textOriginalModifiedByExtensions = extension.onBeforeCreateFile(
+                            selectedPath = pathChoose,
+                            mapParam = mapParam,
+                            pathToTemplate = pathTemplate,
+                            pathToTemplateFile = fileTemplate.absolutePath.toString(),
+                            fileText = textOriginalModifiedByExtensions
+                        )
+                    }
+
+                    val textReplaced = textOriginalModifiedByExtensions.replaceTemplate(mapParam)
+
+                    var textReplacedModifiedByExtensions = textReplaced
+                    structureFromTemplateExtensions.forEach { extension ->
+                        textReplacedModifiedByExtensions = extension.onAfterCreateFile(
+                            selectedPath = pathChoose,
+                            mapParam = mapParam,
+                            pathToTemplate = pathTemplate,
+                            pathToTemplateFile = fileTemplate.absolutePath.toString(),
+                            fileText = textReplacedModifiedByExtensions
+                        )
+                    }
+
+                    fileTemplateInPath.writeText(textReplaced)
                 }
             } catch (e: Exception) {
                 showError("No such file or directory (${nameFile})")
@@ -119,9 +147,9 @@ object CreateTemplate {
 
     private fun create(pathProject: String, pathFileTemplate: String): VirtualFile {
         val path = "$pathProject$SLASH$pathFileTemplate"
-        val formatPath = if (path[path.length-1] == SLASH) path.substring(0, path.length-1) else path
+        val formatPath = if (path[path.length - 1] == SLASH) path.substring(0, path.length - 1) else path
         return try {
-             if (!File(formatPath).isDirectory) {
+            if (!File(formatPath).isDirectory) {
                 VfsUtil.createDirectories(formatPath)
             } else {
                 LocalFileSystem.getInstance().findFileByPath(formatPath)!!
