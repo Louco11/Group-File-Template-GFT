@@ -21,7 +21,7 @@ class CreateShortCodeFromTemplateAction(
 
     override fun actionPerformed(event: AnActionEvent) {
         val editor = event.getData(CommonDataKeys.EDITOR)
-        val project = event.getRequiredData(CommonDataKeys.PROJECT)
+        val project = event.project
         val document = editor?.document
         val file = File(mainShortClassJson.globalBasePath, fileShortTemplate.filePath)
         editor?.let { edit ->
