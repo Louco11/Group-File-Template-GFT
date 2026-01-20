@@ -1,25 +1,30 @@
 plugins {
-    id ("org.jetbrains.intellij") version "1.17.2"
+    id("org.jetbrains.intellij.platform") version "2.10.5"
     java
-    kotlin("jvm") version "1.9.23"
+    kotlin("jvm") version "2.2.0"
 }
-
-group = "com.arch"
-version = "5.4"
 
 repositories {
     mavenCentral()
+    intellijPlatform {
+        defaultRepositories()
+    }
 }
 
 dependencies {
-    implementation(kotlin("stdlib"))
+    intellijPlatform {
+        create("IU", "2025.3")
+    }
 }
 
-intellij {
-    version.value("IC-2023.3.5")
-//    version.set("232.10300.40.2321.11567975")
-//    type.set("AI")
-//    plugins.set(listOf("android"))
-}
+intellijPlatform {
+    pluginConfiguration {
+        group = "com.arch"
+        version = "5.6"
 
-tasks.getByName<org.jetbrains.intellij.tasks.PatchPluginXmlTask>("patchPluginXml") {}
+        ideaVersion {
+            sinceBuild = "231"
+            untilBuild = "253.*"
+        }
+    }
+}
